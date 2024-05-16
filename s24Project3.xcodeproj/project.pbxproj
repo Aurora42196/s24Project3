@@ -32,9 +32,9 @@
 		C15C1B4C2BF54D6000C18BF5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C15C1B4D2BF54D6000C18BF5 /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = "<group>"; };
 		C15C1B4E2BF54D6000C18BF5 /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
-		C15C1B522BF5600C00C18BF5 /* Actor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Actor.cpp; sourceTree = SOURCE_ROOT; };
-		C15C1B532BF5600C00C18BF5 /* Actor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Actor.h; sourceTree = SOURCE_ROOT; };
-		C15C1B552BF5E2DE00C18BF5 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = SOURCE_ROOT; };
+		C15C1B522BF5600C00C18BF5 /* Actor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Actor.cpp; path = s24Project3/Actor.cpp; sourceTree = SOURCE_ROOT; };
+		C15C1B532BF5600C00C18BF5 /* Actor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Actor.h; path = s24Project3/Actor.h; sourceTree = SOURCE_ROOT; };
+		C15C1B552BF5E2DE00C18BF5 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = globals.h; path = s24Project3/globals.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
