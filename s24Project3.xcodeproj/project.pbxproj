@@ -10,6 +10,7 @@
 		C15C1B4F2BF54D6000C18BF5 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15C1B4A2BF54D6000C18BF5 /* Game.cpp */; };
 		C15C1B502BF54D6000C18BF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15C1B4C2BF54D6000C18BF5 /* main.cpp */; };
 		C15C1B512BF54D6000C18BF5 /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15C1B4D2BF54D6000C18BF5 /* utilities.cpp */; };
+		C15C1B542BF5600C00C18BF5 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15C1B522BF5600C00C18BF5 /* Actor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,9 @@
 		C15C1B4C2BF54D6000C18BF5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C15C1B4D2BF54D6000C18BF5 /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = "<group>"; };
 		C15C1B4E2BF54D6000C18BF5 /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
+		C15C1B522BF5600C00C18BF5 /* Actor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Actor.cpp; sourceTree = SOURCE_ROOT; };
+		C15C1B532BF5600C00C18BF5 /* Actor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Actor.h; sourceTree = SOURCE_ROOT; };
+		C15C1B552BF5E2DE00C18BF5 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +67,12 @@
 		C15C1B422BF5431200C18BF5 /* s24Project3 */ = {
 			isa = PBXGroup;
 			children = (
+				C15C1B552BF5E2DE00C18BF5 /* globals.h */,
 				C15C1B4E2BF54D6000C18BF5 /* utilities.h */,
-				C15C1B4B2BF54D6000C18BF5 /* Game.h */,
 				C15C1B4D2BF54D6000C18BF5 /* utilities.cpp */,
+				C15C1B532BF5600C00C18BF5 /* Actor.h */,
+				C15C1B522BF5600C00C18BF5 /* Actor.cpp */,
+				C15C1B4B2BF54D6000C18BF5 /* Game.h */,
 				C15C1B4A2BF54D6000C18BF5 /* Game.cpp */,
 				C15C1B4C2BF54D6000C18BF5 /* main.cpp */,
 			);
@@ -132,6 +139,7 @@
 				C15C1B512BF54D6000C18BF5 /* utilities.cpp in Sources */,
 				C15C1B502BF54D6000C18BF5 /* main.cpp in Sources */,
 				C15C1B4F2BF54D6000C18BF5 /* Game.cpp in Sources */,
+				C15C1B542BF5600C00C18BF5 /* Actor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
