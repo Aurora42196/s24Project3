@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "utilities.h"
+#include "Temple.h"
 #include <iostream>
 using namespace std;
 
@@ -14,7 +15,7 @@ Game::Game(int goblinSmellDistance)
 
 Game::~Game()
 {
-//    delete m_temple;
+    delete m_temple;
 }
 
 void Game::play()

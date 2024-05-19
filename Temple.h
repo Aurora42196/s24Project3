@@ -15,6 +15,10 @@ public:
     Temple(int nRows, int nCols);
     ~Temple();
     
+        // Accessors
+    int rows() const { return m_rows; };
+        // Mutators
+    
     
 private:
     int m_rows;
