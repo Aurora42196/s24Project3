@@ -8,11 +8,20 @@ using namespace std;
 // Implement these and other Game member functions you may have added.
 
 Game::Game(int goblinSmellDistance)
-{}
+{
+    m_temple = new Temple(MAXROWS,MAXCOLS);
+}
+
+Game::~Game()
+{
+//    delete m_temple;
+}
 
 void Game::play()
 {
-    cout << "The game hasn't been implemented yet." << endl;
+//    cout << "The game hasn't been implemented yet." << endl;
+    
+    
     cout << "Press q to exit game." << endl;
     while (getCharacter() != 'q')
         ;
