@@ -8,6 +8,7 @@
 #include "Temple.h"
 #include "globals.h"
 #include "utilities.h"
+#include "Actor.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -22,6 +23,22 @@ Temple::Temple(int nRows, int nCols)
              << nCols << "!" << endl;
         exit(1);
     }
+    
+    // This implementation will start with one big room before trying to create multiple rooms with corridors
+    // Fill the grid with walls on the outer border (wall is 2 layers thick)
+    // Position (row,col) in the temple coordinate system is represented in
+    // the array element grid[row-1][col-1]
+    int r, c;
+    for (r = 0; r < rows(); r++)
+    {
+        for (c = 0; c < cols(); c++)
+        {
+            if (r <= 1 || r >= MAXROWS-2 || c <= 1 || c >= MAXCOLS-2)
+                m_grid[r][c] = WALL_SYMBOL;
+            else
+                m_grid[r][c] = ' ';
+        }
+    }
 }
 
 Temple::~Temple()
@@ -31,38 +48,55 @@ Temple::~Temple()
 
 void Temple::display() const
 {
-    // Position (row,col) in the temple coordinate system is represented in
-    // the array element grid[row-1][col-1]
-    char grid[MAXROWS][MAXCOLS];
-    int r, c;
     
-    // This implementation will start with one big room before trying to create multiple rooms with corridors
-    // Fill the grid with walls on the outer border (wall is 2 layers thick)
-    for (r = 0; r < rows(); r++)
-    {
-        for (c = 0; c < cols(); c++)
-        {
-            if (r <= 1 || r >= MAXROWS-2 || c <= 1 || c >= MAXCOLS-2)
-                grid[r][c] = WALL_SYMBOL;
-            else
-                grid[r][c] = ' ';
-        }
-    }
+//    char grid[MAXROWS][MAXCOLS];
+    
+    
+    
+    
+    // Mark the position of the Player
+//    if(m_player != nullptr)
+//    {
+//        m_grid[m_player->row()][m_player->col()] = PLAYER_SYMBOL;
+//    }
+    
     
     // Draw the grid
     clearScreen();
-    for (r = 0; r < rows(); r++)
+    for (int r = 0; r < rows(); r++)
     {
-        for (c = 0; c < cols(); c++)
-            cout << grid[r][c];
+        for (int c = 0; c < cols(); c++)
+            cout << m_grid[r][c];
         cout << endl;
     }
     cout << endl;
     
+    if (m_player != nullptr) {
+        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+    }
+    
+}
+
+bool Temple::addPlayer(int r, int c)
+{
+    if ( ! isInBounds(r, c))
+        return false;
+
+      // Don't add a player if one already exists
+    if (m_player != nullptr)
+        return false;
+
+      // Don't add a player on a spot with a Tooter
+    if (m_grid[r][c] == WALL_SYMBOL)
+        return false;
+
+      // Dynamically allocate new Player and add it to the temple
+    m_player = new Player(this, r, c);
+    return true;
 }
 
 /// Checks if any future objects created will remain within the walls of the temple
 bool Temple::isInBounds(int r ,int c) const
 {
-    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols);
+    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols && m_grid[r][c] != WALL_SYMBOL);
 }

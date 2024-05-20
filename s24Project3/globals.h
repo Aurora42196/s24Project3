@@ -15,6 +15,10 @@
 const int MAXROWS = 18;
 const int MAXCOLS = 70;
 const int INITIAL_PLAYER_HEALTH = 20;
+const int MAX_HEALTH = 99;
+const int MAX_ARMOR = 99;
+const int MAX_STRENGTH = 99;
+const int MAX_DEXTERITY = 99;
 const char PLAYER_SYMBOL = '@';
 const char BOGEYMAN_SYMBOL = 'B';
 const char SNAKEWOMAN_SYMBOL = 'S';

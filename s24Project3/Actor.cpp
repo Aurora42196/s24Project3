@@ -6,6 +6,7 @@
 //
 
 #include "Actor.h"
+#include "globals.h"
 
 ///////////////////////////////////////////////////////////////////////////
 // Actor function implementations
@@ -23,9 +24,13 @@ Actor::~Actor()
 ///////////////////////////////////////////////////////////////////////////
 
 Player::Player(Temple* tp, int r, int c)
- : Actor(tp, r, c)
+ : Actor(tp, r, c) 
 {
     
+    setHealth(INITIAL_PLAYER_HEALTH);
+    setArmor(2);
+    setStrength(2);
+    setDexterity(2);
 }
 
 Player::~Player()

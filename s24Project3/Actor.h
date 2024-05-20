@@ -44,6 +44,11 @@ public:
     int sleepTimer() const { return m_sleepTimer; };
     
     // Mutators
+    void setHealth(int h) { m_health = h; };
+    void setArmor(int a) { m_armor = a; };
+    void setStrength(int s) { m_strength = s; };
+    void setDexterity(int d) { m_dexterity = d; };
+    void castSleep(int s) { m_sleepTimer = s; };
     
 private:
     Temple* m_temple;
