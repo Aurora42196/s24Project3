@@ -36,8 +36,8 @@
 		C15C1B522BF5600C00C18BF5 /* Actor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Actor.cpp; path = s24Project3/Actor.cpp; sourceTree = SOURCE_ROOT; };
 		C15C1B532BF5600C00C18BF5 /* Actor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Actor.h; path = s24Project3/Actor.h; sourceTree = SOURCE_ROOT; };
 		C15C1B552BF5E2DE00C18BF5 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = globals.h; path = s24Project3/globals.h; sourceTree = SOURCE_ROOT; };
-		C1F250412BFAB0B7005B2593 /* Temple.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Temple.cpp; sourceTree = SOURCE_ROOT; };
-		C1F250422BFAB0B7005B2593 /* Temple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Temple.h; sourceTree = SOURCE_ROOT; };
+		C1F250412BFAB0B7005B2593 /* Temple.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Temple.cpp; path = s24Project3/Temple.cpp; sourceTree = SOURCE_ROOT; };
+		C1F250422BFAB0B7005B2593 /* Temple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Temple.h; path = s24Project3/Temple.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
