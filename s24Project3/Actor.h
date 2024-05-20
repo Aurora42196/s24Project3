@@ -11,7 +11,12 @@
 #include "utilities.h"
 /// Game Plan: Actors.h will contain the class declarations for the Actor base class and its derived classes Player and Monster
 /// The implementations of the base class and derived classes will be in the source file Actor.cpp
-class Temple; // Every Actor object have to be associated to a temple
+
+///////////////////////////////////////////////////////////////////////////
+// Actor (Base Class)
+///////////////////////////////////////////////////////////////////////////
+
+class Temple; // Every Actor object have to be associated to a temple object
 
 class Actor // Base Class
 {
@@ -26,7 +31,7 @@ class Actor // Base Class
 public:
     
     // Constructor/destructor
-    Actor();
+    Actor(Temple* tp, int r, int c);
     virtual ~Actor();
     
     // Accessors
@@ -37,6 +42,7 @@ public:
     int strength() const { return m_strength; };
     int dexterity() const { return m_dexterity; };
     int sleepTimer() const { return m_sleepTimer; };
+    
     // Mutators
     
 private:
@@ -51,6 +57,10 @@ private:
     int m_sleepTimer;
 };
 
+///////////////////////////////////////////////////////////////////////////
+// Player (Derived from Actor)
+///////////////////////////////////////////////////////////////////////////
+
 class Player: public Actor
 {
 public:
@@ -63,8 +73,12 @@ public:
     // Mutators
     
 private:
-    // Every player has an inventory of items (array of game objects)
+    // A Player has an inventory of items (array of game objects)
     
 };
+
+///////////////////////////////////////////////////////////////////////////
+// Monster (Derived from Actor)
+///////////////////////////////////////////////////////////////////////////
 
 #endif /* Actor_h */

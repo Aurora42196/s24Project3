@@ -11,22 +11,23 @@
 class Temple
 {
 public:
-        // Constructor/destructor
+    // Constructor/destructor
     Temple(int nRows, int nCols);
     ~Temple();
     
-        // Accessors
+    // Accessors
     int rows() const { return m_rows; };
     int cols() const { return m_cols; };
-        
-        // Mutators
+    
+    // Mutators
     void display() const;
     
 private:
     int m_rows;
     int m_cols;
     
-    
+    // Helper functions
+    bool isInBounds(int r, int c) const;
 };
 
 #endif /* Temple_h */

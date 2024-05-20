@@ -60,3 +60,9 @@ void Temple::display() const
     cout << endl;
     
 }
+
+/// Checks if any future objects created will remain within the walls of the temple
+bool Temple::isInBounds(int r ,int c) const
+{
+    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols);
+}
