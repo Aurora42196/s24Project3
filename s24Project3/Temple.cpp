@@ -61,7 +61,7 @@ void Temple::display() const
         cout << endl;
     }
     
-    // Display Player's current status information
+    // Display Player's statistics
     cout << "Level: " << 0 // This will be changed at a later time
     << ", Hit points: " << m_player->health()
     << ", Armor: " << m_player->armor()

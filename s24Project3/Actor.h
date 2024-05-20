@@ -24,17 +24,18 @@ class Actor // Base Class
     ///     *move one space
     ///     *attack a target
     /// All Actors store:
-    ///     *their position
+    ///     *their position (row, col)
     ///     *current weapon
-    ///     *status information (hit points, armor, strength, dexterity)
+    ///     *status information (hit points/health, armor, strength, dexterity)
     ///     *sleep time
 public:
     
     // Constructor/destructor
     Actor(Temple* tp, int r, int c);
-    virtual ~Actor();
+    virtual ~Actor() {};
     
     // Accessors
+        // Inline function implementations
     int row() const { return m_row; };
     int col() const { return m_col; };
     int health() const { return m_health; };
@@ -44,12 +45,15 @@ public:
     int sleepTimer() const { return m_sleepTimer; };
     
     // Mutators
+        // Inline function implementations
     void setHealth(int h) { m_health = h; };
     void setArmor(int a) { m_armor = a; };
     void setStrength(int s) { m_strength = s; };
     void setDexterity(int d) { m_dexterity = d; };
     void castSleep(int s) { m_sleepTimer = s; };
-    
+        
+        // Non-inline declarations
+    virtual void move(char dir); // All Actors move differently, so they will all have their unique implementations. If I am not able to impelemnt all the move functions by the deadline, they will default moving an any random direction
     
 private:
     Temple* m_temple;
@@ -77,6 +81,7 @@ public:
     // Accessors
     
     // Mutators
+    virtual void move(char dir);
     
 private:
     // A Player has an inventory of items (array of game objects)

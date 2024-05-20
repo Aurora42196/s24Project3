@@ -13,13 +13,14 @@ Game::Game(int goblinSmellDistance)
     // create the Temple of Doom
     m_temple = new Temple(MAXROWS,MAXCOLS);
     
-    // Add a player
+    // Add a player, if the randomly generated coordinate is occupied
+    // (i.e. wall, monster already exists there), then a new coordinate will
+    // be generated until the addPlayer returns true
     int rPlayer = randInt(1, MAXROWS);
     int cPlayer = randInt(1, MAXCOLS);
-    
     while (!(m_temple->addPlayer(rPlayer, cPlayer)))
     {
-        cerr << "coordinate out of bounds" << endl;
+//        cerr << "coordinate out of bounds" << endl;
         rPlayer = randInt(1, MAXROWS);
         cPlayer = randInt(1, MAXCOLS);
     }
@@ -33,12 +34,11 @@ Game::~Game()
 void Game::play()
 {
     m_temple->display();
-    Actor* p = m_temple->player();
-    if (p == nullptr)
+    Actor* ap = m_temple->player();
+    if (ap == nullptr)
         return;
     
-//    cout << "Press q to exit game." << endl;
-    while (getCharacter() != 'q')
+    while (getCharacter() != 'q' /*&& m_player > 0*/)
         ;
 }
 

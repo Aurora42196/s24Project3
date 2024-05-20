@@ -16,9 +16,6 @@ Actor::Actor(Temple* tp, int r, int c)
 : m_temple(tp), m_row(r), m_col(c), m_sleepTimer(0)
 {}
 
-Actor::~Actor()
-{}
-
 ///////////////////////////////////////////////////////////////////////////
 // Player function implementations
 ///////////////////////////////////////////////////////////////////////////
@@ -33,6 +30,9 @@ Player::Player(Temple* tp, int r, int c)
 }
 
 Player::~Player()
+{}
+
+void Player::move(char dir)
 {
     
 }
