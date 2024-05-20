@@ -7,6 +7,7 @@
 #include "globals.h"
 class Temple;
 
+
 class Game
 {
 public:

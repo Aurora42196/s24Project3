@@ -43,7 +43,7 @@ void Temple::display() const
         for (c = 0; c < cols(); c++)
         {
             if (r <= 1 || r >= MAXROWS-2 || c <= 1 || c >= MAXCOLS-2)
-                grid[r][c] = '#';
+                grid[r][c] = WALL_SYMBOL;
             else
                 grid[r][c] = ' ';
         }

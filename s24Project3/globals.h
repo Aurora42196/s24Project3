@@ -23,6 +23,8 @@ const char GOBLIN_SYMBOL = 'G';
 const char SCROLL_SYMBOL = '?';
 const char WEAPON_SYMBOL = ')';
 const char IDOL_SYMBOL = '&';
+const char STAIRS_SYMBOL = '>';
+const char WALL_SYMBOL = '#';
 
 
 #endif /* globals_h */
