@@ -22,7 +22,7 @@ void Game::play()
 {
 //    cout << "The game hasn't been implemented yet." << endl;
     
-    
+    m_temple->display();
     cout << "Press q to exit game." << endl;
     while (getCharacter() != 'q')
         ;

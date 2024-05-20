@@ -17,8 +17,10 @@ public:
     
         // Accessors
     int rows() const { return m_rows; };
+    int cols() const { return m_cols; };
+        
         // Mutators
-    
+    void display() const;
     
 private:
     int m_rows;

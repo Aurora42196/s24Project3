@@ -7,6 +7,7 @@
 
 #include "Temple.h"
 #include "globals.h"
+#include "utilities.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -25,5 +26,37 @@ Temple::Temple(int nRows, int nCols)
 
 Temple::~Temple()
 {
+    
+}
+
+void Temple::display() const
+{
+    // Position (row,col) in the temple coordinate system is represented in
+    // the array element grid[row-1][col-1]
+    char grid[MAXROWS][MAXCOLS];
+    int r, c;
+    
+    // This implementation will start with one big room before trying to create multiple rooms with corridors
+    // Fill the grid with walls on the outer border (wall is 2 layers thick)
+    for (r = 0; r < rows(); r++)
+    {
+        for (c = 0; c < cols(); c++)
+        {
+            if (r <= 1 || r >= MAXROWS-2 || c <= 1 || c >= MAXCOLS-2)
+                grid[r][c] = '#';
+            else
+                grid[r][c] = ' ';
+        }
+    }
+    
+    // Draw the grid
+    clearScreen();
+    for (r = 0; r < rows(); r++)
+    {
+        for (c = 0; c < cols(); c++)
+            cout << grid[r][c];
+        cout << endl;
+    }
+    cout << endl;
     
 }
