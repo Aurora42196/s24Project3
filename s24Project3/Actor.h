@@ -50,6 +50,7 @@ public:
     void setDexterity(int d) { m_dexterity = d; };
     void castSleep(int s) { m_sleepTimer = s; };
     
+    
 private:
     Temple* m_temple;
     // Add later: weapon will be a pointer to a game object
