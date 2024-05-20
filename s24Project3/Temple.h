@@ -22,6 +22,7 @@ public:
     // Accessors
     int rows() const { return m_rows; };
     int cols() const { return m_cols; };
+    Actor* player() const { return m_player; };
     void display() const;
     
     // Mutators

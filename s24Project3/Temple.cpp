@@ -14,9 +14,9 @@
 using namespace std;
 
 Temple::Temple(int nRows, int nCols)
-    : m_rows(nRows),m_cols(nCols)
+: m_rows(nRows),m_cols(nCols), m_player(nullptr)
 {
-    // Checks if the size of the temple floor is valid, if this code runs, something went terribly wrong
+    // Checks if the size of the temple floor is valid. If this code runs, something went terribly wrong
     if (nRows <= 0  ||  nCols <= 0  ||  nRows > MAXROWS  ||  nCols > MAXCOLS)
     {
         cout << "***** Temple created with invalid size " << nRows << " by "
@@ -43,17 +43,18 @@ Temple::Temple(int nRows, int nCols)
 
 Temple::~Temple()
 {
-    
+    delete m_player;
 }
+
+///////////////////////////////////////////////////////////////////////////
+// Accessor function implementations
+///////////////////////////////////////////////////////////////////////////
 
 void Temple::display() const
 {
     
 //    char grid[MAXROWS][MAXCOLS];
-    
-    
-    
-    
+
     // Mark the position of the Player
 //    if(m_player != nullptr)
 //    {
@@ -77,6 +78,10 @@ void Temple::display() const
     
 }
 
+///////////////////////////////////////////////////////////////////////////
+// Mutator function implementations
+///////////////////////////////////////////////////////////////////////////
+
 bool Temple::addPlayer(int r, int c)
 {
     if ( ! isInBounds(r, c))
@@ -86,17 +91,23 @@ bool Temple::addPlayer(int r, int c)
     if (m_player != nullptr)
         return false;
 
-      // Don't add a player on a spot with a Tooter
-    if (m_grid[r][c] == WALL_SYMBOL)
+      // Don't add a player where a wall exists
+    if (m_grid[r-1][c-1] == WALL_SYMBOL)
         return false;
 
       // Dynamically allocate new Player and add it to the temple
     m_player = new Player(this, r, c);
+    m_grid[r-1][c-1] = PLAYER_SYMBOL;
     return true;
 }
+
+
+///////////////////////////////////////////////////////////////////////////
+// Helper function implementations
+///////////////////////////////////////////////////////////////////////////
 
 /// Checks if any future objects created will remain within the walls of the temple
 bool Temple::isInBounds(int r ,int c) const
 {
-    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols && m_grid[r][c] != WALL_SYMBOL);
+    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols && m_grid[r-1][c-1] != WALL_SYMBOL);
 }

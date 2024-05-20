@@ -12,8 +12,8 @@
 // Manifest constants
 ///////////////////////////////////////////////////////////////////////////
 
-const int MAXROWS = 18;
-const int MAXCOLS = 70;
+const int MAXROWS = 18; // max number of rows in a temple floor
+const int MAXCOLS = 70; // max number of columns in a temple floor
 const int INITIAL_PLAYER_HEALTH = 20;
 const int MAX_HEALTH = 99;
 const int MAX_ARMOR = 99;

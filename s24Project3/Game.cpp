@@ -14,7 +14,15 @@ Game::Game(int goblinSmellDistance)
     m_temple = new Temple(MAXROWS,MAXCOLS);
     
     // Add a player
+    int rPlayer = randInt(1, MAXROWS);
+    int cPlayer = randInt(1, MAXCOLS);
     
+    while (!(m_temple->addPlayer(rPlayer, cPlayer)))
+    {
+        cerr << "coordinate out of bounds" << endl;
+        rPlayer = randInt(1, MAXROWS);
+        cPlayer = randInt(1, MAXCOLS);
+    }
 }
 
 Game::~Game()
@@ -27,6 +35,9 @@ void Game::play()
     //    cout << "The game hasn't been implemented yet." << endl;
     
     m_temple->display();
+    Actor* p = m_temple->player();
+    if (p == nullptr)
+        return;
     cout << "Press q to exit game." << endl;
     while (getCharacter() != 'q')
         ;

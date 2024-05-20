@@ -26,7 +26,6 @@ Actor::~Actor()
 Player::Player(Temple* tp, int r, int c)
  : Actor(tp, r, c) 
 {
-    
     setHealth(INITIAL_PLAYER_HEALTH);
     setArmor(2);
     setStrength(2);
