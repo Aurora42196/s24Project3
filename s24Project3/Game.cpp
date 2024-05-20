@@ -32,13 +32,12 @@ Game::~Game()
 
 void Game::play()
 {
-    //    cout << "The game hasn't been implemented yet." << endl;
-    
     m_temple->display();
     Actor* p = m_temple->player();
     if (p == nullptr)
         return;
-    cout << "Press q to exit game." << endl;
+    
+//    cout << "Press q to exit game." << endl;
     while (getCharacter() != 'q')
         ;
 }

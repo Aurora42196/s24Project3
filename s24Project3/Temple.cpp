@@ -52,16 +52,6 @@ Temple::~Temple()
 
 void Temple::display() const
 {
-    
-//    char grid[MAXROWS][MAXCOLS];
-
-    // Mark the position of the Player
-//    if(m_player != nullptr)
-//    {
-//        m_grid[m_player->row()][m_player->col()] = PLAYER_SYMBOL;
-//    }
-    
-    
     // Draw the grid
     clearScreen();
     for (int r = 0; r < rows(); r++)
@@ -70,11 +60,22 @@ void Temple::display() const
             cout << m_grid[r][c];
         cout << endl;
     }
+    
+    // Display Player's current status information
+    cout << "Level: " << 0 // This will be changed at a later time
+    << ", Hit points: " << m_player->health()
+    << ", Armor: " << m_player->armor()
+    << ", Strength: " << m_player->strength()
+    << ", Dexterity: " << m_player->dexterity();
     cout << endl;
     
-    if (m_player != nullptr) {
-        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-    }
+    /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
+//    if (m_player != nullptr) {
+//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+//    }
+    
+    
+    
     
 }
 
