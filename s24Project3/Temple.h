@@ -22,8 +22,8 @@ public:
     // Accessors
     int rows() const { return m_rows; };
     int cols() const { return m_cols; };
-    int level() const { return m_level; };
-    Actor* player() const { return m_player; };
+    int getLevel() const { return m_level; };
+    Actor* getPlayer() const { return m_player; };
     void display() const;
     
     // Mutators
@@ -35,6 +35,7 @@ private:
     int m_rows;
     int m_cols;
     int m_level; // keeps track of what level the player is currently on
+//    char (*m_grid)[MAXCOLS];
     char m_grid[MAXROWS][MAXCOLS];
     Actor* m_player;
     

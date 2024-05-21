@@ -36,14 +36,15 @@ public:
     virtual ~Actor() {};
     
     // Accessors
-        // Inline function implementations
-    int row() const { return m_row; };
-    int col() const { return m_col; };
-    int health() const { return m_health; };
-    int armor() const { return m_armor; };
-    int strength() const { return m_strength; };
-    int dexterity() const { return m_dexterity; };
-    int sleepTimer() const { return m_sleepTimer; };
+        // Inline function implementations (getter functions)
+    int getRow() const { return m_row; };
+    int getCol() const { return m_col; };
+    int getHealth() const { return m_health; };
+    int getArmor() const { return m_armor; };
+    int getStrength() const { return m_strength; };
+    int getDexterity() const { return m_dexterity; };
+    int getSleepTimer() const { return m_sleepTimer; };
+    Temple* getTemple() const { return m_temple; };
     
     // Mutators
         // Inline function implementations

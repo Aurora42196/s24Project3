@@ -28,6 +28,7 @@ Temple::Temple(int nRows, int nCols, int level)
     // Fill the grid with walls on the outer border (wall is 2 layers thick)
     // Position (row,col) in the temple coordinate system is represented in
     // the array element grid[row-1][col-1]
+//    m_grid = new char[MAXROWS][MAXCOLS];
     int r, c;
     for (r = 0; r < rows(); r++)
     {
@@ -82,6 +83,7 @@ Temple::Temple(int nRows, int nCols, int level)
 
 Temple::~Temple()
 {
+    // delete the player
     delete m_player;
 }
 
@@ -101,11 +103,11 @@ void Temple::display() const
     }
     
     // Display Player's statistics
-    cout << "Level: " << level() // This will be changed at a later time
-    << ", Hit points: " << m_player->health()
-    << ", Armor: " << m_player->armor()
-    << ", Strength: " << m_player->strength()
-    << ", Dexterity: " << m_player->dexterity();
+    cout << "Level: " << getLevel() // This will be changed at a later time
+    << ", Hit points: " << m_player->getHealth()
+    << ", Armor: " << m_player->getArmor()
+    << ", Strength: " << m_player->getStrength()
+    << ", Dexterity: " << m_player->getDexterity();
     cout << endl;
     
 /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls

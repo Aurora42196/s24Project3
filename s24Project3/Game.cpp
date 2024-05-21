@@ -1,8 +1,9 @@
 // Game.cpp
 
 #include "Game.h"
-#include "utilities.h"
 #include "Temple.h"
+#include "Actor.h"
+#include "utilities.h"
 #include <iostream>
 using namespace std;
 
@@ -34,12 +35,25 @@ Game::~Game()
 void Game::play()
 {
     m_temple->display();
-    Actor* ap = m_temple->player();
+    Actor* ap = m_temple->getPlayer();
     if (ap == nullptr)
         return;
     
-    while (getCharacter() != 'q' /*&& m_player > 0*/)
-        ;
+    
+    while (getCharacter() != 'q' && ap->getHealth() > 0)
+    {
+        switch (char ch = getCharacter()) {
+            case ARROW_LEFT:
+            case ARROW_RIGHT:
+            case ARROW_UP:
+            case ARROW_DOWN:
+                ap->move(ch);
+                break;
+                
+            default:
+                break;
+        }
+    };
 }
 
 // You will presumably add to this project other .h/.cpp files for the various

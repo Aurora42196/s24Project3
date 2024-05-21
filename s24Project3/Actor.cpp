@@ -6,6 +6,7 @@
 //
 
 #include "Actor.h"
+#include "Temple.h"
 #include "globals.h"
 
 ///////////////////////////////////////////////////////////////////////////
@@ -37,7 +38,20 @@ Player::~Player()
 
 void Player::move(char dir)
 {
-    return;
+//    char* cp = getTemple()->m_grid;
+    
+    
+    
+    switch (dir) {
+        case ARROW_UP:
+        {
+//            if()
+                break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
