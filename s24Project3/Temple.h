@@ -16,7 +16,7 @@ class Temple
 {
 public:
     // Constructor/destructor
-    Temple(int nRows, int nCols);
+    Temple(int nRows, int nCols, int level);
     ~Temple();
     
     // Accessors
@@ -31,10 +31,10 @@ public:
     
     
 private:
-    
+    // Data members
     int m_rows;
     int m_cols;
-    int m_level;
+    int m_level; // keeps track of what level the player is currently on
     char m_grid[MAXROWS][MAXCOLS];
     Actor* m_player;
     

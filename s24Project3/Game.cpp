@@ -11,7 +11,7 @@ using namespace std;
 Game::Game(int goblinSmellDistance)
 {
     // create the Temple of Doom
-    m_temple = new Temple(MAXROWS,MAXCOLS);
+    m_temple = new Temple(MAXROWS,MAXCOLS, 0);
     
     // Add a player, if the randomly generated coordinate is occupied
     // (i.e. wall, monster already exists there), then a new coordinate will

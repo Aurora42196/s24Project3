@@ -13,8 +13,8 @@
 #include <cstdlib>
 using namespace std;
 
-Temple::Temple(int nRows, int nCols)
-: m_rows(nRows),m_cols(nCols), m_player(nullptr)
+Temple::Temple(int nRows, int nCols, int level)
+: m_rows(nRows), m_cols(nCols), m_level(level), m_player(nullptr)
 {
     // Checks if the size of the temple floor is valid. If this code runs, something went terribly wrong
     if (nRows <= 0  ||  nCols <= 0  ||  nRows > MAXROWS  ||  nCols > MAXCOLS)
@@ -39,6 +39,45 @@ Temple::Temple(int nRows, int nCols)
                 m_grid[r][c] = ' ';
         }
     }
+    
+///////////////////////////////////////////////////////////////////////////
+// Room generator
+///////////////////////////////////////////////////////////////////////////
+///rectangle sizes will range from 4x4 to 8x8
+//    // fill grid with walls
+//    int r, c;
+//    for (r = 0; r < rows(); r++)
+//    {
+//        for (c = 0; c < cols(); c++)
+//        {
+//                m_grid[r][c] = WALL_SYMBOL;
+//        }
+//    }
+//    
+//    int numRooms = randInt(3, 5);
+//    cerr << "number of rooms generated: " << numRooms << endl;
+//    while (numRooms > 0)
+//    {
+//        int rectangleOriginRow = randInt(1, MAXROWS-1);
+//        int rectangleOriginCol = randInt(1, MAXCOLS-1);
+//        int roomRowSize = randInt(8, 10);
+//        int roomColsize = randInt(8, 10);
+//        for (r = 0; r < roomRowSize; r++)
+//        {
+//            if(rectangleOriginRow + r == MAXROWS-1) // row reached the bottom of the bounds of the temple
+//                break;
+//            
+//            for(c = 0; c < roomColsize; c++)
+//            {
+//                if(rectangleOriginCol + c == MAXCOLS-1)
+//                    break;
+//                else
+//                    m_grid[rectangleOriginRow + r][rectangleOriginCol + c] = ' ';
+//            }
+//        }
+//        numRooms--;
+//    }
+    
 }
 
 Temple::~Temple()
@@ -62,20 +101,17 @@ void Temple::display() const
     }
     
     // Display Player's statistics
-    cout << "Level: " << 0 // This will be changed at a later time
+    cout << "Level: " << level() // This will be changed at a later time
     << ", Hit points: " << m_player->health()
     << ", Armor: " << m_player->armor()
     << ", Strength: " << m_player->strength()
     << ", Dexterity: " << m_player->dexterity();
     cout << endl;
     
-    /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
+/// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
 //    if (m_player != nullptr) {
 //        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
 //    }
-    
-    
-    
     
 }
 

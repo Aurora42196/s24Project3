@@ -8,6 +8,7 @@
 #ifndef Actor_h
 #define Actor_h
 
+//#include <string>
 #include "utilities.h"
 /// Game Plan: Actors.h will contain the class declarations for the Actor base class and its derived classes Player and Monster
 /// The implementations of the base class and derived classes will be in the source file Actor.cpp
@@ -53,7 +54,9 @@ public:
     void castSleep(int s) { m_sleepTimer = s; };
         
         // Non-inline declarations
-    virtual void move(char dir); // All Actors move differently, so they will all have their unique implementations. If I am not able to impelemnt all the move functions by the deadline, they will default moving an any random direction
+    virtual void move(char dir);
+        /// All Actors move differently, so they will all have their unique implementations.
+        /// If I am not able to impelemnt all the move functions by the deadline, they will default moving an any random direction
     
 private:
     Temple* m_temple;
