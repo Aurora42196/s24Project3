@@ -85,20 +85,44 @@ Temple::~Temple()
 {
     // delete the player
     delete m_player;
+    
+    // delete the dynamically allocated grid
+//    for(int i = 0; i < MAXROWS; i++)
+//    {
+//        delete [] m_grid[i];
+//    }
+//    delete [] m_grid;
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Accessor function implementations
 ///////////////////////////////////////////////////////////////////////////
 
+bool Temple::isPlayerAt(int r, int c) const
+{
+    return m_player != nullptr  &&
+           m_player->getRow() == r  &&  m_player->getCol() == c;
+}
+
 void Temple::display() const
 {
+    // Indicate Player's position
+    if(m_player != nullptr)
+    {
+//        char& gridChar = m_grid[m_player->getRow()-1][m_player->getCol()-1];
+        
+    }
     // Draw the grid
     clearScreen();
     for (int r = 0; r < rows(); r++)
     {
         for (int c = 0; c < cols(); c++)
-            cout << m_grid[r][c];
+        {
+            if(isPlayerAt(r, c))
+                cout << '@';
+            else
+                cout << m_grid[r][c];
+        }
         cout << endl;
     }
     
@@ -111,9 +135,9 @@ void Temple::display() const
     cout << endl;
     
 /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
-//    if (m_player != nullptr) {
-//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-//    }
+    if (m_player != nullptr) {
+        cerr << "Player is placed at: (" << m_player->getRow() << ","<< m_player->getCol() << ")" << endl;
+    }
     
 }
 
@@ -136,7 +160,7 @@ bool Temple::addPlayer(int r, int c)
 
       // Dynamically allocate new Player and add it to the temple
     m_player = new Player(this, r, c);
-    m_grid[r-1][c-1] = PLAYER_SYMBOL;
+//    m_grid[r-1][c-1] = PLAYER_SYMBOL;
     return true;
 }
 

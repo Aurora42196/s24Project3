@@ -20,10 +20,15 @@ public:
     ~Temple();
     
     // Accessors
+        // Inline function implementations
     int rows() const { return m_rows; };
     int cols() const { return m_cols; };
     int getLevel() const { return m_level; };
+//    char (*getGrid())[MAXCOLS] { return m_grid; };
     Actor* getPlayer() const { return m_player; };
+    
+        // Member function declarations
+    bool isPlayerAt(int r, int c) const;
     void display() const;
     
     // Mutators

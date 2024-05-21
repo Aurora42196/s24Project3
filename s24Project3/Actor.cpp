@@ -38,14 +38,17 @@ Player::~Player()
 
 void Player::move(char dir)
 {
-//    char* cp = getTemple()->m_grid;
+//    char (*cp)[MAXCOLS] = getTemple()->getGrid();
     
     
     
     switch (dir) {
         case ARROW_UP:
         {
-//            if()
+//            if(cp[getRow()-1][getCol()] == ' ')
+//            {
+//                setRow(getRow()-1);
+//            }
                 break;
         }
             

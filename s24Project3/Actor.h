@@ -48,6 +48,8 @@ public:
     
     // Mutators
         // Inline function implementations
+    void setRow(int r) { m_row = r; };
+    void setCol(int c) { m_col = c; };
     void setHealth(int h) { m_health = h; };
     void setArmor(int a) { m_armor = a; };
     void setStrength(int s) { m_strength = s; };

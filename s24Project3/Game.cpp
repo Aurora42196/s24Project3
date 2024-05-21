@@ -21,10 +21,11 @@ Game::Game(int goblinSmellDistance)
     int cPlayer = randInt(1, MAXCOLS);
     while (!(m_temple->addPlayer(rPlayer, cPlayer)))
     {
-//        cerr << "coordinate out of bounds" << endl;
+        //        cerr << "coordinate out of bounds" << endl;
         rPlayer = randInt(1, MAXROWS);
         cPlayer = randInt(1, MAXCOLS);
     }
+    //    m_temple->getGrid() m_grid[rPlayer-1][cPlayer-1] = PLAYER_SYMBOL;
 }
 
 Game::~Game()
@@ -40,9 +41,26 @@ void Game::play()
         return;
     
     
-    while (getCharacter() != 'q' && ap->getHealth() > 0)
-    {
-        switch (char ch = getCharacter()) {
+    //    while (getCharacter() != 'q' && ap->getHealth() > 0)
+    //    {
+    //        switch (char ch = getCharacter())
+    //        {
+    //            case ARROW_LEFT:
+    //            case ARROW_RIGHT:
+    //            case ARROW_UP:
+    //            case ARROW_DOWN:
+    //                ap->move(ch);
+    //                break;
+    //
+    //            default:
+    //                break;
+    //        }
+    //        m_temple->display();
+    //    };
+    
+    do {
+        switch (char ch = getCharacter())
+        {
             case ARROW_LEFT:
             case ARROW_RIGHT:
             case ARROW_UP:
@@ -53,7 +71,8 @@ void Game::play()
             default:
                 break;
         }
-    };
+        m_temple->display();
+    } while (getCharacter() != 'q' && ap->getHealth() > 0);
 }
 
 // You will presumably add to this project other .h/.cpp files for the various
