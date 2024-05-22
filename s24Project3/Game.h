@@ -6,7 +6,7 @@
 // You may add data members and other member functions to this class.
 #include "globals.h"
 class Temple;
-
+class Actor;
 
 class Game
 {
@@ -16,9 +16,15 @@ public:
     ~Game();
     
         // Mutators
+    bool addPlayer(int r, int c);
     void play();
 private:
+    // Data members
     Temple* m_temple;
+    Actor* m_player;
+    
+    // Helper functions
+    bool isInBounds(int r ,int c) const;
 };
 
 #endif // GAME_INCLUDED

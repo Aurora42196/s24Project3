@@ -13,8 +13,8 @@
 #include <cstdlib>
 using namespace std;
 
-Temple::Temple(int nRows, int nCols, int level)
-: m_rows(nRows), m_cols(nCols), m_level(level), m_player(nullptr)
+Temple::Temple(Actor* ap, int nRows, int nCols, int level)
+: m_player(ap), m_rows(nRows), m_cols(nCols), m_level(level)
 {
     // Checks if the size of the temple floor is valid. If this code runs, something went terribly wrong
     if (nRows <= 0  ||  nCols <= 0  ||  nRows > MAXROWS  ||  nCols > MAXCOLS)
@@ -123,9 +123,6 @@ void Temple::display() const
     {
         for (int c = 0; c < cols(); c++)
         {
-//            if(isPlayerAt(r, c))
-//                cout << '@';
-//            else
                 cout << m_grid[r][c];
         }
         cout << endl;
@@ -150,24 +147,24 @@ void Temple::display() const
 // Mutator function implementations
 ///////////////////////////////////////////////////////////////////////////
 
-bool Temple::addPlayer(int r, int c)
-{
-    if ( ! isInBounds(r, c))
-        return false;
-
-      // Don't add a player if one already exists
-    if (m_player != nullptr)
-        return false;
-
-      // Don't add a player where a wall exists
-    if (m_grid[r-1][c-1] == WALL_SYMBOL)
-        return false;
-
-      // Dynamically allocate new Player and add it to the temple
-    m_player = new Player(this, r, c);
-    m_grid[r-1][c-1] = PLAYER_SYMBOL;
-    return true;
-}
+//bool Temple::addPlayer(int r, int c)
+//{
+//    if ( ! isInBounds(r, c))
+//        return false;
+//
+//      // Don't add a player if one already exists
+//    if (m_player != nullptr)
+//        return false;
+//
+//      // Don't add a player where a wall exists
+//    if (m_grid[r-1][c-1] == WALL_SYMBOL)
+//        return false;
+//
+//      // Dynamically allocate new Player and add it to the temple
+//    m_player = new Player(this, r, c);
+//    m_grid[r-1][c-1] = PLAYER_SYMBOL;
+//    return true;
+//}
 
 void Temple::addToGrid(int r, int c, char ch)
 {
@@ -175,12 +172,12 @@ void Temple::addToGrid(int r, int c, char ch)
 }
 
 
-///////////////////////////////////////////////////////////////////////////
-// Helper function implementations
-///////////////////////////////////////////////////////////////////////////
-
-/// Checks if any future objects created will remain within the walls of the temple
-bool Temple::isInBounds(int r ,int c) const
-{
-    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols && m_grid[r-1][c-1] != WALL_SYMBOL);
-}
+/////////////////////////////////////////////////////////////////////////////
+//// Helper function implementations
+/////////////////////////////////////////////////////////////////////////////
+//
+///// Checks if any future objects created will remain within the walls of the temple
+//bool Temple::isInBounds(int r ,int c) const
+//{
+//    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols && m_grid[r-1][c-1] != WALL_SYMBOL);
+//}

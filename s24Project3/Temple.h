@@ -16,7 +16,7 @@ class Temple
 {
 public:
     // Constructor/destructor
-    Temple(int nRows, int nCols, int level);
+    Temple(Actor* ap, int nRows, int nCols, int level);
     ~Temple();
     
     // Accessors
@@ -28,11 +28,12 @@ public:
     Actor* getPlayer() const { return m_player; };
     
         // Member function declarations
+    void setPlayer(Actor* ap) { m_player = ap; };
     bool isPlayerAt(int r, int c) const;
     void display() const;
     
     // Mutators
-    bool addPlayer(int r, int c);
+//    bool addPlayer(int r, int c);
     void addToGrid(int r, int c, char ch);
     
     
@@ -56,7 +57,7 @@ private:
     
     
     // Helper functions
-    bool isInBounds(int r, int c) const;
+//    bool isInBounds(int r, int c) const;
 };
 
 #endif /* Temple_h */
