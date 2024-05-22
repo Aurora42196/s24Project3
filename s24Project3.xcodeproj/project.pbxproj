@@ -72,14 +72,14 @@
 			children = (
 				C1F250412BFAB0B7005B2593 /* Temple.cpp */,
 				C1F250422BFAB0B7005B2593 /* Temple.h */,
-				C15C1B552BF5E2DE00C18BF5 /* globals.h */,
 				C15C1B522BF5600C00C18BF5 /* Actor.cpp */,
 				C15C1B532BF5600C00C18BF5 /* Actor.h */,
 				C15C1B4A2BF54D6000C18BF5 /* Game.cpp */,
 				C15C1B4B2BF54D6000C18BF5 /* Game.h */,
 				C15C1B4C2BF54D6000C18BF5 /* main.cpp */,
-				C15C1B4E2BF54D6000C18BF5 /* utilities.h */,
+				C15C1B552BF5E2DE00C18BF5 /* globals.h */,
 				C15C1B4D2BF54D6000C18BF5 /* utilities.cpp */,
+				C15C1B4E2BF54D6000C18BF5 /* utilities.h */,
 			);
 			path = s24Project3;
 			sourceTree = "<group>";

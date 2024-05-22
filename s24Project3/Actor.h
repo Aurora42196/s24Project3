@@ -98,4 +98,19 @@ private:
 // Monster (Derived from Actor)
 ///////////////////////////////////////////////////////////////////////////
 
+class Monster: public Actor
+{
+public:
+    // Constructor/destructor
+    Monster(Temple* tp, int r, int c);
+    virtual ~Monster();
+    
+    // Accessors
+    
+    // Mutators
+    virtual void move(char dir);
+    
+private:
+    // All monsters have an item to drop
+};
 #endif /* Actor_h */

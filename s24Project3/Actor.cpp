@@ -16,7 +16,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 
 Actor::Actor(Temple* tp, int r, int c)
-: m_temple(tp), m_row(r), m_col(c), m_sleepTimer(0)
+: m_temple(tp), m_row(r), m_col(c), m_health(0), m_armor(0), m_strength(0), m_dexterity(0), m_sleepTimer(0)
 {}
 
 void Actor::move(char dir)
@@ -95,3 +95,20 @@ void Player::move(char dir)
 ///////////////////////////////////////////////////////////////////////////
 // Monster function implementations
 ///////////////////////////////////////////////////////////////////////////
+
+Monster::Monster(Temple *tp, int r, int c)
+ :Actor(tp, r, c)
+{
+    
+}
+
+Monster::~Monster()
+{
+    
+}
+
+void Monster::move(char dir)
+{
+    
+}
+
