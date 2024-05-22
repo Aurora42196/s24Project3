@@ -40,51 +40,54 @@ Player::~Player()
 
 void Player::move(char dir)
 {
-    char element;
-    
-    
+    /// This is my own version of move based on a combination of decodeDirection and
+    /// detemineNewPosition from project 1. The player is only allowed to move in the direction
+    /// dir as long as there is no wall or monster at the new position, otherwise the player doesn't
+    /// move and the Monsters take their turn. This will also work if the player moves on top of a game
+    /// object. The game object will remain in the same place unless it gets picked up (TEST IF THIS WORKS!!)
     switch (dir) {
         case ARROW_UP:
-            element = getTemple()->getGridValue(row()-1,col());
-            if (element == ' ') {
-                getTemple()->addToGrid(row(), col(), element);
-                setRow(row()-1);
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+            dir = getTemple()->getGridValue(row()-1,col()); // decode the direction
+            if (dir == ' ') // determine if the new position is a valid place to move
+            {
+                getTemple()->addToGrid(row(), col(), dir); // clear the space the player is moving from
+                setRow(row()-1); // alter the players position
+                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL); // show the change to player's position in the grid
             }
             break;
             
         case ARROW_DOWN:
-            element = getTemple()->getGridValue(row()+1,col());
-            if(element == ' ')
+            dir = getTemple()->getGridValue(row()+1,col());
+            if(dir == ' ')
             {
-                getTemple()->addToGrid(row(), col(), element);
+                getTemple()->addToGrid(row(), col(), dir);
                 setRow(row()+1);
                 getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
             }
             break;
             
         case ARROW_LEFT:
-            element = getTemple()->getGridValue(row(),col()-1);
-            if(element == ' ')
+            dir = getTemple()->getGridValue(row(),col()-1);
+            if(dir == ' ')
             {
-                getTemple()->addToGrid(row(), col(), element);
+                getTemple()->addToGrid(row(), col(), dir);
                 setCol(col()-1);
                 getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
             }
             break;
             
         case ARROW_RIGHT:
-            element = getTemple()->getGridValue(row(),col()+1);
-            if(element == ' ')
+            dir = getTemple()->getGridValue(row(),col()+1);
+            if(dir == ' ')
             {
-                getTemple()->addToGrid(row(), col(), element);
+                getTemple()->addToGrid(row(), col(), dir);
                 setCol(col()+1);
                 getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
             }
             break;
             
         default:
-            cerr << "Player couldn't move" << endl;
+            cerr << "invalid char for player::move()" << endl; // this should never be called, if it does something went terribly wrong
             break;
     }
 }
