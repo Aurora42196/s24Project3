@@ -31,4 +31,5 @@ private:
     std::string m_name; // Each game object has a unique name
     Temple* m_temple;
 };
+
 #endif /* GameObject_h */
