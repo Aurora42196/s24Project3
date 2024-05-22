@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1465CDE2BFDE3020062DE9E /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1465CDC2BFDE3020062DE9E /* GameObject.cpp */; };
 		C15C1B4F2BF54D6000C18BF5 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15C1B4A2BF54D6000C18BF5 /* Game.cpp */; };
 		C15C1B502BF54D6000C18BF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15C1B4C2BF54D6000C18BF5 /* main.cpp */; };
 		C15C1B512BF54D6000C18BF5 /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15C1B4D2BF54D6000C18BF5 /* utilities.cpp */; };
@@ -27,6 +28,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C1465CDC2BFDE3020062DE9E /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
+		C1465CDD2BFDE3020062DE9E /* GameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
 		C15C1B402BF5431200C18BF5 /* s24Project3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = s24Project3; sourceTree = BUILT_PRODUCTS_DIR; };
 		C15C1B4A2BF54D6000C18BF5 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		C15C1B4B2BF54D6000C18BF5 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -70,14 +73,16 @@
 		C15C1B422BF5431200C18BF5 /* s24Project3 */ = {
 			isa = PBXGroup;
 			children = (
-				C1F250412BFAB0B7005B2593 /* Temple.cpp */,
-				C1F250422BFAB0B7005B2593 /* Temple.h */,
 				C15C1B522BF5600C00C18BF5 /* Actor.cpp */,
 				C15C1B532BF5600C00C18BF5 /* Actor.h */,
 				C15C1B4A2BF54D6000C18BF5 /* Game.cpp */,
 				C15C1B4B2BF54D6000C18BF5 /* Game.h */,
-				C15C1B4C2BF54D6000C18BF5 /* main.cpp */,
+				C1465CDC2BFDE3020062DE9E /* GameObject.cpp */,
+				C1465CDD2BFDE3020062DE9E /* GameObject.h */,
 				C15C1B552BF5E2DE00C18BF5 /* globals.h */,
+				C15C1B4C2BF54D6000C18BF5 /* main.cpp */,
+				C1F250412BFAB0B7005B2593 /* Temple.cpp */,
+				C1F250422BFAB0B7005B2593 /* Temple.h */,
 				C15C1B4D2BF54D6000C18BF5 /* utilities.cpp */,
 				C15C1B4E2BF54D6000C18BF5 /* utilities.h */,
 			);
@@ -143,6 +148,7 @@
 			files = (
 				C15C1B512BF54D6000C18BF5 /* utilities.cpp in Sources */,
 				C15C1B502BF54D6000C18BF5 /* main.cpp in Sources */,
+				C1465CDE2BFDE3020062DE9E /* GameObject.cpp in Sources */,
 				C1F250432BFAB0B7005B2593 /* Temple.cpp in Sources */,
 				C15C1B4F2BF54D6000C18BF5 /* Game.cpp in Sources */,
 				C15C1B542BF5600C00C18BF5 /* Actor.cpp in Sources */,

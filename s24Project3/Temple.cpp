@@ -109,6 +109,14 @@ void Temple::display() const
     // Position (row,col) in the temple coordinate system is represented in
     // the array element grid[row-1][col-1]
 
+//    // Indicate player's position
+//    if (m_player != nullptr)
+//    {
+//        char& gridChar = m_grid[m_player->row()-1][m_player->col()-1];
+//        if (gridChar == ' ')
+//            gridChar = '@';
+//    }
+    
     // Draw the grid
     clearScreen();
     for (int r = 0; r < rows(); r++)
