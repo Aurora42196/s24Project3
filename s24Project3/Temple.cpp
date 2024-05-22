@@ -101,26 +101,23 @@ Temple::~Temple()
 bool Temple::isPlayerAt(int r, int c) const
 {
     return m_player != nullptr  &&
-           m_player->getRow() == r  &&  m_player->getCol() == c;
+           m_player->row() == r  &&  m_player->col() == c;
 }
 
 void Temple::display() const
 {
-    // Indicate Player's position
-    if(m_player != nullptr)
-    {
-//        char& gridChar = m_grid[m_player->getRow()-1][m_player->getCol()-1];
-        
-    }
+    // Position (row,col) in the temple coordinate system is represented in
+    // the array element grid[row-1][col-1]
+
     // Draw the grid
     clearScreen();
     for (int r = 0; r < rows(); r++)
     {
         for (int c = 0; c < cols(); c++)
         {
-            if(isPlayerAt(r, c))
-                cout << '@';
-            else
+//            if(isPlayerAt(r, c))
+//                cout << '@';
+//            else
                 cout << m_grid[r][c];
         }
         cout << endl;
@@ -135,9 +132,9 @@ void Temple::display() const
     cout << endl;
     
 /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
-    if (m_player != nullptr) {
-        cerr << "Player is placed at: (" << m_player->getRow() << ","<< m_player->getCol() << ")" << endl;
-    }
+//    if (m_player != nullptr) {
+//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+//    }
     
 }
 
@@ -160,8 +157,13 @@ bool Temple::addPlayer(int r, int c)
 
       // Dynamically allocate new Player and add it to the temple
     m_player = new Player(this, r, c);
-//    m_grid[r-1][c-1] = PLAYER_SYMBOL;
+    m_grid[r-1][c-1] = PLAYER_SYMBOL;
     return true;
+}
+
+void Temple::addToGrid(int r, int c, char ch)
+{
+    m_grid[r-1][c-1] = ch;
 }
 
 

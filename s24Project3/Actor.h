@@ -37,8 +37,8 @@ public:
     
     // Accessors
         // Inline function implementations (getter functions)
-    int getRow() const { return m_row; };
-    int getCol() const { return m_col; };
+    int row() const { return m_row; };
+    int col() const { return m_col; };
     int getHealth() const { return m_health; };
     int getArmor() const { return m_armor; };
     int getStrength() const { return m_strength; };

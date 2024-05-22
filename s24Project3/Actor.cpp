@@ -8,6 +8,8 @@
 #include "Actor.h"
 #include "Temple.h"
 #include "globals.h"
+#include <iostream>
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////
 // Actor function implementations
@@ -38,21 +40,51 @@ Player::~Player()
 
 void Player::move(char dir)
 {
-//    char (*cp)[MAXCOLS] = getTemple()->getGrid();
-    
+    char element;
     
     
     switch (dir) {
         case ARROW_UP:
-        {
-//            if(cp[getRow()-1][getCol()] == ' ')
-//            {
-//                setRow(getRow()-1);
-//            }
-                break;
-        }
+            element = getTemple()->getGridValue(row()-1,col());
+            if (element == ' ') {
+                getTemple()->addToGrid(row(), col(), element);
+                setRow(row()-1);
+                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+            }
+            break;
+            
+        case ARROW_DOWN:
+            element = getTemple()->getGridValue(row()+1,col());
+            if(element == ' ')
+            {
+                getTemple()->addToGrid(row(), col(), element);
+                setRow(row()+1);
+                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+            }
+            break;
+            
+        case ARROW_LEFT:
+            element = getTemple()->getGridValue(row(),col()-1);
+            if(element == ' ')
+            {
+                getTemple()->addToGrid(row(), col(), element);
+                setCol(col()-1);
+                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+            }
+            break;
+            
+        case ARROW_RIGHT:
+            element = getTemple()->getGridValue(row(),col()+1);
+            if(element == ' ')
+            {
+                getTemple()->addToGrid(row(), col(), element);
+                setCol(col()+1);
+                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+            }
+            break;
             
         default:
+            cerr << "Player couldn't move" << endl;
             break;
     }
 }

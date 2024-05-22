@@ -24,7 +24,7 @@ public:
     int rows() const { return m_rows; };
     int cols() const { return m_cols; };
     int getLevel() const { return m_level; };
-//    char (*getGrid())[MAXCOLS] { return m_grid; };
+    char getGridValue(const int r, const int c) const { return m_grid[r-1][c-1]; };
     Actor* getPlayer() const { return m_player; };
     
         // Member function declarations
@@ -33,6 +33,7 @@ public:
     
     // Mutators
     bool addPlayer(int r, int c);
+    void addToGrid(int r, int c, char ch);
     
     
 private:

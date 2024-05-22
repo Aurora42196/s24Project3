@@ -15,7 +15,7 @@ Game::Game(int goblinSmellDistance)
     m_temple = new Temple(MAXROWS,MAXCOLS, 0);
     
     // Add a player, if the randomly generated coordinate is occupied
-    // (i.e. wall, monster already exists there), then a new coordinate will
+    // (i.e. wall or monster already exists there), then a new coordinate will
     // be generated until the addPlayer returns true
     int rPlayer = randInt(1, MAXROWS);
     int cPlayer = randInt(1, MAXCOLS);
@@ -25,7 +25,7 @@ Game::Game(int goblinSmellDistance)
         rPlayer = randInt(1, MAXROWS);
         cPlayer = randInt(1, MAXCOLS);
     }
-    //    m_temple->getGrid() m_grid[rPlayer-1][cPlayer-1] = PLAYER_SYMBOL;
+//    m_temple->addToGrid(rPlayer, cPlayer, PLAYER_SYMBOL);
 }
 
 Game::~Game()
@@ -40,39 +40,40 @@ void Game::play()
     if (ap == nullptr)
         return;
     
-    
-    //    while (getCharacter() != 'q' && ap->getHealth() > 0)
-    //    {
-    //        switch (char ch = getCharacter())
-    //        {
-    //            case ARROW_LEFT:
-    //            case ARROW_RIGHT:
-    //            case ARROW_UP:
-    //            case ARROW_DOWN:
-    //                ap->move(ch);
-    //                break;
-    //
-    //            default:
-    //                break;
-    //        }
-    //        m_temple->display();
-    //    };
-    
-    do {
-        switch (char ch = getCharacter())
+    char command;
+    while ((command = getCharacter()) && command != 'q' && ap->getHealth() > 0)
         {
-            case ARROW_LEFT:
-            case ARROW_RIGHT:
-            case ARROW_UP:
-            case ARROW_DOWN:
-                ap->move(ch);
-                break;
-                
-            default:
-                break;
-        }
-        m_temple->display();
-    } while (getCharacter() != 'q' && ap->getHealth() > 0);
+            switch (command)
+            {
+                case ARROW_LEFT:
+                case ARROW_RIGHT:
+                case ARROW_UP:
+                case ARROW_DOWN:
+                    ap->move(command);
+                    break;
+    
+                default:
+//                    cout << '\a' << endl; // beep
+                    break;
+            }
+            m_temple->display();
+        };
+    
+//    do {
+//        switch (char ch = getCharacter())
+//        {
+//            case ARROW_LEFT:
+//            case ARROW_RIGHT:
+//            case ARROW_UP:
+//            case ARROW_DOWN:
+//                ap->move(ch);
+//                break;
+//                
+//            default:
+//                break;
+//        }
+//        m_temple->display();
+//    } while (getCharacter() != 'q' && ap->getHealth() > 0);
 }
 
 // You will presumably add to this project other .h/.cpp files for the various
