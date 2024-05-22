@@ -7,8 +7,10 @@
 #include <iostream>
 using namespace std;
 
-// Implement these and other Game member functions you may have added.
-
+///////////////////////////////////////////////////////////////////////////
+// Constructor
+///////////////////////////////////////////////////////////////////////////
+///
 Game::Game(int goblinSmellDistance)
  :m_temple(nullptr), m_player(nullptr)
 {
@@ -29,6 +31,10 @@ Game::Game(int goblinSmellDistance)
     m_temple->setPlayer(m_player);
 }
 
+///////////////////////////////////////////////////////////////////////////
+// Destructor
+///////////////////////////////////////////////////////////////////////////
+///
 Game::~Game()
 {
     delete m_temple;
@@ -52,6 +58,11 @@ bool Game::addPlayer(int r, int c)
     m_temple->addToGrid(r, c, PLAYER_SYMBOL);
     return true;
 }
+
+///////////////////////////////////////////////////////////////////////////
+// Mutator function implementation
+///////////////////////////////////////////////////////////////////////////
+///
 void Game::play()
 {
     m_temple->display();
@@ -77,23 +88,8 @@ void Game::play()
             }
             m_temple->display();
         };
-    
-//    do {
-//        switch (char ch = getCharacter())
-//        {
-//            case ARROW_LEFT:
-//            case ARROW_RIGHT:
-//            case ARROW_UP:
-//            case ARROW_DOWN:
-//                ap->move(ch);
-//                break;
-//                
-//            default:
-//                break;
-//        }
-//        m_temple->display();
-//    } while (getCharacter() != 'q' && ap->getHealth() > 0);
 }
+
 
 ///////////////////////////////////////////////////////////////////////////
 // Helper function implementations
@@ -105,8 +101,3 @@ bool Game::isInBounds(int r ,int c) const
     return (r >= 1  &&  r <= m_temple->rows()  &&  c >= 1  &&  c <= m_temple->cols() && m_temple->getGridValue(r-1, c-1) != WALL_SYMBOL);
 }
 
-// You will presumably add to this project other .h/.cpp files for the various
-// classes of objects you need to play the game:  player, monsters, weapons,
-// etc.  You might have a separate .h/.cpp pair for each class (e.g., Player.h,
-// Bogeyman.h, etc.), or you might put the class declarations for all actors in
-// Actor.h, all game objects in GameObject.h, etc.
