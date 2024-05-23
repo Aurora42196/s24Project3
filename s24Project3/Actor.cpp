@@ -92,23 +92,3 @@ void Player::move(char dir)
     }
 }
 
-///////////////////////////////////////////////////////////////////////////
-// Monster function implementations
-///////////////////////////////////////////////////////////////////////////
-
-Monster::Monster(Temple *tp, int r, int c)
- :Actor(tp, r, c)
-{
-    
-}
-
-Monster::~Monster()
-{
-    
-}
-
-void Monster::move(char dir)
-{
-    
-}
-
