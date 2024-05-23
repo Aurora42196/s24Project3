@@ -32,7 +32,7 @@ class Actor // Base Class
 public:
     
     // Constructor/destructor
-    Actor(Temple* tp, int r, int c);
+    Actor(Temple* tp, int r, int c, char sym);
     virtual ~Actor() {};
     
     // Accessors
@@ -57,13 +57,16 @@ public:
     void castSleep(int s) { m_sleepTimer = s; };
         
         // Non-inline declarations
-    virtual void move(char dir);
+    virtual void move(char dir) = 0;
+    virtual char getSymbol() const;
+
         /// All Actors move differently, so they will all have their unique implementations.
         /// If I am not able to impelemnt all the move functions by the deadline, they will default moving an any random direction
     
 private:
     Temple* m_temple;
     // Add later: weapon will be a pointer to a game object
+    char m_symbol;
     int m_row;
     int m_col;
     int m_health;

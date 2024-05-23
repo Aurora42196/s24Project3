@@ -8,9 +8,13 @@
 #ifndef Temple_h
 #define Temple_h
 
+#include <vector>
 #include "globals.h"
+#include "utilities.h"
+#include "Game.h"
 
 class Actor;
+class Monster;
 
 class Temple
 {
@@ -41,10 +45,10 @@ private:
     // Data members
     int m_rows;
     int m_cols;
-    int m_level; // keeps track of what level the player is currently on
-//    char (*m_grid)[MAXCOLS];
+    int m_level;
     char m_grid[MAXROWS][MAXCOLS];
     Actor* m_player;
+    std::vector<Monster*> m_monsters;
     
     ///////////////////////////////////////////////////////////////////////////
     // Class Invariants

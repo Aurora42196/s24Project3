@@ -15,19 +15,21 @@ using namespace std;
 // Actor function implementations
 ///////////////////////////////////////////////////////////////////////////
 
-Actor::Actor(Temple* tp, int r, int c)
-: m_temple(tp), m_row(r), m_col(c), m_health(0), m_armor(0), m_strength(0), m_dexterity(0), m_sleepTimer(0)
+Actor::Actor(Temple* tp, int r, int c, char sym)
+: m_temple(tp), m_row(r), m_col(c), m_symbol(sym), m_health(0), m_armor(0), m_strength(0), m_dexterity(0), m_sleepTimer(0)
 {}
 
-void Actor::move(char dir)
-{}
+char Actor::getSymbol() const
+{
+    return m_symbol;
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // Player function implementations
 ///////////////////////////////////////////////////////////////////////////
 
 Player::Player(Temple* tp, int r, int c)
- : Actor(tp, r, c) 
+ : Actor(tp, r, c, PLAYER_SYMBOL)
 {
     setHealth(INITIAL_PLAYER_HEALTH);
     setArmor(2);
@@ -52,7 +54,7 @@ void Player::move(char dir)
             {
                 getTemple()->addToGrid(row(), col(), dir); // clear the space the player is moving from
                 setRow(row()-1); // alter the players position
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL); // show the change to player's position in the grid
+                getTemple()->addToGrid(row(), col(), getSymbol()); // show the change to player's position in the grid
             }
             break;
             
@@ -62,7 +64,7 @@ void Player::move(char dir)
             {
                 getTemple()->addToGrid(row(), col(), dir);
                 setRow(row()+1);
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+                getTemple()->addToGrid(row(), col(), getSymbol());
             }
             break;
             
@@ -72,7 +74,7 @@ void Player::move(char dir)
             {
                 getTemple()->addToGrid(row(), col(), dir);
                 setCol(col()-1);
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+                getTemple()->addToGrid(row(), col(), getSymbol());
             }
             break;
             
@@ -82,7 +84,7 @@ void Player::move(char dir)
             {
                 getTemple()->addToGrid(row(), col(), dir);
                 setCol(col()+1);
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+                getTemple()->addToGrid(row(), col(), getSymbol());
             }
             break;
             

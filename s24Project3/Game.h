@@ -6,7 +6,7 @@
 // You may add data members and other member functions to this class.
 #include "globals.h"
 class Temple;
-class Actor;
+class Player;
 
 class Game
 {
@@ -21,7 +21,8 @@ public:
 private:
     // Data members
     Temple* m_temple;
-    Actor* m_player;
+    Player* m_player;
+    int m_level; // keeps track of what level the player is currently on
     
     // Helper functions
     bool isInBounds(int r ,int c) const;

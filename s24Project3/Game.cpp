@@ -12,10 +12,10 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 ///
 Game::Game(int goblinSmellDistance)
- :m_temple(nullptr), m_player(nullptr)
+ :m_temple(nullptr), m_player(nullptr), m_level(0)
 {
     // create the Temple of Doom
-    m_temple = new Temple(m_player, MAXROWS,MAXCOLS, 0);
+    m_temple = new Temple(m_player, MAXROWS,MAXCOLS, m_level);
     
     // Add a player, if the randomly generated coordinate is occupied
     // (i.e. wall or monster already exists there), then a new coordinate will
@@ -55,7 +55,7 @@ bool Game::addPlayer(int r, int c)
 
       // Dynamically allocate new Player and add it to the temple
     m_player = new Player(m_temple, r, c);
-    m_temple->addToGrid(r, c, PLAYER_SYMBOL);
+    m_temple->addToGrid(r, c, m_player->getSymbol());
     return true;
 }
 

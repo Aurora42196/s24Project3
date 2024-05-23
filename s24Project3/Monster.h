@@ -25,21 +25,34 @@ class Monster: public Actor
     ///     *Drops an item upon death
 public:
     // Constructor/destructor
-    Monster(Temple* tp, int r, int c);
+    Monster(Temple* tp, int r, int c, char sym);
     virtual ~Monster();
     
     // Accessors
     
     // Mutators
     void monstersTakeTurn();
-    virtual void move(char dir);
+    virtual void move();
     virtual void dropItem();
     
 private:
     // All monsters have an item to drop
-    
-    // Helper function
+    // Helper functions
+    bool determineNewPosition(int& r, int& c, int dir) const;
     bool decodeDirection(char dir); // Default Monster movement will move in any random direction
+};
+
+///////////////////////////////////////////////////////////////////////////
+// Types of Monsters (Derived from Monster)
+///////////////////////////////////////////////////////////////////////////
+///
+class Bogeyman : public Monster
+{
+public:
+    Bogeyman(Temple* tp, int r, int c);
+    ~Bogeyman();
+private:
+    
     
 };
 #endif /* Monster_h */
