@@ -57,7 +57,7 @@ public:
     void castSleep(int s) { m_sleepTimer = s; };
         
         // Non-inline declarations
-    virtual void move(char dir) = 0;
+    virtual void move(char dir);
     virtual char getSymbol() const;
 
         /// All Actors move differently, so they will all have their unique implementations.

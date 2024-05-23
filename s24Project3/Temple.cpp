@@ -9,6 +9,7 @@
 #include "globals.h"
 #include "utilities.h"
 #include "Actor.h"
+#include "Monster.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -18,7 +19,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 
 Temple::Temple(Actor* ap, int nRows, int nCols, int level)
-: m_player(ap), m_rows(nRows), m_cols(nCols), m_level(level)
+: m_player(ap), m_rows(nRows), m_cols(nCols), m_level(level), m_nMonsters(0)
 {
     // Checks if the size of the temple floor is valid. If this code runs, something went terribly wrong
     if (nRows <= 0  ||  nCols <= 0  ||  nRows > MAXROWS  ||  nCols > MAXCOLS)
@@ -83,6 +84,19 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
 //        numRooms--;
 //    }
     
+    //Add the monsters to the dungeon, we'll start with adding only Bogeymen
+    int M = randInt(2, 5*(m_level+1)+1);
+    for (; M > 0; M--)
+    {
+        //        cerr << "coordinate out of bounds" << endl;
+        int rMonster = randInt(1, MAXROWS);
+        int cMonster = randInt(1, MAXCOLS);
+        while (!(addMonster(rMonster, cMonster)))
+        {
+            rMonster = randInt(1, MAXROWS);
+            cMonster = randInt(1, MAXCOLS);
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -179,13 +193,42 @@ void Temple::addToGrid(int r, int c, char ch)
     m_grid[r-1][c-1] = ch;
 }
 
+bool Temple::addMonster(int r, int c)
+{
+    if (!isInBounds(r, c))
+        return false;
+
+      // Don't add a player if one already exists
+    if (m_player != nullptr)
+        return false;
+
+      // Don't add a monster where a wall or another monster exists
+    if (getGridValue(r-1, c-1) != ' ')
+        return false;
+
+      // Dynamically allocate new Player and add it to the temple
+    Monster* newMonster = new Bogeyman(this, r, c);
+    m_monsters.push_back(newMonster);
+    addToGrid(r, c, m_monsters[m_nMonsters]->getSymbol());
+    m_nMonsters++;
+    return true;
+}
+
+void Temple::monstersTakeTurn()
+{
+    for( int i = 0; i < m_nMonsters; i++)
+    {
+        m_monsters[i]->move();
+    }
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 //// Helper function implementations
 /////////////////////////////////////////////////////////////////////////////
 //
 ///// Checks if any future objects created will remain within the walls of the temple
-//bool Temple::isInBounds(int r ,int c) const
-//{
-//    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols && m_grid[r-1][c-1] != WALL_SYMBOL);
-//}
+bool Temple::isInBounds(int r ,int c) const
+{
+    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols && m_grid[r-1][c-1] != WALL_SYMBOL);
+}

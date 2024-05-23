@@ -31,7 +31,6 @@ public:
     // Accessors
     
     // Mutators
-    void monstersTakeTurn();
     virtual void move();
     virtual void dropItem();
     
@@ -50,7 +49,7 @@ class Bogeyman : public Monster
 {
 public:
     Bogeyman(Temple* tp, int r, int c);
-    ~Bogeyman();
+    virtual ~Bogeyman();
 private:
     
     

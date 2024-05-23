@@ -34,10 +34,6 @@ Monster::~Monster()
 // Mutator function implementations
 ///////////////////////////////////////////////////////////////////////////
 ///
-void Monster::monstersTakeTurn()
-{
-    
-}
 
 void Monster::move()
 {
@@ -51,7 +47,7 @@ void Monster::move()
             {
                 getTemple()->addToGrid(row(), col(), dir); // clear the space the player is moving from
                 setRow(row()-1); // alter the players position
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL); // show the change to player's position in the grid
+                getTemple()->addToGrid(row(), col(), getSymbol()); // show the change to player's position in the grid
             }
             break;
             
@@ -61,7 +57,7 @@ void Monster::move()
             {
                 getTemple()->addToGrid(row(), col(), dir);
                 setRow(row()+1);
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+                getTemple()->addToGrid(row(), col(), getSymbol());
             }
             break;
             
@@ -71,7 +67,7 @@ void Monster::move()
             {
                 getTemple()->addToGrid(row(), col(), dir);
                 setCol(col()-1);
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+                getTemple()->addToGrid(row(), col(), getSymbol());
             }
             break;
             
@@ -81,7 +77,7 @@ void Monster::move()
             {
                 getTemple()->addToGrid(row(), col(), dir);
                 setCol(col()+1);
-                getTemple()->addToGrid(row(), col(), PLAYER_SYMBOL);
+                getTemple()->addToGrid(row(), col(), getSymbol());
             }
             break;
             

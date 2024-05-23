@@ -29,6 +29,7 @@ Game::Game(int goblinSmellDistance)
         cPlayer = randInt(1, MAXCOLS);
     }
     m_temple->setPlayer(m_player);
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -49,8 +50,8 @@ bool Game::addPlayer(int r, int c)
     if (m_player != nullptr)
         return false;
 
-      // Don't add a player where a wall exists
-    if (m_temple->getGridValue(r-1, c-1) == WALL_SYMBOL)
+      // Don't add a player where a wall or monster exists
+    if (m_temple->getGridValue(r-1, c-1) != ' ')
         return false;
 
       // Dynamically allocate new Player and add it to the temple
@@ -86,6 +87,7 @@ void Game::play()
                     cout << '\a' << endl; // beep
                     break;
             }
+            m_temple->monstersTakeTurn();
             m_temple->display();
         };
 }

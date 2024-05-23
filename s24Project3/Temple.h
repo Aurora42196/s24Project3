@@ -30,15 +30,17 @@ public:
     int getLevel() const { return m_level; };
     char& getGridValue( int r, int c) { return m_grid[r-1][c-1]; };
     Actor* getPlayer() const { return m_player; };
-    
-        // Member function declarations
-    void setPlayer(Actor* ap) { m_player = ap; };
     bool isPlayerAt(int r, int c) const;
     void display() const;
     
+    
     // Mutators
+    void setPlayer(Actor* ap) { m_player = ap; };
 //    bool addPlayer(int r, int c);
     void addToGrid(int r, int c, char ch);
+    bool addMonster(int r, int c);
+    void monstersTakeTurn();
+
     
     
 private:
@@ -46,6 +48,7 @@ private:
     int m_rows;
     int m_cols;
     int m_level;
+    int m_nMonsters;
     char m_grid[MAXROWS][MAXCOLS];
     Actor* m_player;
     std::vector<Monster*> m_monsters;
@@ -61,7 +64,7 @@ private:
     
     
     // Helper functions
-//    bool isInBounds(int r, int c) const;
+    bool isInBounds(int r, int c) const;
 };
 
 #endif /* Temple_h */
