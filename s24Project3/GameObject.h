@@ -16,19 +16,25 @@ class GameObject
 {
 public:
     // Constructor/destructor
-    GameObject(Temple* tp, int r, int c, std::string nm);
+    GameObject(Temple* tp, int r, int c, char sym);
     ~GameObject();
     
     // Accessors
         // Inline function implementations
     int row() const { return m_row; };
     int col() const { return m_col; };
+    char getSymbol() const { return m_symbol; };
+    std::string getName() { return m_name; };
+    
+    // Mutators
+    void setName(std::string nm) { m_name = nm; };
     
 private:
     // Data members
     Temple* m_temple;
     int m_row;
     int m_col;
+    char m_symbol;
     std::string m_name; // Each game object has a unique name
 };
 

@@ -18,7 +18,7 @@
 class Weapon : public GameObject
 {
 public:
-    Weapon(Temple* tp, int r, int c, std::string nm);
+    Weapon(Temple* tp, int r, int c);
     virtual ~Weapon();
     
     // Accessors
@@ -44,7 +44,7 @@ class Mace : public Weapon
 {
 public:
     Mace(Temple* tp, int r, int c);
-    virtual ~Mace();
+    virtual ~Mace() {};
     std::string getName() { return "mace"; };
     std::string getAction() { return "swings mace at "; };
 private:
@@ -54,7 +54,7 @@ class ShortSword : public Weapon
 {
 public:
     ShortSword(Temple* tp, int r, int c);
-    virtual ~ShortSword();
+    virtual ~ShortSword() {};
     std::string getName() { return "short sword"; };
     std::string getAction() { return "slashes short sword at "; };
 private:
@@ -64,7 +64,7 @@ class LongSword : public Weapon
 {
 public:
     LongSword(Temple* tp, int r, int c);
-    virtual ~LongSword();    
+    virtual ~LongSword() {};
     std::string getName() { return "long sword"; };
     std::string getAction() { return "swings long sword at "; };
 private:
@@ -74,7 +74,7 @@ class MagicAxe : public Weapon
 {
 public:
     MagicAxe(Temple* tp, int r, int c);
-    virtual ~MagicAxe();
+    virtual ~MagicAxe() {};
     std::string getName() { return "magic axe"; };
     std::string getAction() { return "chops magic axe at "; };
 private:
@@ -84,7 +84,7 @@ class MagicFangs : public Weapon
 {
 public:
     MagicFangs(Temple* tp, int r, int c);
-    virtual ~MagicFangs();
+    virtual ~MagicFangs() {};
     std::string getName() { return "magic fangs"; };
     std::string getAction() { return "strikes magic fangs at "; };
 private:

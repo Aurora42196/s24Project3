@@ -10,6 +10,8 @@
 #include "utilities.h"
 #include "Actor.h"
 #include "Monster.h"
+#include "Weapon.h"
+#include "Scroll.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -19,7 +21,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 
 Temple::Temple(Actor* ap, int nRows, int nCols, int level)
-: m_player(ap), m_rows(nRows), m_cols(nCols), m_level(level), m_nMonsters(0)
+: m_player(ap), m_rows(nRows), m_cols(nCols), m_level(level), m_nMonsters(0), m_nGameObjects(0)
 {
     // Checks if the size of the temple floor is valid. If this code runs, something went terribly wrong
     if (nRows <= 0  ||  nCols <= 0  ||  nRows > MAXROWS  ||  nCols > MAXCOLS)
@@ -85,7 +87,7 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
 //        numRooms--;
 //    }
     
-    //Add the monsters to the dungeon, we'll start with adding only Bogeymen
+    //Add the monsters to the Temple
     
     int M = randInt(2, 5*(m_level+1)+1);
     for (; M > 0; M--)
@@ -104,6 +106,21 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
         {
             rMonster = randInt(1, MAXROWS);
             cMonster = randInt(1, MAXCOLS);
+        }
+    }
+    
+    // Add the game objects to the Temple, only 2-3 weapons or scrolls can
+    // be placed in the temple on the first turn
+    int numObjects = randInt(2, 3);
+    for (; numObjects > 0; numObjects--)
+    {
+        int gameObjectRandomizer = randInt(1, 7);
+        int rObject = randInt(1, MAXROWS);
+        int cObject = randInt(1, MAXCOLS);
+        while (!(addMonster(rObject, cObject, gameObjectRandomizer)))
+        {
+            rObject = randInt(1, MAXROWS);
+            cObject = randInt(1, MAXCOLS);
         }
     }
 }
@@ -164,9 +181,9 @@ void Temple::display() const
     cout << endl;
     
 /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
-    if (m_player != nullptr) {
-        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-    }
+//    if (m_player != nullptr) {
+//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+//    }
     
 }
 
@@ -203,12 +220,8 @@ bool Temple::addMonster(int r, int c, int randomizer)
     if (!isInBounds(r, c))
         return false;
 
-      // Don't add a player if one already exists
-    if (m_player != nullptr)
-        return false;
-
       // Don't add a monster where a wall or another monster exists
-    if (getGridValue(r-1, c-1) != ' ')
+    if (getGridValue(r-1, c-1) != WEAPON_SYMBOL && getGridValue(r-1, c-1) != SCROLL_SYMBOL && getGridValue(r-1, c-1) != ' ')
         return false;
 
       // Dynamically allocate new Monster and add it to the temple
@@ -233,6 +246,60 @@ bool Temple::addMonster(int r, int c, int randomizer)
     m_monsters.push_back(newMonster);
     addToGrid(r, c, m_monsters[m_nMonsters]->getSymbol());
     m_nMonsters++;
+    return true;
+}
+
+bool Temple::addGameObjects(int r, int c, int randomizer)
+{
+    if (!isInBounds(r, c))
+        return false;
+
+      // Don't add a monster where a wall or another object exists
+    if (getGridValue(r-1, c-1) == WALL_SYMBOL || getGridValue(r-1, c-1) == WEAPON_SYMBOL || getGridValue(r-1, c-1) == SCROLL_SYMBOL)
+        return false;
+
+      // Dynamically allocate new Monster and add it to the temple
+    GameObject* newGameObject;
+    switch (randomizer) {
+        case 1:
+            newGameObject = new ShortSword(this, r, c);
+            break;
+        case 2:
+            newGameObject = new LongSword(this, r, c);
+            break;
+        case 3:
+            newGameObject = new Mace(this, r, c);
+            break;
+        case 4:
+            newGameObject = new ImproveArmor(this, r, c);
+            break;
+        case 5:
+            newGameObject = new RaiseStrength(this, r, c);
+            break;
+        case 6:
+            newGameObject = new EnhanceHealth(this, r, c);
+            break;
+        case 7:
+            newGameObject = new EnhanceDexterity(this, r, c);
+            break;
+        // Objects 8, 9, and 10 will be called explicitly since they can
+        // only be added to the temple when a monster is killed
+        case 8:
+            newGameObject = new MagicAxe(this, r, c);
+            break;
+        case 9:
+            newGameObject = new MagicFangs(this, r, c);
+            break;
+        case 10:
+            newGameObject = new Teleportation(this, r, c);
+            break;
+        default:
+            return false;
+            break;
+    }
+    m_objects.push_back(newGameObject);
+    addToGrid(r, c, m_objects[m_nGameObjects]->getSymbol());
+    m_nGameObjects++;
     return true;
 }
 

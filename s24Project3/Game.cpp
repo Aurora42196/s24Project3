@@ -53,7 +53,7 @@ bool Game::addPlayer(int r, int c)
         return false;
 
       // Don't add a player where a wall or monster exists
-    if (m_temple->getGridValue(r, c) != ' ')
+    if (m_temple->getGridValue(r, c) != ' ' || m_temple->getGridValue(r, c) != WEAPON_SYMBOL || m_temple->getGridValue(r, c) != SCROLL_SYMBOL)
         return false;
 
       // Dynamically allocate new Player and add it to the temple

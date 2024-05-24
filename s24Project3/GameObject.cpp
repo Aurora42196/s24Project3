@@ -14,8 +14,8 @@ using namespace std;
 // Constructor
 ///////////////////////////////////////////////////////////////////////////
 ///
-GameObject::GameObject(Temple* tp, int r, int c, string nm)
- :m_temple(tp), m_row(r), m_col(c), m_name(nm)
+GameObject::GameObject(Temple* tp, int r, int c, char sym)
+ :m_temple(tp), m_row(r), m_col(c), m_symbol(sym)
 {
     
 }

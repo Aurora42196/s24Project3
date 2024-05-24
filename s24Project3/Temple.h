@@ -13,8 +13,10 @@
 #include "utilities.h"
 #include "Game.h"
 
+
 class Actor;
 class Monster;
+class GameObject;
 
 class Temple
 {
@@ -39,6 +41,7 @@ public:
 //    bool addPlayer(int r, int c);
     void addToGrid(int r, int c, char ch);
     bool addMonster(int r, int c, int randomizer);
+    bool addGameObjects(int r, int c, int randomizer);
     void monstersTakeTurn();
 
     
@@ -50,8 +53,10 @@ private:
     int m_cols;
     int m_level;
     int m_nMonsters;
+    int m_nGameObjects;
     char m_grid[MAXROWS][MAXCOLS];
     std::vector<Monster*> m_monsters;
+    std::vector<GameObject*> m_objects;
     
     ///////////////////////////////////////////////////////////////////////////
     // Class Invariants

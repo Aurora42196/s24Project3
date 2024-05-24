@@ -9,6 +9,7 @@
 #define Monster_h
 
 #include "Actor.h"
+#include <string>
 class Temple;
 
 ///////////////////////////////////////////////////////////////////////////
@@ -29,6 +30,7 @@ public:
     virtual ~Monster();
     
     // Accessors
+    virtual std::string getName() = 0;
     
     // Mutators
     virtual void move();
@@ -50,6 +52,9 @@ class Bogeyman : public Monster
 public:
     Bogeyman(Temple* tp, int r, int c);
     virtual ~Bogeyman();
+    
+    virtual std::string getName() { return "bogeyman"; };
+
 private:
     
 };
@@ -59,6 +64,9 @@ class Snakewoman : public Monster
 public:
     Snakewoman(Temple* tp, int r, int c);
     virtual ~Snakewoman();
+    
+    virtual std::string getName() { return "snakewoman"; };
+
 private:
     
 };
@@ -69,6 +77,8 @@ public:
     Dragon(Temple* tp, int r, int c);
     virtual ~Dragon();
     
+    virtual std::string getName() { return "dragon"; };
+
     // Mutator
     virtual void move();
 private:
@@ -80,6 +90,9 @@ class Goblin : public Monster
 public:
     Goblin(Temple* tp, int r, int c);
     virtual ~Goblin();
+    
+    virtual std::string getName() { return "goblin"; };
+
 private:
     
 };
