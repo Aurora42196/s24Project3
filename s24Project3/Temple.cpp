@@ -33,13 +33,14 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
     // Fill the grid with walls on the outer border (wall is 2 layers thick)
     // Position (row,col) in the temple coordinate system is represented in
     // the array element grid[row-1][col-1]
-//    m_grid = new char[MAXROWS][MAXCOLS];
+    
+    int borderRandomizer = randInt(1, 4);
     int r, c;
     for (r = 0; r < rows(); r++)
     {
         for (c = 0; c < cols(); c++)
         {
-            if (r <= 1 || r >= MAXROWS-2 || c <= 1 || c >= MAXCOLS-2)
+            if (r <= borderRandomizer || r >= MAXROWS-borderRandomizer || c <= borderRandomizer || c >= MAXCOLS-borderRandomizer)
                 m_grid[r][c] = WALL_SYMBOL;
             else
                 m_grid[r][c] = ' ';
@@ -163,9 +164,9 @@ void Temple::display() const
     cout << endl;
     
 /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
-//    if (m_player != nullptr) {
-//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-//    }
+    if (m_player != nullptr) {
+        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+    }
     
 }
 

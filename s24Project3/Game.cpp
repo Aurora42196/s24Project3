@@ -53,7 +53,7 @@ bool Game::addPlayer(int r, int c)
         return false;
 
       // Don't add a player where a wall or monster exists
-    if (m_temple->getGridValue(r-1, c-1) != ' ')
+    if (m_temple->getGridValue(r, c) != ' ')
         return false;
 
       // Dynamically allocate new Player and add it to the temple
@@ -83,6 +83,11 @@ void Game::play()
                 case ARROW_UP:
                 case ARROW_DOWN:
                     ap->move(command);
+                    break;
+                    
+                case 'c': // allows the player to cheat the game
+                    m_player->setHealth(50);
+                    m_player->setDexterity(9);
                     break;
     
                 default:
