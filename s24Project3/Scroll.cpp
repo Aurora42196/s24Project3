@@ -30,10 +30,20 @@ ImproveArmor::ImproveArmor(Temple* tp, int r, int c)
     setName(getName());
 }
 
+void ImproveArmor::castEffect()
+{
+    
+}
+
 RaiseStrength::RaiseStrength(Temple* tp, int r, int c)
  :Scroll(tp, r, c)
 {
     setName(getName());
+}
+
+void RaiseStrength::castEffect()
+{
+    
 }
 
 EnhanceHealth::EnhanceHealth(Temple* tp, int r, int c)
@@ -42,8 +52,18 @@ EnhanceHealth::EnhanceHealth(Temple* tp, int r, int c)
     setName(getName());
 }
 
+void EnhanceHealth::castEffect()
+{
+    
+}
+
 EnhanceDexterity::EnhanceDexterity(Temple* tp, int r, int c)
  :Scroll(tp, r, c)
 {
     setName(getName());
+}
+
+void EnhanceDexterity::castEffect()
+{
+    
 }

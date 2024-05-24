@@ -111,18 +111,18 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
     
     // Add the game objects to the Temple, only 2-3 weapons or scrolls can
     // be placed in the temple on the first turn
-    int numObjects = randInt(2, 3);
-    for (; numObjects > 0; numObjects--)
-    {
-        int gameObjectRandomizer = randInt(1, 7);
-        int rObject = randInt(1, MAXROWS);
-        int cObject = randInt(1, MAXCOLS);
-        while (!(addMonster(rObject, cObject, gameObjectRandomizer)))
-        {
-            rObject = randInt(1, MAXROWS);
-            cObject = randInt(1, MAXCOLS);
-        }
-    }
+//    int numObjects = randInt(2, 3);
+//    for (; numObjects > 0; numObjects--)
+//    {
+//        int gameObjectRandomizer = randInt(1, 3);
+//        int rObject = randInt(1, MAXROWS);
+//        int cObject = randInt(1, MAXCOLS);
+//        while (!(addGameObjects(rObject, cObject, gameObjectRandomizer)))
+//        {
+//            rObject = randInt(1, MAXROWS);
+//            cObject = randInt(1, MAXCOLS);
+//        }
+//    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -131,11 +131,17 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
 
 Temple::~Temple()
 {
-    // delete the dynamically allocated grid
+    // delete the dynamically allocated monsters
     for(int i = 0; i < m_nMonsters; i++)
     {
         delete m_monsters[i];
     }
+    
+    // delete the dynamically allocated game objects
+//    for(int i = 0; i < m_nGameObjects; i++)
+//    {
+//        delete m_objects[i];
+//    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -152,14 +158,6 @@ void Temple::display() const
 {
     // Position (row,col) in the temple coordinate system is represented in
     // the array element grid[row-1][col-1]
-
-//    // Indicate player's position
-//    if (m_player != nullptr)
-//    {
-//        char& gridChar = m_grid[m_player->row()-1][m_player->col()-1];
-//        if (gridChar == ' ')
-//            gridChar = '@';
-//    }
     
     // Draw the grid
     clearScreen();
@@ -191,24 +189,6 @@ void Temple::display() const
 // Mutator function implementations
 ///////////////////////////////////////////////////////////////////////////
 
-//bool Temple::addPlayer(int r, int c)
-//{
-//    if ( ! isInBounds(r, c))
-//        return false;
-//
-//      // Don't add a player if one already exists
-//    if (m_player != nullptr)
-//        return false;
-//
-//      // Don't add a player where a wall exists
-//    if (m_grid[r-1][c-1] == WALL_SYMBOL)
-//        return false;
-//
-//      // Dynamically allocate new Player and add it to the temple
-//    m_player = new Player(this, r, c);
-//    m_grid[r-1][c-1] = PLAYER_SYMBOL;
-//    return true;
-//}
 
 void Temple::addToGrid(int r, int c, char ch)
 {
@@ -221,7 +201,7 @@ bool Temple::addMonster(int r, int c, int randomizer)
         return false;
 
       // Don't add a monster where a wall or another monster exists
-    if (getGridValue(r-1, c-1) != WEAPON_SYMBOL && getGridValue(r-1, c-1) != SCROLL_SYMBOL && getGridValue(r-1, c-1) != ' ')
+    if (/*getGridValue(r-1, c-1) != WEAPON_SYMBOL && getGridValue(r-1, c-1) != SCROLL_SYMBOL &&*/ getGridValue(r-1, c-1) != ' ')
         return false;
 
       // Dynamically allocate new Monster and add it to the temple
