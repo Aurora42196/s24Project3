@@ -67,9 +67,9 @@ public:
 private:
     Temple* m_temple;
     // Add later: weapon will be a pointer to a game object
-    char m_symbol;
     int m_row;
     int m_col;
+    char m_symbol;
     int m_health;
     int m_armor;
     int m_strength;

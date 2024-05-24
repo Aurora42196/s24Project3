@@ -39,6 +39,8 @@ Game::Game(int goblinSmellDistance)
 Game::~Game()
 {
     delete m_temple;
+    delete m_player;
+
 }
 
 bool Game::addPlayer(int r, int c)

@@ -45,12 +45,12 @@ public:
     
 private:
     // Data members
+    Actor* m_player;
     int m_rows;
     int m_cols;
     int m_level;
     int m_nMonsters;
     char m_grid[MAXROWS][MAXCOLS];
-    Actor* m_player;
     std::vector<Monster*> m_monsters;
     
     ///////////////////////////////////////////////////////////////////////////

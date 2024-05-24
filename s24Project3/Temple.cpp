@@ -113,15 +113,11 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
 
 Temple::~Temple()
 {
-    // delete the player
-    delete m_player;
-    
     // delete the dynamically allocated grid
-//    for(int i = 0; i < MAXROWS; i++)
-//    {
-//        delete [] m_grid[i];
-//    }
-//    delete [] m_grid;
+    for(int i = 0; i < m_nMonsters; i++)
+    {
+        delete m_monsters[i];
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////

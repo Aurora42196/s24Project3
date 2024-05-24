@@ -26,10 +26,10 @@ public:
     
 private:
     // Data members
+    Temple* m_temple;
     int m_row;
     int m_col;
     std::string m_name; // Each game object has a unique name
-    Temple* m_temple;
 };
 
 #endif /* GameObject_h */
