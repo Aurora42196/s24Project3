@@ -52,6 +52,35 @@ public:
     virtual ~Bogeyman();
 private:
     
+};
+
+class Snakewoman : public Monster
+{
+public:
+    Snakewoman(Temple* tp, int r, int c);
+    virtual ~Snakewoman();
+private:
+    
+};
+
+class Dragon : public Monster
+{
+public:
+    Dragon(Temple* tp, int r, int c);
+    virtual ~Dragon();
+    
+    // Mutator
+    virtual void move();
+private:
+    
+};
+
+class Goblin : public Monster
+{
+public:
+    Goblin(Temple* tp, int r, int c);
+    virtual ~Goblin();
+private:
     
 };
 #endif /* Monster_h */

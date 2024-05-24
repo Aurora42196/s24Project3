@@ -85,13 +85,21 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
 //    }
     
     //Add the monsters to the dungeon, we'll start with adding only Bogeymen
+    
     int M = randInt(2, 5*(m_level+1)+1);
     for (; M > 0; M--)
     {
+        int monsterRandomizer;
+        if (m_level <= 1)
+            monsterRandomizer = randInt(1, 2);
+        else if (m_level == 2)
+            monsterRandomizer = randInt(1, 3);
+        else // m_level > 2
+            monsterRandomizer = randInt(1, 4);
         //        cerr << "coordinate out of bounds" << endl;
         int rMonster = randInt(1, MAXROWS);
         int cMonster = randInt(1, MAXCOLS);
-        while (!(addMonster(rMonster, cMonster)))
+        while (!(addMonster(rMonster, cMonster, monsterRandomizer)))
         {
             rMonster = randInt(1, MAXROWS);
             cMonster = randInt(1, MAXCOLS);
@@ -193,7 +201,7 @@ void Temple::addToGrid(int r, int c, char ch)
     m_grid[r-1][c-1] = ch;
 }
 
-bool Temple::addMonster(int r, int c)
+bool Temple::addMonster(int r, int c, int randomizer)
 {
     if (!isInBounds(r, c))
         return false;
@@ -206,8 +214,25 @@ bool Temple::addMonster(int r, int c)
     if (getGridValue(r-1, c-1) != ' ')
         return false;
 
-      // Dynamically allocate new Player and add it to the temple
-    Monster* newMonster = new Bogeyman(this, r, c);
+      // Dynamically allocate new Monster and add it to the temple
+    Monster* newMonster;
+    switch (randomizer) {
+        case 1:
+            newMonster = new Snakewoman(this, r, c);
+            break;
+        case 2:
+            newMonster = new Goblin(this, r, c);
+            break;
+        case 3:
+            newMonster = new Bogeyman(this, r, c);
+            break;
+        case 4:
+            newMonster = new Dragon(this, r, c);
+            break;
+        default:
+            return false;
+            break;
+    }
     m_monsters.push_back(newMonster);
     addToGrid(r, c, m_monsters[m_nMonsters]->getSymbol());
     m_nMonsters++;

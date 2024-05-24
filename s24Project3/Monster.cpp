@@ -133,3 +133,65 @@ Bogeyman::~Bogeyman()
 {
     
 }
+
+///////////////////////////////////////////////////////////////////////////
+// Snakewoman function implementations
+///////////////////////////////////////////////////////////////////////////
+///
+// Constructor
+Snakewoman::Snakewoman(Temple* tp, int r, int c)
+ :Monster(tp, r, c, SNAKEWOMAN_SYMBOL)
+{
+    setHealth(randInt(3, 6));
+    setStrength(2);
+    setDexterity(3);
+    setArmor(3);
+}
+
+Snakewoman::~Snakewoman()
+{
+    
+}
+
+///////////////////////////////////////////////////////////////////////////
+// Dragon function implementations
+///////////////////////////////////////////////////////////////////////////
+///
+// Constructor
+Dragon::Dragon(Temple* tp, int r, int c)
+ :Monster(tp, r, c, DRAGON_SYMBOL)
+{
+    setHealth(randInt(20, 25));
+    setStrength(4);
+    setDexterity(4);
+    setArmor(4);
+}
+
+Dragon::~Dragon()
+{
+    
+}
+
+void Dragon::move()
+{
+    return; // Dragons do not move, since they want to protect their treasure
+}
+
+///////////////////////////////////////////////////////////////////////////
+// Goblin function implementations
+///////////////////////////////////////////////////////////////////////////
+///
+// Constructor
+Goblin::Goblin(Temple* tp, int r, int c)
+ :Monster(tp, r, c, GOBLIN_SYMBOL)
+{
+    setHealth(randInt(15, 20));
+    setStrength(3);
+    setDexterity(1);
+    setArmor(1);
+}
+
+Goblin::~Goblin()
+{
+    
+}

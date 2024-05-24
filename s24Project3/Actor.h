@@ -10,8 +10,9 @@
 
 //#include <string>
 #include "utilities.h"
-/// Game Plan: Actors.h will contain the class declarations for the Actor base class and its derived classes Player and Monster
-/// The implementations of the base class and derived classes will be in the source file Actor.cpp
+/// Game Plan: Actors.h will contain the class declarations for the Actor base class and its derived class Player
+/// The Monster derived class will be in its own file since there are a wide variance of classes derived from Monster
+/// The implementations of the Actor base class and Player derived class will be in the source file Actor.cpp
 
 ///////////////////////////////////////////////////////////////////////////
 // Actor (Base Class)

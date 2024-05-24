@@ -38,7 +38,7 @@ public:
     void setPlayer(Actor* ap) { m_player = ap; };
 //    bool addPlayer(int r, int c);
     void addToGrid(int r, int c, char ch);
-    bool addMonster(int r, int c);
+    bool addMonster(int r, int c, int randomizer);
     void monstersTakeTurn();
 
     
