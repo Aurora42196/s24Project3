@@ -14,7 +14,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 ///
 Weapon::Weapon(Temple* tp, int r, int c)
- : GameObject(tp,r,c,WEAPON_SYMBOL), m_action(nullptr), m_dexterityBonus(0), m_weaponDamage(0)
+ : GameObject(tp,r,c,WEAPON_SYMBOL), m_dexterityBonus(0), m_weaponDamage(0)
 {
     
 }

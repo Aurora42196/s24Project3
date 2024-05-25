@@ -12,7 +12,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 ///
 Game::Game(int goblinSmellDistance)
- :m_temple(nullptr), m_player(nullptr), m_level(0)
+ :m_temple(nullptr), m_player(nullptr), m_level(3)
 {
     // create the Temple of Doom
     m_temple = new Temple(m_player, MAXROWS,MAXCOLS, m_level);
@@ -53,7 +53,7 @@ bool Game::addPlayer(int r, int c)
         return false;
 
       // Don't add a player where a wall or monster exists
-    if (m_temple->getGridValue(r, c) != ' ' || m_temple->getGridValue(r, c) != WEAPON_SYMBOL || m_temple->getGridValue(r, c) != SCROLL_SYMBOL)
+    if (m_temple->getGridValue(r, c) != ' ' && m_temple->getGridValue(r, c) != WEAPON_SYMBOL && m_temple->getGridValue(r, c) != SCROLL_SYMBOL)
         return false;
 
       // Dynamically allocate new Player and add it to the temple

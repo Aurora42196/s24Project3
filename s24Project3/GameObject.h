@@ -17,7 +17,7 @@ class GameObject
 public:
     // Constructor/destructor
     GameObject(Temple* tp, int r, int c, char sym);
-    ~GameObject();
+    virtual ~GameObject();
     
     // Accessors
         // Inline function implementations

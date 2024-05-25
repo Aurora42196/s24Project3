@@ -33,6 +33,9 @@ public:
     char& getGridValue( int r, int c) { return m_grid[r-1][c-1]; };
     Actor* getPlayer() const { return m_player; };
     bool isPlayerAt(int r, int c) const;
+    bool isWeaponAt(int r, int c) const;
+    bool isScrollAt(int r, int c) const;
+    bool isMonsterAt(int r, int c, char& result) const;
     void display() const;
     
     

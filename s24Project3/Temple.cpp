@@ -12,6 +12,7 @@
 #include "Monster.h"
 #include "Weapon.h"
 #include "Scroll.h"
+//#include "GameObject.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -111,18 +112,18 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
     
     // Add the game objects to the Temple, only 2-3 weapons or scrolls can
     // be placed in the temple on the first turn
-//    int numObjects = randInt(2, 3);
-//    for (; numObjects > 0; numObjects--)
-//    {
-//        int gameObjectRandomizer = randInt(1, 3);
-//        int rObject = randInt(1, MAXROWS);
-//        int cObject = randInt(1, MAXCOLS);
-//        while (!(addGameObjects(rObject, cObject, gameObjectRandomizer)))
-//        {
-//            rObject = randInt(1, MAXROWS);
-//            cObject = randInt(1, MAXCOLS);
-//        }
-//    }
+    int numObjects = randInt(2, 3);
+    for (; numObjects > 0; numObjects--)
+    {
+        int gameObjectRandomizer = randInt(1, 7);
+        int rObject = randInt(1, MAXROWS);
+        int cObject = randInt(1, MAXCOLS);
+        while (!(addGameObjects(rObject, cObject, gameObjectRandomizer)))
+        {
+            rObject = randInt(1, MAXROWS);
+            cObject = randInt(1, MAXCOLS);
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -138,10 +139,10 @@ Temple::~Temple()
     }
     
     // delete the dynamically allocated game objects
-//    for(int i = 0; i < m_nGameObjects; i++)
-//    {
-//        delete m_objects[i];
-//    }
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        delete m_objects[i];
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -151,7 +152,40 @@ Temple::~Temple()
 bool Temple::isPlayerAt(int r, int c) const
 {
     return m_player != nullptr  &&
-           m_player->row() == r  &&  m_player->col() == c;
+           m_player->row()-1 == r  &&  m_player->col()-1 == c;
+}
+
+bool Temple::isWeaponAt(int r, int c) const
+{
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        if(m_objects[i]->row()-1 == r && m_objects[i]->col()-1 == c && m_objects[i]->getSymbol() == ')')
+            return true;
+    }
+    return false;
+}
+
+bool Temple::isScrollAt(int r, int c) const
+{
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        if(m_objects[i]->row()-1 == r && m_objects[i]->col()-1 == c && m_objects[i]->getSymbol() == '?')
+            return true;
+    }
+    return false;
+}
+
+bool Temple::isMonsterAt(int r, int c, char& result) const
+{
+    for(int i = 0; i < m_nMonsters; i++)
+    {
+        if(m_monsters[i]->row()-1 == r && m_monsters[i]->col()-1 == c)
+        {
+            result = m_monsters[i]->getSymbol();
+            return true;
+        }
+    }
+    return false;
 }
 
 void Temple::display() const
@@ -165,6 +199,26 @@ void Temple::display() const
     {
         for (int c = 0; c < cols(); c++)
         {
+            char monsterSymbol;
+            if(isWeaponAt(r, c))
+            {
+                if(isPlayerAt(r, c))
+                    cout << PLAYER_SYMBOL;
+                else if(isMonsterAt(r, c, monsterSymbol))
+                    cout << monsterSymbol;
+                else
+                    cout << WEAPON_SYMBOL;
+            }
+            else if (isScrollAt(r, c))
+            {
+                if(isPlayerAt(r, c))
+                    cout << PLAYER_SYMBOL;
+                else if(isMonsterAt(r, c, monsterSymbol))
+                    cout << monsterSymbol;
+                else
+                    cout << SCROLL_SYMBOL;
+            }
+            else
                 cout << m_grid[r][c];
         }
         cout << endl;

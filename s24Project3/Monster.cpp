@@ -43,9 +43,9 @@ void Monster::move()
     {
         case 0: // MOVE UP
             dir = getTemple()->getGridValue(row()-1,col()); // decode the direction
-            if (dir == ' ') // determine if the new position is a valid place to move
+            if (dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL) // determine if the new position is a valid place to move
             {
-                getTemple()->addToGrid(row(), col(), dir); // clear the space the player is moving from
+                getTemple()->addToGrid(row(), col(), ' '); // clear the space the player is moving from
                 setRow(row()-1); // alter the players position
                 getTemple()->addToGrid(row(), col(), getSymbol()); // show the change to player's position in the grid
             }
@@ -53,9 +53,9 @@ void Monster::move()
             
         case 1: // MOVE DOWN
             dir = getTemple()->getGridValue(row()+1,col());
-            if(dir == ' ')
+            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL)
             {
-                getTemple()->addToGrid(row(), col(), dir);
+                getTemple()->addToGrid(row(), col(), ' ');
                 setRow(row()+1);
                 getTemple()->addToGrid(row(), col(), getSymbol());
             }
@@ -63,9 +63,9 @@ void Monster::move()
             
         case 2: // MOVE LEFT
             dir = getTemple()->getGridValue(row(),col()-1);
-            if(dir == ' ')
+            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL)
             {
-                getTemple()->addToGrid(row(), col(), dir);
+                getTemple()->addToGrid(row(), col(), ' ');
                 setCol(col()-1);
                 getTemple()->addToGrid(row(), col(), getSymbol());
             }
@@ -73,9 +73,9 @@ void Monster::move()
             
         case 3: // MOVE RIGHT
             dir = getTemple()->getGridValue(row(),col()+1);
-            if(dir == ' ')
+            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL)
             {
-                getTemple()->addToGrid(row(), col(), dir);
+                getTemple()->addToGrid(row(), col(), ' ');
                 setCol(col()+1);
                 getTemple()->addToGrid(row(), col(), getSymbol());
             }
