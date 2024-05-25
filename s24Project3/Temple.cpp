@@ -21,8 +21,8 @@ using namespace std;
 // Constructor
 ///////////////////////////////////////////////////////////////////////////
 
-Temple::Temple(Actor* ap, int nRows, int nCols, int level)
-: m_player(ap), m_rows(nRows), m_cols(nCols), m_level(level), m_nMonsters(0), m_nGameObjects(0)
+Temple::Temple(Player* pp, int nRows, int nCols, int level)
+: m_player(pp), m_rows(nRows), m_cols(nCols), m_level(level), m_nMonsters(0), m_nGameObjects(0)
 {
     // Checks if the size of the temple floor is valid. If this code runs, something went terribly wrong
     if (nRows <= 0  ||  nCols <= 0  ||  nRows > MAXROWS  ||  nCols > MAXCOLS)

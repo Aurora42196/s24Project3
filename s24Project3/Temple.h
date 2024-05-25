@@ -22,7 +22,7 @@ class Temple
 {
 public:
     // Constructor/destructor
-    Temple(Actor* ap, int nRows, int nCols, int level);
+    Temple(Player* pp, int nRows, int nCols, int level);
     ~Temple();
     
     // Accessors
@@ -31,18 +31,20 @@ public:
     int cols() const { return m_cols; };
     int getLevel() const { return m_level; };
     char& getGridValue( int r, int c) { return m_grid[r-1][c-1]; };
-    Actor* getPlayer() const { return m_player; };
+    Player* getPlayer() const { return m_player; };
+        // Non-inline function declarations
     bool isPlayerAt(int r, int c) const;
     bool isWeaponAt(int r, int c) const;
     bool isScrollAt(int r, int c) const;
     bool isMonsterAt(int r, int c, char& result) const;
     bool isIdolAt(int r, int c) const;
     bool isStaircaseAt(int r, int c) const;
+//    void showInventory() const;
     void display() const;
     
     
     // Mutators
-    void setPlayer(Actor* ap) { m_player = ap; };
+    void setPlayer(Player* pp) { m_player = pp; };
 //    bool addPlayer(int r, int c);
     void addToGrid(int r, int c, char ch);
     bool addMonster(int r, int c, int randomizer);
@@ -53,7 +55,7 @@ public:
     
 private:
     // Data members
-    Actor* m_player;
+    Player* m_player;
     int m_rows;
     int m_cols;
     int m_level;

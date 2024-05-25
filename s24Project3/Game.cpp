@@ -104,7 +104,9 @@ void Game::play()
                 case ARROW_DOWN:
                     ap->move(command);
                     break;
-                    
+                case 'i':
+                    m_player->showInventory();
+                    break;
                     
                 case 'c': // allows the player to cheat the game
                     m_player->setHealth(50);
@@ -137,6 +139,6 @@ void Game::play()
 /// Checks if any future objects created will remain within the walls of the temple
 bool Game::isInBounds(int r ,int c) const
 {
-    return (r >= 0  &&  r <= m_temple->rows()  &&  c >= 0  &&  c <= m_temple->cols() && m_temple->getGridValue(r-1, c-1) != WALL_SYMBOL && m_temple->getGridValue(r-1, c-1) != BOGEYMAN_SYMBOL && m_temple->getGridValue(r-1, c-1) != SNAKEWOMAN_SYMBOL && m_temple->getGridValue(r-1, c-1) != DRAGON_SYMBOL && m_temple->getGridValue(r-1, c-1) != GOBLIN_SYMBOL);
+    return (m_temple->getGridValue(r-1, c-1) == ' ');
 }
 

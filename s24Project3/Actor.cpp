@@ -8,6 +8,7 @@
 #include "Actor.h"
 #include "Temple.h"
 #include "globals.h"
+#include "Weapon.h"
 #include <iostream>
 using namespace std;
 
@@ -39,11 +40,35 @@ Player::Player(Temple* tp, int r, int c)
     setArmor(2);
     setStrength(2);
     setDexterity(2);
+    
+    GameObject* starterWeapon;
+    starterWeapon = new ShortSword();
+    m_inventory.push_back(starterWeapon);
+    m_nItems++;
 }
 
 Player::~Player()
 {}
 
+///////////////////////////////////////////////////////////////////////////
+// Accessor function implementations
+///////////////////////////////////////////////////////////////////////////
+///
+void Player::showInventory() const
+{
+    clearScreen();
+    char index = 97; // starts with the character 'a' and increments with each item in the inventory
+    for (int i = 0; i < m_nItems; i++)
+    {
+        cout << index + i << ". " << m_inventory[i]->getName() << endl;
+    }
+    getCharacter();
+}
+
+///////////////////////////////////////////////////////////////////////////
+// Mutator function implementations
+///////////////////////////////////////////////////////////////////////////
+///
 void Player::move(char dir)
 {
     /// This is my own version of move based on a combination of decodeDirection and

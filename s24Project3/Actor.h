@@ -8,8 +8,9 @@
 #ifndef Actor_h
 #define Actor_h
 
-//#include <string>
 #include "utilities.h"
+#include <vector>
+#include "GameObject.h"
 /// Game Plan: Actors.h will contain the class declarations for the Actor base class and its derived class Player
 /// The Monster derived class will be in its own file since there are a wide variance of classes derived from Monster
 /// The implementations of the Actor base class and Player derived class will be in the source file Actor.cpp
@@ -90,12 +91,17 @@ public:
     virtual ~Player();
     
     // Accessors
-    
+//    bool hasInInventory()
+    int getInventorySize() { return m_nItems; };
+    void showInventory() const;
     // Mutators
     virtual void move(char dir);
+    void pickUpObject();
     
 private:
     // A Player has an inventory of items (array of game objects)
+    int m_nItems; // keeps track of how many items are in the inventory
+    std::vector<GameObject*> m_inventory;
     
 };
 

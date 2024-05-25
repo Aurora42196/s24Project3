@@ -17,6 +17,7 @@ class GameObject
 public:
     // Constructor/destructor
     GameObject(Temple* tp, int r, int c, char sym);
+    GameObject() {}; // Used to add game objects to the player's inventory
     virtual ~GameObject();
     
     // Accessors
