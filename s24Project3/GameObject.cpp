@@ -6,6 +6,7 @@
 //
 
 #include "GameObject.h"
+#include "globals.h"
 #include <iostream>
 
 using namespace std;
@@ -30,11 +31,21 @@ GameObject::~GameObject()
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Accessor Function Implementations
+// Golden Idol Function Implementations
 ///////////////////////////////////////////////////////////////////////////
 
-
+GoldenIdol::GoldenIdol(Temple* tp, int r, int c)
+ :GameObject(tp, r, c, IDOL_SYMBOL)
+{
+    setName("golden idol");
+}
 
 ///////////////////////////////////////////////////////////////////////////
-// Mutator Function Implementations
+// Staircase Function Implementations
 ///////////////////////////////////////////////////////////////////////////
+
+Staircase::Staircase(Temple* tp, int r, int c)
+ :GameObject(tp, r, c, STAIRS_SYMBOL)
+{
+    
+}

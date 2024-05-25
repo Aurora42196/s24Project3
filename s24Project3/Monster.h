@@ -54,6 +54,9 @@ public:
     virtual ~Bogeyman();
     
     virtual std::string getName() { return "bogeyman"; };
+    
+    // Mutator
+//    virtual void move();
 
 private:
     
@@ -66,6 +69,9 @@ public:
     virtual ~Snakewoman();
     
     virtual std::string getName() { return "snakewoman"; };
+    
+    // Mutator
+//    virtual void move();
 
 private:
     
@@ -92,6 +98,9 @@ public:
     virtual ~Goblin();
     
     virtual std::string getName() { return "goblin"; };
+    
+    // Mutator
+//    virtual void move();
 
 private:
     

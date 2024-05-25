@@ -12,7 +12,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 ///
 Game::Game(int goblinSmellDistance)
- :m_temple(nullptr), m_player(nullptr), m_level(3)
+ :m_temple(nullptr), m_player(nullptr), m_level(0)
 {
     // create the Temple of Doom
     m_temple = new Temple(m_player, MAXROWS,MAXCOLS, m_level);
@@ -43,6 +43,10 @@ Game::~Game()
 
 }
 
+///////////////////////////////////////////////////////////////////////////
+// Mutator function implementations
+///////////////////////////////////////////////////////////////////////////
+///
 bool Game::addPlayer(int r, int c)
 {
     if (!isInBounds(r, c))
@@ -62,10 +66,26 @@ bool Game::addPlayer(int r, int c)
     return true;
 }
 
-///////////////////////////////////////////////////////////////////////////
-// Mutator function implementation
-///////////////////////////////////////////////////////////////////////////
-///
+void Game::goToNextLevel()
+{
+    delete m_temple;
+    m_level++;
+    m_temple = new Temple(m_player, MAXROWS,MAXCOLS, m_level);
+    int rPlayer = randInt(1, MAXROWS);
+    int cPlayer = randInt(1, MAXCOLS);
+    while ( !(isInBounds(rPlayer, cPlayer)) )
+    {
+        //        cerr << "coordinate out of bounds" << endl;
+        rPlayer = randInt(1, MAXROWS);
+        cPlayer = randInt(1, MAXCOLS);
+    }
+    m_player->setTemple(m_temple);
+    m_player->setRow(rPlayer-1);
+    m_player->setCol(cPlayer-1);
+    m_temple->addToGrid(rPlayer-1, cPlayer-1, m_player->getSymbol());
+//    m_temple->setPlayer(m_player);
+}
+
 void Game::play()
 {
     m_temple->display();
@@ -85,6 +105,7 @@ void Game::play()
                     ap->move(command);
                     break;
                     
+                    
                 case 'c': // allows the player to cheat the game
                     m_player->setHealth(50);
                     m_player->setDexterity(9);
@@ -92,6 +113,15 @@ void Game::play()
     
                 default:
                     cout << '\a' << endl; // beep
+                    break;
+                    
+                case '>':
+                    int rPlayer = m_player->row();
+                    int cPlayer = m_player->col();
+                    if(m_temple->isPlayerAt(rPlayer,cPlayer) == m_temple->isStaircaseAt(rPlayer, cPlayer))
+                    {
+                        goToNextLevel();
+                    }
                     break;
             }
             m_temple->monstersTakeTurn();
@@ -107,6 +137,6 @@ void Game::play()
 /// Checks if any future objects created will remain within the walls of the temple
 bool Game::isInBounds(int r ,int c) const
 {
-    return (r >= 1  &&  r <= m_temple->rows()  &&  c >= 1  &&  c <= m_temple->cols() && m_temple->getGridValue(r-1, c-1) != WALL_SYMBOL);
+    return (r >= 0  &&  r <= m_temple->rows()  &&  c >= 0  &&  c <= m_temple->cols() && m_temple->getGridValue(r-1, c-1) != WALL_SYMBOL && m_temple->getGridValue(r-1, c-1) != BOGEYMAN_SYMBOL && m_temple->getGridValue(r-1, c-1) != SNAKEWOMAN_SYMBOL && m_temple->getGridValue(r-1, c-1) != DRAGON_SYMBOL && m_temple->getGridValue(r-1, c-1) != GOBLIN_SYMBOL);
 }
 

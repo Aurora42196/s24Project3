@@ -36,6 +36,8 @@ public:
     bool isWeaponAt(int r, int c) const;
     bool isScrollAt(int r, int c) const;
     bool isMonsterAt(int r, int c, char& result) const;
+    bool isIdolAt(int r, int c) const;
+    bool isStaircaseAt(int r, int c) const;
     void display() const;
     
     

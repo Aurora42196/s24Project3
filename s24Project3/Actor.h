@@ -56,9 +56,10 @@ public:
     void setStrength(int s) { m_strength = s; };
     void setDexterity(int d) { m_dexterity = d; };
     void castSleep(int s) { m_sleepTimer = s; };
+    void setTemple(Temple* tp) { m_temple = tp; };
         
         // Non-inline declarations
-    virtual void move(char dir);
+    virtual void move(char dir); // move for the player
     virtual char getSymbol() const;
 
         /// All Actors move differently, so they will all have their unique implementations.

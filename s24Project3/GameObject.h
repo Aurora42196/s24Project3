@@ -38,4 +38,22 @@ private:
     std::string m_name; // Each game object has a unique name
 };
 
+class GoldenIdol : public GameObject
+{
+public:
+    GoldenIdol(Temple* tp, int r, int c);
+    virtual ~GoldenIdol() {};
+private:
+    
+};
+
+class Staircase : public GameObject
+{
+public:
+    Staircase(Temple* tp, int r, int c);
+    virtual ~Staircase() {};
+private:
+    
+};
+
 #endif /* GameObject_h */

@@ -124,6 +124,31 @@ Temple::Temple(Actor* ap, int nRows, int nCols, int level)
             cObject = randInt(1, MAXCOLS);
         }
     }
+    
+    //Add the staircase if the player is on level 0-3,
+    //esle add the golden idol if the player is on level 4
+    if (m_level == 4)
+    {
+        int rObject = randInt(1, MAXROWS);
+        int cObject = randInt(1, MAXCOLS);
+        while (!(addGameObjects(rObject, cObject, 11)))
+        {
+            rObject = randInt(1, MAXROWS);
+            cObject = randInt(1, MAXCOLS);
+        }
+    }
+    
+    if (m_level <= 3)
+    {
+        int rObject = randInt(1, MAXROWS);
+        int cObject = randInt(1, MAXCOLS);
+        while (!(addGameObjects(rObject, cObject, 12)))
+        {
+            rObject = randInt(1, MAXROWS);
+            cObject = randInt(1, MAXCOLS);
+        }
+    }
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -188,6 +213,26 @@ bool Temple::isMonsterAt(int r, int c, char& result) const
     return false;
 }
 
+bool Temple::isIdolAt(int r, int c) const
+{
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        if(m_objects[i]->row()-1 == r && m_objects[i]->col()-1 == c && m_objects[i]->getSymbol() == '&')
+            return true;
+    }
+    return false;
+}
+
+bool Temple::isStaircaseAt(int r, int c) const
+{
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        if(m_objects[i]->row()-1 == r && m_objects[i]->col()-1 == c && m_objects[i]->getSymbol() == '>')
+            return true;
+    }
+    return false;
+}
+
 void Temple::display() const
 {
     // Position (row,col) in the temple coordinate system is represented in
@@ -217,6 +262,24 @@ void Temple::display() const
                     cout << monsterSymbol;
                 else
                     cout << SCROLL_SYMBOL;
+            }
+            else if (isIdolAt(r, c))
+            {
+                if(isPlayerAt(r, c))
+                    cout << PLAYER_SYMBOL;
+                else if(isMonsterAt(r, c, monsterSymbol))
+                    cout << monsterSymbol;
+                else
+                    cout << IDOL_SYMBOL;
+            }
+            else if (isStaircaseAt(r, c))
+            {
+                if(isPlayerAt(r, c))
+                    cout << PLAYER_SYMBOL;
+                else if(isMonsterAt(r, c, monsterSymbol))
+                    cout << monsterSymbol;
+                else
+                    cout << STAIRS_SYMBOL;
             }
             else
                 cout << m_grid[r][c];
@@ -326,6 +389,12 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
             break;
         case 10:
             newGameObject = new Teleportation(this, r, c);
+            break;
+        case 11:
+            newGameObject = new GoldenIdol(this, r, c);
+            break;
+        case 12:
+            newGameObject = new Staircase(this, r, c);
             break;
         default:
             return false;
