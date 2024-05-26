@@ -34,7 +34,7 @@ void Actor::move(char dir)
 ///////////////////////////////////////////////////////////////////////////
 
 Player::Player(Temple* tp, int r, int c)
- : Actor(tp, r, c, PLAYER_SYMBOL)
+ : Actor(tp, r, c, PLAYER_SYMBOL), m_nItems(0)
 {
     setHealth(INITIAL_PLAYER_HEALTH);
     setArmor(2);
@@ -57,10 +57,11 @@ Player::~Player()
 void Player::showInventory() const
 {
     clearScreen();
-    char index = 97; // starts with the character 'a' and increments with each item in the inventory
+//    char index = 97; // starts with the character 'a' and increments with each item in the inventory
+    cout << "Inventory:" << endl;
     for (int i = 0; i < m_nItems; i++)
     {
-        cout << index + i << ". " << m_inventory[i]->getName() << endl;
+        cout << " " << (char)('a' + i) << ". " << m_inventory[i]->getName() << endl;
     }
     getCharacter();
 }
@@ -69,6 +70,29 @@ void Player::showInventory() const
 // Mutator function implementations
 ///////////////////////////////////////////////////////////////////////////
 ///
+bool Player::pickUpObject()
+{
+    int rPlayer = row();
+    int cPlayer = col();
+    Temple* tp = getTemple();
+    if(m_nItems < INVENTORY_CAPACITY)
+    {
+        for (int i = 0; i < tp->getNumGameObjects(); i++)
+        {
+            GameObject* templeObject = tp->getGameObjectAt(i);
+            if(tp->isWeaponAt(rPlayer, cPlayer) || tp->isScrollAt(rPlayer, cPlayer) || tp->isIdolAt(rPlayer, cPlayer))
+            {
+                templeObject->setRow(-1);
+                templeObject->setCol(-1);
+                m_inventory.push_back(templeObject);
+                m_nItems++;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void Player::move(char dir)
 {
     /// This is my own version of move based on a combination of decodeDirection and

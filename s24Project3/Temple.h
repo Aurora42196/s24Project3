@@ -30,8 +30,10 @@ public:
     int rows() const { return m_rows; };
     int cols() const { return m_cols; };
     int getLevel() const { return m_level; };
-    char& getGridValue( int r, int c) { return m_grid[r-1][c-1]; };
+    char& getGridValue( int r, int c) { return m_grid[r][c]; };
     Player* getPlayer() const { return m_player; };
+    GameObject* getGameObjectAt(int i) const { return m_objects[i]; };
+    int getNumGameObjects() const { return m_nGameObjects; };
         // Non-inline function declarations
     bool isPlayerAt(int r, int c) const;
     bool isWeaponAt(int r, int c) const;

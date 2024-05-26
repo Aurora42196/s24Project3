@@ -95,8 +95,8 @@ public:
     int getInventorySize() { return m_nItems; };
     void showInventory() const;
     // Mutators
+    bool pickUpObject();
     virtual void move(char dir);
-    void pickUpObject();
     
 private:
     // A Player has an inventory of items (array of game objects)

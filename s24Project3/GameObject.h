@@ -10,7 +10,7 @@
 
 #include "Temple.h"
 #include <string>
-
+#include <iostream>
 
 class GameObject
 {
@@ -29,6 +29,8 @@ public:
     
     // Mutators
     void setName(std::string nm) { m_name = nm; };
+    void setRow(int r) { m_row = r; };
+    void setCol(int c) { m_col = c; };
     
 private:
     // Data members

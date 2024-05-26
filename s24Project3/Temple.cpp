@@ -177,14 +177,16 @@ Temple::~Temple()
 bool Temple::isPlayerAt(int r, int c) const
 {
     return m_player != nullptr  &&
-           m_player->row()-1 == r  &&  m_player->col()-1 == c;
+           m_player->row() == r  &&  m_player->col() == c;
 }
 
 bool Temple::isWeaponAt(int r, int c) const
 {
     for(int i = 0; i < m_nGameObjects; i++)
     {
-        if(m_objects[i]->row()-1 == r && m_objects[i]->col()-1 == c && m_objects[i]->getSymbol() == ')')
+        int rObject = m_objects[i]->row();
+        int cObject = m_objects[i]->col();
+        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == ')')
             return true;
     }
     return false;
@@ -194,7 +196,9 @@ bool Temple::isScrollAt(int r, int c) const
 {
     for(int i = 0; i < m_nGameObjects; i++)
     {
-        if(m_objects[i]->row()-1 == r && m_objects[i]->col()-1 == c && m_objects[i]->getSymbol() == '?')
+        int rObject = m_objects[i]->row();
+        int cObject = m_objects[i]->col();
+        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '?')
             return true;
     }
     return false;
@@ -204,7 +208,9 @@ bool Temple::isMonsterAt(int r, int c, char& result) const
 {
     for(int i = 0; i < m_nMonsters; i++)
     {
-        if(m_monsters[i]->row()-1 == r && m_monsters[i]->col()-1 == c)
+        int rMonster = m_monsters[i]->row();
+        int cMonster = m_monsters[i]->col();
+        if(rMonster == r && cMonster == c)
         {
             result = m_monsters[i]->getSymbol();
             return true;
@@ -217,7 +223,9 @@ bool Temple::isIdolAt(int r, int c) const
 {
     for(int i = 0; i < m_nGameObjects; i++)
     {
-        if(m_objects[i]->row()-1 == r && m_objects[i]->col()-1 == c && m_objects[i]->getSymbol() == '&')
+        int rObject = m_objects[i]->row();
+        int cObject = m_objects[i]->col();
+        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '&')
             return true;
     }
     return false;
@@ -227,7 +235,9 @@ bool Temple::isStaircaseAt(int r, int c) const
 {
     for(int i = 0; i < m_nGameObjects; i++)
     {
-        if(m_objects[i]->row()-1 == r && m_objects[i]->col()-1 == c && m_objects[i]->getSymbol() == '>')
+        int rObject = m_objects[i]->row();
+        int cObject = m_objects[i]->col();
+        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '>')
             return true;
     }
     return false;
@@ -295,10 +305,14 @@ void Temple::display() const
     << ", Dexterity: " << m_player->getDexterity();
     cout << endl;
     
-/// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
-//    if (m_player != nullptr) {
-//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-//    }
+    /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
+    if (m_player != nullptr) {
+        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+    }
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
+    }
     
 }
 
@@ -309,7 +323,7 @@ void Temple::display() const
 
 void Temple::addToGrid(int r, int c, char ch)
 {
-    m_grid[r-1][c-1] = ch;
+    m_grid[r][c] = ch;
 }
 
 bool Temple::addMonster(int r, int c, int randomizer)
@@ -318,7 +332,7 @@ bool Temple::addMonster(int r, int c, int randomizer)
         return false;
 
       // Don't add a monster where a wall or another monster exists
-    if (/*getGridValue(r-1, c-1) != WEAPON_SYMBOL && getGridValue(r-1, c-1) != SCROLL_SYMBOL &&*/ getGridValue(r-1, c-1) != ' ')
+    if (/*getGridValue(r-1, c-1) != WEAPON_SYMBOL && getGridValue(r-1, c-1) != SCROLL_SYMBOL &&*/ getGridValue(r, c) != ' ')
         return false;
 
       // Dynamically allocate new Monster and add it to the temple
@@ -352,7 +366,7 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
         return false;
 
       // Don't add a monster where a wall or another object exists
-    if (getGridValue(r-1, c-1) == WALL_SYMBOL || getGridValue(r-1, c-1) == WEAPON_SYMBOL || getGridValue(r-1, c-1) == SCROLL_SYMBOL)
+    if (getGridValue(r, c) == WALL_SYMBOL || getGridValue(r, c) == WEAPON_SYMBOL || getGridValue(r, c) == SCROLL_SYMBOL)
         return false;
 
       // Dynamically allocate new Monster and add it to the temple
@@ -422,5 +436,5 @@ void Temple::monstersTakeTurn()
 ///// Checks if any future objects created will remain within the walls of the temple
 bool Temple::isInBounds(int r ,int c) const
 {
-    return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols && m_grid[r-1][c-1] != WALL_SYMBOL);
+    return (r >= 0  &&  r <= m_rows  &&  c >= 0  &&  c <= m_cols && m_grid[r][c] != WALL_SYMBOL);
 }

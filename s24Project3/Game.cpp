@@ -107,6 +107,9 @@ void Game::play()
                 case 'i':
                     m_player->showInventory();
                     break;
+                case 'g':
+                    m_player->pickUpObject();
+                    break;
                     
                 case 'c': // allows the player to cheat the game
                     m_player->setHealth(50);
