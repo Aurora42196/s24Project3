@@ -41,14 +41,13 @@ public:
     bool isMonsterAt(int r, int c, char& result) const;
     bool isIdolAt(int r, int c) const;
     bool isStaircaseAt(int r, int c) const;
-//    void showInventory() const;
     void display() const;
     
     
     // Mutators
     void setPlayer(Player* pp) { m_player = pp; };
-//    bool addPlayer(int r, int c);
     void addToGrid(int r, int c, char ch);
+    void removeFromGrid(int i);
     bool addMonster(int r, int c, int randomizer);
     bool addGameObjects(int r, int c, int randomizer);
     void monstersTakeTurn();

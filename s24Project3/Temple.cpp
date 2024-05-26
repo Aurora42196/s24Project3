@@ -88,6 +88,30 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
 //        numRooms--;
 //    }
     
+    //Add the staircase if the player is on level 0-3,
+    //esle add the golden idol if the player is on level 4
+    if (m_level == 4)
+    {
+        int rObject = randInt(1, MAXROWS);
+        int cObject = randInt(1, MAXCOLS);
+        while (!(addGameObjects(rObject, cObject, 11)))
+        {
+            rObject = randInt(1, MAXROWS);
+            cObject = randInt(1, MAXCOLS);
+        }
+    }
+    
+    if (m_level <= 3)
+    {
+        int rObject = randInt(1, MAXROWS);
+        int cObject = randInt(1, MAXCOLS);
+        while (!(addGameObjects(rObject, cObject, 12)))
+        {
+            rObject = randInt(1, MAXROWS);
+            cObject = randInt(1, MAXCOLS);
+        }
+    }
+    
     //Add the monsters to the Temple
     
     int M = randInt(2, 5*(m_level+1)+1);
@@ -124,31 +148,6 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
             cObject = randInt(1, MAXCOLS);
         }
     }
-    
-    //Add the staircase if the player is on level 0-3,
-    //esle add the golden idol if the player is on level 4
-    if (m_level == 4)
-    {
-        int rObject = randInt(1, MAXROWS);
-        int cObject = randInt(1, MAXCOLS);
-        while (!(addGameObjects(rObject, cObject, 11)))
-        {
-            rObject = randInt(1, MAXROWS);
-            cObject = randInt(1, MAXCOLS);
-        }
-    }
-    
-    if (m_level <= 3)
-    {
-        int rObject = randInt(1, MAXROWS);
-        int cObject = randInt(1, MAXCOLS);
-        while (!(addGameObjects(rObject, cObject, 12)))
-        {
-            rObject = randInt(1, MAXROWS);
-            cObject = randInt(1, MAXCOLS);
-        }
-    }
-    
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -306,13 +305,14 @@ void Temple::display() const
     cout << endl;
     
     /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
-    if (m_player != nullptr) {
-        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-    }
-    for(int i = 0; i < m_nGameObjects; i++)
-    {
-        cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
-    }
+    /// This code was also used to see if any game objects got picked up properly
+//    if (m_player != nullptr) {
+//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+//    }
+//    for(int i = 0; i < m_nGameObjects; i++)
+//    {
+//        cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
+//    }
     
 }
 
@@ -324,6 +324,12 @@ void Temple::display() const
 void Temple::addToGrid(int r, int c, char ch)
 {
     m_grid[r][c] = ch;
+}
+
+void Temple::removeFromGrid(int i)
+{
+    m_objects.erase(m_objects.begin()+i);
+    m_nGameObjects--;
 }
 
 bool Temple::addMonster(int r, int c, int randomizer)

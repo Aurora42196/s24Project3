@@ -77,14 +77,16 @@ bool Player::pickUpObject()
     Temple* tp = getTemple();
     if(m_nItems < INVENTORY_CAPACITY)
     {
-        for (int i = 0; i < tp->getNumGameObjects(); i++)
+        // i = 1 because we want to skip the first iteration because the first GameObject created is the stairway
+        for (int i = 1; i < tp->getNumGameObjects(); i++)
         {
             GameObject* templeObject = tp->getGameObjectAt(i);
-            if(tp->isWeaponAt(rPlayer, cPlayer) || tp->isScrollAt(rPlayer, cPlayer) || tp->isIdolAt(rPlayer, cPlayer))
+            if(templeObject->row() == rPlayer && templeObject->col() == cPlayer)
             {
                 templeObject->setRow(-1);
                 templeObject->setCol(-1);
                 m_inventory.push_back(templeObject);
+                tp->removeFromGrid(i);
                 m_nItems++;
                 return true;
             }
