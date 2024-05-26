@@ -54,6 +54,16 @@ Player::~Player()
 // Accessor function implementations
 ///////////////////////////////////////////////////////////////////////////
 ///
+bool Player::hasGoldenIdol()
+{
+    for (int i = 0; i < m_nItems; i++)
+    {
+        if (m_inventory[i]->getSymbol() == IDOL_SYMBOL)
+            return true;
+    }
+    return false;
+}
+
 void Player::showInventory() const
 {
     clearScreen();
@@ -77,10 +87,11 @@ bool Player::pickUpObject()
     Temple* tp = getTemple();
     if(m_nItems < INVENTORY_CAPACITY)
     {
-        // i = 1 because we want to skip the first iteration because the first GameObject created is the stairway
-        for (int i = 1; i < tp->getNumGameObjects(); i++)
+        for (int i = 0; i < tp->getNumGameObjects(); i++)
         {
             GameObject* templeObject = tp->getGameObjectAt(i);
+            if(templeObject->getSymbol() == STAIRS_SYMBOL) // you can't pick up the staircase
+                continue;
             if(templeObject->row() == rPlayer && templeObject->col() == cPlayer)
             {
                 templeObject->setRow(-1);
@@ -88,6 +99,16 @@ bool Player::pickUpObject()
                 m_inventory.push_back(templeObject);
                 tp->removeFromGrid(i);
                 m_nItems++;
+                string pickup;
+                if(templeObject->getSymbol() == SCROLL_SYMBOL)
+                {
+                    pickup = "You pick up a scroll called " + templeObject->getName();
+                }
+                else
+                {
+                    pickup = "You pick up " + templeObject->getName();
+                }
+                tp->addAction(pickup);
                 return true;
             }
         }

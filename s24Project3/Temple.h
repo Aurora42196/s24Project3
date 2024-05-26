@@ -9,6 +9,8 @@
 #define Temple_h
 
 #include <vector>
+#include <queue>
+#include <string>
 #include "globals.h"
 #include "utilities.h"
 #include "Game.h"
@@ -42,6 +44,7 @@ public:
     bool isIdolAt(int r, int c) const;
     bool isStaircaseAt(int r, int c) const;
     void display() const;
+    void displayActions();
     
     
     // Mutators
@@ -50,6 +53,7 @@ public:
     void removeFromGrid(int i);
     bool addMonster(int r, int c, int randomizer);
     bool addGameObjects(int r, int c, int randomizer);
+    void addAction(std::string action);
     void monstersTakeTurn();
 
     
@@ -65,6 +69,7 @@ private:
     char m_grid[MAXROWS][MAXCOLS];
     std::vector<Monster*> m_monsters;
     std::vector<GameObject*> m_objects;
+    std::queue<std::string> m_actions;
     
     ///////////////////////////////////////////////////////////////////////////
     // Class Invariants

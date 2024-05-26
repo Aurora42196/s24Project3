@@ -94,7 +94,7 @@ void Game::play()
         return;
     
     char command;
-    while ((command = getCharacter()) && command != 'q' && ap->getHealth() > 0)
+    while ((command = getCharacter()) && command != 'q' && ap->getHealth() > 0 && !(m_player->hasGoldenIdol()))
         {
             switch (command)
             {
@@ -131,7 +131,17 @@ void Game::play()
             }
             m_temple->monstersTakeTurn();
             m_temple->display();
+            m_temple->displayActions();
         };
+    if(m_player->hasGoldenIdol())
+    {
+        cout << "Congratulations, you won!" << endl;
+        cout << "Press q to quit the game." << endl;
+        while ((command = getCharacter()) != 'q')
+        {};
+    }
+    
+    
 }
 
 

@@ -45,7 +45,7 @@ class Mace : public Weapon
 {
 public:
     Mace(Temple* tp, int r, int c);
-    Mace() {setName(getName()); setDexterityBonus(0); setWeaponDamage(2);};
+//    Mace() {setName(getName()); setDexterityBonus(0); setWeaponDamage(2);};
     virtual ~Mace() {};
     std::string getName() { return "mace"; };
     std::string getAction() { return "swings mace at "; };
@@ -67,7 +67,7 @@ class LongSword : public Weapon
 {
 public:
     LongSword(Temple* tp, int r, int c);
-    LongSword() {setName(getName()); setDexterityBonus(2); setWeaponDamage(4);};
+//    LongSword() {setName(getName()); setDexterityBonus(2); setWeaponDamage(4);};
     virtual ~LongSword() {};
     std::string getName() { return "long sword"; };
     std::string getAction() { return "swings long sword at "; };
@@ -78,7 +78,7 @@ class MagicAxe : public Weapon
 {
 public:
     MagicAxe(Temple* tp, int r, int c);
-    MagicAxe() {setName(getName()); setDexterityBonus(5); setWeaponDamage(5);};
+//    MagicAxe() {setName(getName()); setDexterityBonus(5); setWeaponDamage(5);};
     virtual ~MagicAxe() {};
     std::string getName() { return "magic axe"; };
     std::string getAction() { return "chops magic axe at "; };
@@ -89,7 +89,7 @@ class MagicFangs : public Weapon
 {
 public:
     MagicFangs(Temple* tp, int r, int c);
-    MagicFangs() {setName(getName()); setDexterityBonus(3); setWeaponDamage(2);};
+//    MagicFangs() {setName(getName()); setDexterityBonus(3); setWeaponDamage(2);};
     virtual ~MagicFangs() {};
     std::string getName() { return "magic fangs"; };
     std::string getAction() { return "strikes magic fangs at "; };

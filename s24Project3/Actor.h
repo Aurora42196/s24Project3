@@ -91,7 +91,7 @@ public:
     virtual ~Player();
     
     // Accessors
-//    bool hasInInventory()
+    bool hasGoldenIdol();
     int getInventorySize() { return m_nItems; };
     void showInventory() const;
     // Mutators

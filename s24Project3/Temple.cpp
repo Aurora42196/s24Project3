@@ -5,6 +5,9 @@
 //  Created by Cameron Maiden on 5/19/24.
 //
 
+#include <iostream>
+#include <cstdlib>
+#include <queue>
 #include "Temple.h"
 #include "globals.h"
 #include "utilities.h"
@@ -12,9 +15,6 @@
 #include "Monster.h"
 #include "Weapon.h"
 #include "Scroll.h"
-//#include "GameObject.h"
-#include <iostream>
-#include <cstdlib>
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////
@@ -304,6 +304,8 @@ void Temple::display() const
     << ", Dexterity: " << m_player->getDexterity();
     cout << endl;
     
+//    displayActions();
+    
     /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
     /// This code was also used to see if any game objects got picked up properly
 //    if (m_player != nullptr) {
@@ -314,6 +316,16 @@ void Temple::display() const
 //        cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
 //    }
     
+}
+
+void Temple::displayActions()
+{
+    cout << endl;
+    while (!m_actions.empty())
+    {
+        cout << m_actions.front() << endl;
+        m_actions.pop();
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -338,7 +350,7 @@ bool Temple::addMonster(int r, int c, int randomizer)
         return false;
 
       // Don't add a monster where a wall or another monster exists
-    if (/*getGridValue(r-1, c-1) != WEAPON_SYMBOL && getGridValue(r-1, c-1) != SCROLL_SYMBOL &&*/ getGridValue(r, c) != ' ')
+    if (getGridValue(r-1, c-1) != WEAPON_SYMBOL && getGridValue(r-1, c-1) != SCROLL_SYMBOL && getGridValue(r, c) != ' ')
         return false;
 
       // Dynamically allocate new Monster and add it to the temple
@@ -424,6 +436,11 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
     addToGrid(r, c, m_objects[m_nGameObjects]->getSymbol());
     m_nGameObjects++;
     return true;
+}
+
+void Temple::addAction(string action)
+{
+    m_actions.push(action);
 }
 
 void Temple::monstersTakeTurn()
