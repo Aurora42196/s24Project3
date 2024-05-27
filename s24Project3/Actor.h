@@ -20,6 +20,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 class Temple; // Every Actor object have to be associated to a temple object
+class Weapon; // Every actor has a reference to a weapon
 
 class Actor // Base Class
 {
@@ -46,7 +47,10 @@ public:
     int getStrength() const { return m_strength; };
     int getDexterity() const { return m_dexterity; };
     int getSleepTimer() const { return m_sleepTimer; };
+    char getSymbol() const { return m_symbol; };
     Temple* getTemple() const { return m_temple; };
+    Weapon* getWeapon() const { return m_weapon; };
+    virtual std::string getName() const = 0;
     
     // Mutators
         // Inline function implementations
@@ -58,10 +62,10 @@ public:
     void setDexterity(int d) { m_dexterity = d; };
     void castSleep(int s) { m_sleepTimer = s; };
     void setTemple(Temple* tp) { m_temple = tp; };
+    void setWeapon(Weapon* wp) { m_weapon = wp; };
         
         // Non-inline declarations
-    virtual void move(char dir); // move for the player
-    virtual char getSymbol() const;
+    virtual void move(char dir)/* = 0*/; // move for the player
 
         /// All Actors move differently, so they will all have their unique implementations.
         /// If I am not able to impelemnt all the move functions by the deadline, they will default moving an any random direction
@@ -77,6 +81,7 @@ private:
     int m_strength;
     int m_dexterity;
     int m_sleepTimer;
+    Weapon* m_weapon;
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -94,9 +99,13 @@ public:
     bool hasGoldenIdol();
     int getInventorySize() { return m_nItems; };
     void showInventory() const;
+    virtual std::string getName() const { return "Player"; };
+    
+    
     // Mutators
     bool pickUpObject();
     virtual void move(char dir);
+//    virtual char getSymbol() const { return PLAYER_SYMBOL; };
     
 private:
     // A Player has an inventory of items (array of game objects)

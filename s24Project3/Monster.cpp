@@ -9,6 +9,7 @@
 #include "Temple.h"
 #include "Monster.h"
 #include "globals.h"
+#include "Weapon.h"
 
 using namespace std;
 
@@ -39,7 +40,8 @@ void Monster::move()
 {
     char dir = '\0';
     int moveDir = randInt(4);
-    switch (moveDir) 
+    
+    switch (moveDir)
     {
         case 0: // MOVE UP
             dir = getTemple()->grid(row()-1,col()); // decode the direction
@@ -87,6 +89,33 @@ void Monster::move()
     }
 }
 
+void Monster::attackPlayer(/*Monster* attacker*/)
+{
+    Weapon* weapon = /*attacker->*/getWeapon();
+    Player* pp = getTemple()->getPlayer();
+    int attackerPoints = /*attacker->*/getDexterity() + weapon->getDexterityBonus();
+    
+    int defenderPoints = pp->getDexterity() + weapon->getDexterityBonus();
+    
+    int damagePoints = randInt(0, getStrength() + weapon->getWeaponDamage()-1);
+    
+    string action = getName() + " " + weapon->getAction() + pp->getName();
+    if(randInt(1, attackerPoints) >= randInt(1, defenderPoints))
+    {
+        pp->setHealth(pp->getHealth() - damagePoints);
+        if(pp->getHealth() <= 0)
+            action += ", dealing a final blow.";
+        else
+            action += " and hits.";
+    }
+    else
+    {
+        action += " and misses.";
+    }
+    
+    getTemple()->addAction(action);
+}
+
 void Monster::dropItem()
 {
     
@@ -127,6 +156,10 @@ Bogeyman::Bogeyman(Temple* tp, int r, int c)
     setStrength(randInt(2, 3));
     setDexterity(randInt(2, 3));
     setArmor(2);
+    
+    Weapon* starterWeapon;
+    starterWeapon = new ShortSword();
+    setWeapon(starterWeapon);
 }
 
 Bogeyman::~Bogeyman()
@@ -151,6 +184,10 @@ Snakewoman::Snakewoman(Temple* tp, int r, int c)
     setStrength(2);
     setDexterity(3);
     setArmor(3);
+    
+    Weapon* starterWeapon;
+    starterWeapon = new MagicFangs();
+    setWeapon(starterWeapon);
 }
 
 Snakewoman::~Snakewoman()
@@ -175,6 +212,10 @@ Dragon::Dragon(Temple* tp, int r, int c)
     setStrength(4);
     setDexterity(4);
     setArmor(4);
+    
+    Weapon* starterWeapon;
+    starterWeapon = new LongSword();
+    setWeapon(starterWeapon);
 }
 
 Dragon::~Dragon()
@@ -182,7 +223,7 @@ Dragon::~Dragon()
     
 }
 
-void Dragon::move()
+void Dragon::move(char dir)
 {
     return; // Dragons do not move, since they want to protect their treasure
 }
@@ -199,6 +240,10 @@ Goblin::Goblin(Temple* tp, int r, int c)
     setStrength(3);
     setDexterity(1);
     setArmor(1);
+    
+    Weapon* starterWeapon;
+    starterWeapon = new ShortSword();
+    setWeapon(starterWeapon);
 }
 
 //void Goblin::move()

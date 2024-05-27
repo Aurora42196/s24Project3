@@ -275,7 +275,7 @@ void Temple::display()
         for (int c = 0; c < cols(); c++)
         {
             Monster* monster = isMonsterAt(r, c);
-            char monsterSymbol;
+//            char monsterSymbol;
             if(isWeaponAt(r, c))
             {
                 if(isPlayerAt(r, c))
@@ -485,7 +485,17 @@ void Temple::monstersTakeTurn()
 {
     for( int i = 0; i < m_nMonsters; i++)
     {
-        m_monsters[i]->move();
+        Player* pp = getPlayer();
+        int rowdiff = m_monsters[i]->row() - pp->row();
+        int coldiff = m_monsters[i]->col() - pp->col();
+        
+        // if orthogonally adjacent, the monster piortizes attacking the player
+        if  ((rowdiff == 0  &&  (coldiff == 1  ||  coldiff == -1))  ||
+             (coldiff == 0  &&  (rowdiff == 1  ||  rowdiff == -1)) )
+            m_monsters[i]->attackPlayer();
+        // if the monster is not adjacent, it will move closet to the player
+        else
+            m_monsters[i]->move();
     }
 }
 

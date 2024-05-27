@@ -20,11 +20,6 @@ Actor::Actor(Temple* tp, int r, int c, char sym)
 : m_temple(tp), m_row(r), m_col(c), m_symbol(sym), m_health(0), m_armor(0), m_strength(0), m_dexterity(0), m_sleepTimer(0)
 {}
 
-char Actor::getSymbol() const
-{
-    return m_symbol;
-}
-
 void Actor::move(char dir)
 {}
 
@@ -41,8 +36,9 @@ Player::Player(Temple* tp, int r, int c)
     setStrength(2);
     setDexterity(2);
     
-    GameObject* starterWeapon;
+    Weapon* starterWeapon;
     starterWeapon = new ShortSword();
+    setWeapon(starterWeapon);
     m_inventory.push_back(starterWeapon);
     m_nItems++;
 }

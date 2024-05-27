@@ -30,10 +30,11 @@ public:
     virtual ~Monster();
     
     // Accessors
-    virtual std::string getName() = 0;
-    
+    virtual std::string getName() const = 0;
     // Mutators
+//    virtual void move(char dir) = 0;
     virtual void move();
+    void attackPlayer(/*Monster**/);
     virtual void dropItem();
     
 private:
@@ -41,6 +42,8 @@ private:
     // Helper functions
     bool determineNewPosition(int& r, int& c, int dir) const;
     bool decodeDirection(char dir); // Default Monster movement will move in any random direction
+    
+    
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -53,7 +56,7 @@ public:
     Bogeyman(Temple* tp, int r, int c);
     virtual ~Bogeyman();
     
-    virtual std::string getName() { return "bogeyman"; };
+    virtual std::string getName() const { return "the Bogeyman"; };
     
     // Mutator
 //    virtual void move();
@@ -68,7 +71,7 @@ public:
     Snakewoman(Temple* tp, int r, int c);
     virtual ~Snakewoman();
     
-    virtual std::string getName() { return "snakewoman"; };
+    virtual std::string getName() const { return "the Snakewoman"; };
     
     // Mutator
 //    virtual void move();
@@ -83,10 +86,11 @@ public:
     Dragon(Temple* tp, int r, int c);
     virtual ~Dragon();
     
-    virtual std::string getName() { return "dragon"; };
+    virtual std::string getName() const { return "the Dragon"; };
 
     // Mutator
-    virtual void move();
+    virtual void move(char dir);
+//    virtual void move();
 private:
     
 };
@@ -97,7 +101,7 @@ public:
     Goblin(Temple* tp, int r, int c);
     virtual ~Goblin();
     
-    virtual std::string getName() { return "goblin"; };
+    virtual std::string getName() const { return "the Goblin"; };
     
     // Mutator
 //    virtual void move();
