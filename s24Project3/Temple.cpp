@@ -373,7 +373,7 @@ bool Temple::addMonster(int r, int c, int randomizer)
         return false;
 
       // Dynamically allocate new Monster and add it to the temple
-    Monster* newMonster;
+    Monster* newMonster = nullptr;
     switch (randomizer) {
         case 1:
             newMonster = new Snakewoman(this, r, c);
@@ -490,5 +490,5 @@ void Temple::monstersTakeTurn()
 ///// Checks if any future objects created will remain within the walls of the temple
 bool Temple::isInBounds(int r ,int c) const
 {
-    return (r >= 0  &&  r <= m_rows  &&  c >= 0  &&  c <= m_cols && m_grid[r][c] != WALL_SYMBOL);
+    return (r-1 >= 0  &&  r-1 <= m_rows  &&  c-1 >= 0  &&  c-1 <= m_cols && m_grid[r-1][c-1] != WALL_SYMBOL);
 }
