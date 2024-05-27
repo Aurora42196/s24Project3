@@ -127,7 +127,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
         //        cerr << "coordinate out of bounds" << endl;
         int rMonster = randInt(1, MAXROWS);
         int cMonster = randInt(1, MAXCOLS);
-        while (!(isInBounds(rMonster, cMonster)) || !(addMonster(rMonster, cMonster, monsterRandomizer)))
+        while (/*!(isInBounds(rMonster, cMonster)) || */!(addMonster(rMonster, cMonster, monsterRandomizer)))
         {
             rMonster = randInt(1, MAXROWS);
             cMonster = randInt(1, MAXCOLS);
@@ -142,7 +142,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
         int gameObjectRandomizer = randInt(1, 7);
         int rObject = randInt(1, MAXROWS);
         int cObject = randInt(1, MAXCOLS);
-        while (!(isInBounds(rObject, cObject)) || !(addGameObjects(rObject, cObject, gameObjectRandomizer)))
+        while (/*!(isInBounds(rObject, cObject)) || */!(addGameObjects(rObject, cObject, gameObjectRandomizer)))
         {
             rObject = randInt(1, MAXROWS);
             cObject = randInt(1, MAXCOLS);
@@ -161,12 +161,14 @@ Temple::~Temple()
     {
         delete m_monsters[i];
     }
+    m_monsters.clear();
     
     // delete the dynamically allocated game objects
     for(int i = 0; i < m_nGameObjects; i++)
     {
         delete m_objects[i];
     }
+    m_objects.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -181,8 +183,8 @@ bool Temple::isPlayerAt(int r, int c) const
 
 bool Temple::isWeaponAt(int r, int c) const
 {
-    if (!(m_objects.empty()))
-    {
+//    if (!(m_objects.empty()))
+//    {
         for(int i = 0; i < m_nGameObjects; i++)
         {
             int rObject = m_objects[i]->row();
@@ -190,14 +192,14 @@ bool Temple::isWeaponAt(int r, int c) const
             if(rObject == r && cObject == c && m_objects[i]->getSymbol() == ')')
                 return true;
         }
-    }
+//    }
     return false;
 }
 
 bool Temple::isScrollAt(int r, int c) const
 {
-    if (!(m_objects.empty()))
-    {
+//    if (!(m_objects.empty()))
+//    {
         for(int i = 0; i < m_nGameObjects; i++)
         {
             int rObject = m_objects[i]->row();
@@ -205,7 +207,7 @@ bool Temple::isScrollAt(int r, int c) const
             if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '?')
                 return true;
         }
-    }
+//    }
     return false;
 }
 
@@ -232,8 +234,8 @@ bool Temple::isMonsterAt(int r, int c, char& result) const
 
 bool Temple::isIdolAt(int r, int c) const
 {
-    if (!(m_objects.empty())) 
-    {
+//    if (!(m_objects.empty())) 
+//    {
         for(int i = 0; i < m_nGameObjects; i++)
         {
             int rObject = m_objects[i]->row();
@@ -241,13 +243,13 @@ bool Temple::isIdolAt(int r, int c) const
             if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '&')
                 return true;
         }
-    }
+//    }
     return false;
 }
 
 bool Temple::isStaircaseAt(int r, int c) const
 {
-    if (!(m_objects.empty())) {
+//    if (!(m_objects.empty())) {
         for(int i = 0; i < m_nGameObjects; i++)
         {
             int rObject = m_objects[i]->row();
@@ -255,7 +257,7 @@ bool Temple::isStaircaseAt(int r, int c) const
             if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '>')
                 return true;
         }
-    }
+//    }
     return false;
 }
 
@@ -337,12 +339,12 @@ void Temple::display() const
 
 void Temple::displayActions()
 {
-    cout << endl;
-    while (!m_actions.empty())
-    {
-        cout << m_actions.front() << endl;
-        m_actions.pop();
-    }
+//    cout << endl;
+//    while (!m_actions.empty())
+//    {
+//        cout << m_actions.front() << endl;
+//        m_actions.pop();
+//    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -375,30 +377,34 @@ bool Temple::addMonster(int r, int c, int randomizer)
     switch (randomizer) {
         case 1:
             newMonster = new Snakewoman(this, r, c);
-//            m_monsters.push_back(new Snakewoman(this, r, c));
+//            m_monsters[m_nMonsters] = new Snakewoman(this,r,c);
             break;
         case 2:
             newMonster = new Goblin(this, r, c);
 //            m_monsters.push_back(new Goblin(this, r, c));
+//            m_monsters[m_nMonsters] = new Goblin(this,r,c);
             break;
         case 3:
             newMonster = new Bogeyman(this, r, c);
 //            m_monsters.push_back(new Bogeyman(this, r, c));
+//            m_monsters[m_nMonsters] = new Bogeyman(this,r,c);
             break;
         case 4:
             newMonster = new Dragon(this, r, c);
 //            m_monsters.push_back(new Dragon(this, r, c));
+//            m_monsters[m_nMonsters] = new Dragon(this,r,c);
             break;
         default:
             return false;
             break;
     }
+//    m_monsters[m_nMonsters] = newMonster;
     m_monsters.push_back(newMonster);
-    if(!(m_monsters.empty()))
-    {
+//    if(!(m_monsters.empty()))
+//    {
         addToGrid(r, c, m_monsters[m_nMonsters]->getSymbol());
         m_nMonsters++;
-    }
+//    }
     return true;
 }
 
@@ -457,6 +463,7 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
             break;
     }
     m_objects.push_back(newGameObject);
+    m_objects[m_nGameObjects] = newGameObject;
     addToGrid(r, c, m_objects[m_nGameObjects]->getSymbol());
     m_nGameObjects++;
     return true;
@@ -464,7 +471,7 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
 
 void Temple::addAction(string action)
 {
-    m_actions.push(action);
+//    m_actions.push(action);
 }
 
 void Temple::monstersTakeTurn()

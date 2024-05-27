@@ -107,17 +107,20 @@ bool Player::pickUpObject()
                 string pickup;
                 if(templeObject->getSymbol() == SCROLL_SYMBOL)
                 {
-                    pickup = "You pick up a scroll called " + templeObject->getName();
+                    pickup = "You pick up a scroll called " + (templeObject->getName());
                 }
                 else
                 {
-                    pickup = "You pick up " + templeObject->getName();
+                    pickup = "You pick up " + (templeObject->getName());
                 }
-                tp->addAction(pickup);
+//                tp->addAction(pickup);
+                
                 return true;
             }
         }
     }
+    else
+        return false;
     return false;
 }
 

@@ -67,9 +67,11 @@ private:
     int m_nMonsters;
     int m_nGameObjects;
     char m_grid[MAXROWS][MAXCOLS];
+//    Monster* m_monsters[MAX_MONSTERS];
     std::vector<Monster*> m_monsters;
+//    GameObject* m_objects[MAX_MONSTERS];
     std::vector<GameObject*> m_objects;
-    std::queue<std::string> m_actions;
+//    std::queue<std::string> m_actions;
     
     ///////////////////////////////////////////////////////////////////////////
     // Class Invariants

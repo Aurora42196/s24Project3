@@ -75,15 +75,13 @@ void Game::goToNextLevel()
     int cPlayer = randInt(1, MAXCOLS);
     while ( !(isInBounds(rPlayer, cPlayer)) )
     {
-        //        cerr << "coordinate out of bounds" << endl;
         rPlayer = randInt(1, MAXROWS);
         cPlayer = randInt(1, MAXCOLS);
     }
     m_player->setTemple(m_temple);
-    m_player->setRow(rPlayer-1);
-    m_player->setCol(cPlayer-1);
-    m_temple->addToGrid(rPlayer-1, cPlayer-1, m_player->getSymbol());
-//    m_temple->setPlayer(m_player);
+    m_player->setRow(rPlayer);
+    m_player->setCol(cPlayer);
+    m_temple->addToGrid(rPlayer, cPlayer, m_player->getSymbol());
 }
 
 void Game::play()
@@ -134,14 +132,14 @@ void Game::play()
                 m_temple->monstersTakeTurn();
             }
             m_temple->display();
-            m_temple->displayActions();
+//            m_temple->displayActions();
             if(m_player->hasGoldenIdol())
             {
                 cout << "Congratulations, you won!" << endl;
                 cout << "Press q to quit the game." << endl;
             }
             
-            if(m_player->getHealth() > 0)
+            if(m_player->getHealth() <= 0)
             {
                 cout << "Press q to quit the game." << endl;
             }
@@ -158,6 +156,6 @@ void Game::play()
 /// Checks if any future objects created will remain within the walls of the temple
 bool Game::isInBounds(int r ,int c) const
 {
-    return (m_temple->getGridValue(r-1, c-1) == ' ');
+    return (m_temple->getGridValue(r, c) == ' ');
 }
 
