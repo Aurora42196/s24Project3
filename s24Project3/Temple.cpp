@@ -90,7 +90,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
     
     //Add the staircase if the player is on level 0-3,
     //esle add the golden idol if the player is on level 4
-    if (m_level == 4)
+    if (m_level == 4) // place golden idol instead of staircase
     {
         int rObject = randInt(1, MAXROWS);
         int cObject = randInt(1, MAXCOLS);
@@ -101,7 +101,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
         }
     }
     
-    if (m_level <= 3)
+    if (m_level <= 3) // place staircase instead of golden idol
     {
         int rObject = randInt(1, MAXROWS);
         int cObject = randInt(1, MAXCOLS);
@@ -127,7 +127,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
         //        cerr << "coordinate out of bounds" << endl;
         int rMonster = randInt(1, MAXROWS);
         int cMonster = randInt(1, MAXCOLS);
-        while (!(addMonster(rMonster, cMonster, monsterRandomizer)))
+        while (!(isInBounds(rMonster, cMonster)) || !(addMonster(rMonster, cMonster, monsterRandomizer)))
         {
             rMonster = randInt(1, MAXROWS);
             cMonster = randInt(1, MAXCOLS);
@@ -142,7 +142,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
         int gameObjectRandomizer = randInt(1, 7);
         int rObject = randInt(1, MAXROWS);
         int cObject = randInt(1, MAXCOLS);
-        while (!(addGameObjects(rObject, cObject, gameObjectRandomizer)))
+        while (!(isInBounds(rObject, cObject)) || !(addGameObjects(rObject, cObject, gameObjectRandomizer)))
         {
             rObject = randInt(1, MAXROWS);
             cObject = randInt(1, MAXCOLS);
@@ -181,38 +181,50 @@ bool Temple::isPlayerAt(int r, int c) const
 
 bool Temple::isWeaponAt(int r, int c) const
 {
-    for(int i = 0; i < m_nGameObjects; i++)
+    if (!(m_objects.empty()))
     {
-        int rObject = m_objects[i]->row();
-        int cObject = m_objects[i]->col();
-        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == ')')
-            return true;
+        for(int i = 0; i < m_nGameObjects; i++)
+        {
+            int rObject = m_objects[i]->row();
+            int cObject = m_objects[i]->col();
+            if(rObject == r && cObject == c && m_objects[i]->getSymbol() == ')')
+                return true;
+        }
     }
     return false;
 }
 
 bool Temple::isScrollAt(int r, int c) const
 {
-    for(int i = 0; i < m_nGameObjects; i++)
+    if (!(m_objects.empty()))
     {
-        int rObject = m_objects[i]->row();
-        int cObject = m_objects[i]->col();
-        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '?')
-            return true;
+        for(int i = 0; i < m_nGameObjects; i++)
+        {
+            int rObject = m_objects[i]->row();
+            int cObject = m_objects[i]->col();
+            if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '?')
+                return true;
+        }
     }
     return false;
 }
 
 bool Temple::isMonsterAt(int r, int c, char& result) const
 {
-    for(int i = 0; i < m_nMonsters; i++)
+    if (!(m_monsters.empty()))
     {
-        int rMonster = m_monsters[i]->row();
-        int cMonster = m_monsters[i]->col();
-        if(rMonster == r && cMonster == c)
+        for(int i = 0; i < m_nMonsters; i++)
         {
-            result = m_monsters[i]->getSymbol();
-            return true;
+            if(m_monsters[i] != nullptr)
+            {
+                int rMonster = m_monsters[i]->row();
+                int cMonster = m_monsters[i]->col();
+                if(rMonster == r && cMonster == c)
+                {
+                    result = m_monsters[i]->getSymbol();
+                    return true;
+                }
+            }
         }
     }
     return false;
@@ -220,24 +232,29 @@ bool Temple::isMonsterAt(int r, int c, char& result) const
 
 bool Temple::isIdolAt(int r, int c) const
 {
-    for(int i = 0; i < m_nGameObjects; i++)
+    if (!(m_objects.empty())) 
     {
-        int rObject = m_objects[i]->row();
-        int cObject = m_objects[i]->col();
-        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '&')
-            return true;
+        for(int i = 0; i < m_nGameObjects; i++)
+        {
+            int rObject = m_objects[i]->row();
+            int cObject = m_objects[i]->col();
+            if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '&')
+                return true;
+        }
     }
     return false;
 }
 
 bool Temple::isStaircaseAt(int r, int c) const
 {
-    for(int i = 0; i < m_nGameObjects; i++)
-    {
-        int rObject = m_objects[i]->row();
-        int cObject = m_objects[i]->col();
-        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '>')
-            return true;
+    if (!(m_objects.empty())) {
+        for(int i = 0; i < m_nGameObjects; i++)
+        {
+            int rObject = m_objects[i]->row();
+            int cObject = m_objects[i]->col();
+            if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '>')
+                return true;
+        }
     }
     return false;
 }
@@ -358,23 +375,30 @@ bool Temple::addMonster(int r, int c, int randomizer)
     switch (randomizer) {
         case 1:
             newMonster = new Snakewoman(this, r, c);
+//            m_monsters.push_back(new Snakewoman(this, r, c));
             break;
         case 2:
             newMonster = new Goblin(this, r, c);
+//            m_monsters.push_back(new Goblin(this, r, c));
             break;
         case 3:
             newMonster = new Bogeyman(this, r, c);
+//            m_monsters.push_back(new Bogeyman(this, r, c));
             break;
         case 4:
             newMonster = new Dragon(this, r, c);
+//            m_monsters.push_back(new Dragon(this, r, c));
             break;
         default:
             return false;
             break;
     }
     m_monsters.push_back(newMonster);
-    addToGrid(r, c, m_monsters[m_nMonsters]->getSymbol());
-    m_nMonsters++;
+    if(!(m_monsters.empty()))
+    {
+        addToGrid(r, c, m_monsters[m_nMonsters]->getSymbol());
+        m_nMonsters++;
+    }
     return true;
 }
 

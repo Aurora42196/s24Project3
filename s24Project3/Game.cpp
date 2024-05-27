@@ -129,17 +129,23 @@ void Game::play()
                     }
                     break;
             }
-            m_temple->monstersTakeTurn();
+            if(command != '>')
+            {
+                m_temple->monstersTakeTurn();
+            }
             m_temple->display();
             m_temple->displayActions();
+            if(m_player->hasGoldenIdol())
+            {
+                cout << "Congratulations, you won!" << endl;
+                cout << "Press q to quit the game." << endl;
+            }
+            
+            if(m_player->getHealth() > 0)
+            {
+                cout << "Press q to quit the game." << endl;
+            }
         };
-    if(m_player->hasGoldenIdol())
-    {
-        cout << "Congratulations, you won!" << endl;
-        cout << "Press q to quit the game." << endl;
-        while ((command = getCharacter()) != 'q')
-        {};
-    }
     
     
 }

@@ -48,7 +48,12 @@ Player::Player(Temple* tp, int r, int c)
 }
 
 Player::~Player()
-{}
+{
+    for (int i = 0; i < m_nItems; i++)
+    {
+        delete m_inventory[i];
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // Accessor function implementations
