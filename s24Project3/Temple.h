@@ -43,7 +43,7 @@ public:
     bool isMonsterAt(int r, int c, char& result) const;
     bool isIdolAt(int r, int c) const;
     bool isStaircaseAt(int r, int c) const;
-    void display() const;
+    void display();
     void displayActions();
     
     
@@ -67,11 +67,9 @@ private:
     int m_nMonsters;
     int m_nGameObjects;
     char m_grid[MAXROWS][MAXCOLS];
-//    Monster* m_monsters[MAX_MONSTERS];
     std::vector<Monster*> m_monsters;
-//    GameObject* m_objects[MAX_MONSTERS];
     std::vector<GameObject*> m_objects;
-//    std::queue<std::string> m_actions;
+    std::queue<std::string> m_actions;
     
     ///////////////////////////////////////////////////////////////////////////
     // Class Invariants
@@ -82,7 +80,6 @@ private:
     // 0 <= m_level < 5 (Levels range from 0 to 4)
     // grid must have 18 rows and 70 columns
     
-protected:
     // Helper functions
     bool isInBounds(int r, int c) const;
 };

@@ -113,7 +113,7 @@ bool Player::pickUpObject()
                 {
                     pickup = "You pick up " + (templeObject->getName());
                 }
-//                tp->addAction(pickup);
+                tp->addAction(pickup);
                 
                 return true;
             }

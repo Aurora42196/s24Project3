@@ -28,7 +28,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
     if (nRows <= 0  ||  nCols <= 0  ||  nRows > MAXROWS  ||  nCols > MAXCOLS)
     {
         cout << "***** Temple created with invalid size " << nRows << " by "
-             << nCols << "!" << endl;
+        << nCols << "!" << endl;
         exit(1);
     }
     
@@ -50,43 +50,43 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
         }
     }
     
-///////////////////////////////////////////////////////////////////////////
-// Room generator
-///////////////////////////////////////////////////////////////////////////
-///rectangle sizes will range from 4x4 to 8x8
-//    // fill grid with walls
-//    int r, c;
-//    for (r = 0; r < rows(); r++)
-//    {
-//        for (c = 0; c < cols(); c++)
-//        {
-//                m_grid[r][c] = WALL_SYMBOL;
-//        }
-//    }
-//    
-//    int numRooms = randInt(3, 5);
-//    cerr << "number of rooms generated: " << numRooms << endl;
-//    while (numRooms > 0)
-//    {
-//        int rectangleOriginRow = randInt(1, MAXROWS-1);
-//        int rectangleOriginCol = randInt(1, MAXCOLS-1);
-//        int roomRowSize = randInt(8, 10);
-//        int roomColsize = randInt(8, 10);
-//        for (r = 0; r < roomRowSize; r++)
-//        {
-//            if(rectangleOriginRow + r == MAXROWS-1) // row reached the bottom of the bounds of the temple
-//                break;
-//            
-//            for(c = 0; c < roomColsize; c++)
-//            {
-//                if(rectangleOriginCol + c == MAXCOLS-1)
-//                    break;
-//                else
-//                    m_grid[rectangleOriginRow + r][rectangleOriginCol + c] = ' ';
-//            }
-//        }
-//        numRooms--;
-//    }
+    ///////////////////////////////////////////////////////////////////////////
+    // Room generator
+    ///////////////////////////////////////////////////////////////////////////
+    ///rectangle sizes will range from 4x4 to 8x8
+    //    // fill grid with walls
+    //    int r, c;
+    //    for (r = 0; r < rows(); r++)
+    //    {
+    //        for (c = 0; c < cols(); c++)
+    //        {
+    //                m_grid[r][c] = WALL_SYMBOL;
+    //        }
+    //    }
+    //
+    //    int numRooms = randInt(3, 5);
+    //    cerr << "number of rooms generated: " << numRooms << endl;
+    //    while (numRooms > 0)
+    //    {
+    //        int rectangleOriginRow = randInt(1, MAXROWS-1);
+    //        int rectangleOriginCol = randInt(1, MAXCOLS-1);
+    //        int roomRowSize = randInt(8, 10);
+    //        int roomColsize = randInt(8, 10);
+    //        for (r = 0; r < roomRowSize; r++)
+    //        {
+    //            if(rectangleOriginRow + r == MAXROWS-1) // row reached the bottom of the bounds of the temple
+    //                break;
+    //
+    //            for(c = 0; c < roomColsize; c++)
+    //            {
+    //                if(rectangleOriginCol + c == MAXCOLS-1)
+    //                    break;
+    //                else
+    //                    m_grid[rectangleOriginRow + r][rectangleOriginCol + c] = ' ';
+    //            }
+    //        }
+    //        numRooms--;
+    //    }
     
     //Add the staircase if the player is on level 0-3,
     //esle add the golden idol if the player is on level 4
@@ -124,10 +124,9 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
             monsterRandomizer = randInt(1, 3);
         else // m_level > 2
             monsterRandomizer = randInt(1, 4);
-        //        cerr << "coordinate out of bounds" << endl;
         int rMonster = randInt(MAXROWS);
         int cMonster = randInt(MAXCOLS);
-        while (/*!(isInBounds(rMonster, cMonster)) || */!(addMonster(rMonster, cMonster, monsterRandomizer)))
+        while (!(addMonster(rMonster, cMonster, monsterRandomizer)))
         {
             rMonster = randInt(MAXROWS);
             cMonster = randInt(MAXCOLS);
@@ -142,7 +141,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
         int gameObjectRandomizer = randInt(1, 7);
         int rObject = randInt(MAXROWS);
         int cObject = randInt(MAXCOLS);
-        while (/*!(isInBounds(rObject, cObject)) || */!(addGameObjects(rObject, cObject, gameObjectRandomizer)))
+        while (!(addGameObjects(rObject, cObject, gameObjectRandomizer)))
         {
             rObject = randInt(MAXROWS);
             cObject = randInt(MAXCOLS);
@@ -178,54 +177,45 @@ Temple::~Temple()
 bool Temple::isPlayerAt(int r, int c) const
 {
     return m_player != nullptr  &&
-           m_player->row() == r  &&  m_player->col() == c;
+    m_player->row() == r  &&  m_player->col() == c;
 }
 
 bool Temple::isWeaponAt(int r, int c) const
 {
-//    if (!(m_objects.empty()))
-//    {
-        for(int i = 0; i < m_nGameObjects; i++)
-        {
-            int rObject = m_objects[i]->row();
-            int cObject = m_objects[i]->col();
-            if(rObject == r && cObject == c && m_objects[i]->getSymbol() == ')')
-                return true;
-        }
-//    }
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        int rObject = m_objects[i]->row();
+        int cObject = m_objects[i]->col();
+        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == ')')
+            return true;
+    }
     return false;
 }
 
 bool Temple::isScrollAt(int r, int c) const
 {
-//    if (!(m_objects.empty()))
-//    {
-        for(int i = 0; i < m_nGameObjects; i++)
-        {
-            int rObject = m_objects[i]->row();
-            int cObject = m_objects[i]->col();
-            if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '?')
-                return true;
-        }
-//    }
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        int rObject = m_objects[i]->row();
+        int cObject = m_objects[i]->col();
+        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '?')
+            return true;
+    }
     return false;
 }
 
 bool Temple::isMonsterAt(int r, int c, char& result) const
 {
-    if (!(m_monsters.empty()))
+    for(int i = 0; i < m_nMonsters; i++)
     {
-        for(int i = 0; i < m_nMonsters; i++)
+        if(m_monsters[i] != nullptr)
         {
-            if(m_monsters[i] != nullptr)
+            int rMonster = m_monsters[i]->row();
+            int cMonster = m_monsters[i]->col();
+            if(rMonster == r && cMonster == c)
             {
-                int rMonster = m_monsters[i]->row();
-                int cMonster = m_monsters[i]->col();
-                if(rMonster == r && cMonster == c)
-                {
-                    result = m_monsters[i]->getSymbol();
-                    return true;
-                }
+                result = m_monsters[i]->getSymbol();
+                return true;
             }
         }
     }
@@ -234,34 +224,29 @@ bool Temple::isMonsterAt(int r, int c, char& result) const
 
 bool Temple::isIdolAt(int r, int c) const
 {
-//    if (!(m_objects.empty())) 
-//    {
-        for(int i = 0; i < m_nGameObjects; i++)
-        {
-            int rObject = m_objects[i]->row();
-            int cObject = m_objects[i]->col();
-            if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '&')
-                return true;
-        }
-//    }
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        int rObject = m_objects[i]->row();
+        int cObject = m_objects[i]->col();
+        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '&')
+            return true;
+    }
     return false;
 }
 
 bool Temple::isStaircaseAt(int r, int c) const
 {
-//    if (!(m_objects.empty())) {
-        for(int i = 0; i < m_nGameObjects; i++)
-        {
-            int rObject = m_objects[i]->row();
-            int cObject = m_objects[i]->col();
-            if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '>')
-                return true;
-        }
-//    }
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        int rObject = m_objects[i]->row();
+        int cObject = m_objects[i]->col();
+        if(rObject == r && cObject == c && m_objects[i]->getSymbol() == '>')
+            return true;
+    }
     return false;
 }
 
-void Temple::display() const
+void Temple::display()
 {
     // Position (row,col) in the temple coordinate system is represented in
     // the array element grid[row-1][col-1]
@@ -316,35 +301,35 @@ void Temple::display() const
     }
     
     // Display Player's statistics
-    cout << "Level: " << getLevel() // This will be changed at a later time
+    cout << "Level: " << getLevel()
     << ", Hit points: " << m_player->getHealth()
     << ", Armor: " << m_player->getArmor()
     << ", Strength: " << m_player->getStrength()
     << ", Dexterity: " << m_player->getDexterity();
     cout << endl;
     
-//    displayActions();
+    displayActions();
     
     /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
     /// This code was also used to see if any game objects got picked up properly
-    if (m_player != nullptr) {
-        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-    }
-    for(int i = 0; i < m_nGameObjects; i++)
-    {
-        cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
-    }
+    //    if (m_player != nullptr) {
+    //        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+    //    }
+    //    for(int i = 0; i < m_nGameObjects; i++)
+    //    {
+    //        cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
+    //    }
     
 }
 
 void Temple::displayActions()
 {
-//    cout << endl;
-//    while (!m_actions.empty())
-//    {
-//        cout << m_actions.front() << endl;
-//        m_actions.pop();
-//    }
+    cout << endl;
+    while (!m_actions.empty())
+    {
+        cout << m_actions.front() << endl;
+        m_actions.pop();
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -367,44 +352,33 @@ bool Temple::addMonster(int r, int c, int randomizer)
 {
     if (!isInBounds(r, c))
         return false;
-
-      // Don't add a monster where a wall or another monster exists
+    
+    // Don't add a monster where a wall or another monster exists
     if (getGridValue(r, c) != WEAPON_SYMBOL && getGridValue(r, c) != SCROLL_SYMBOL && getGridValue(r, c) != ' ')
         return false;
-
-      // Dynamically allocate new Monster and add it to the temple
+    
+    // Dynamically allocate new Monster and add it to the temple
     Monster* newMonster = nullptr;
     switch (randomizer) {
         case 1:
             newMonster = new Snakewoman(this, r, c);
-//            m_monsters[m_nMonsters] = new Snakewoman(this,r,c);
             break;
         case 2:
             newMonster = new Goblin(this, r, c);
-//            m_monsters.push_back(new Goblin(this, r, c));
-//            m_monsters[m_nMonsters] = new Goblin(this,r,c);
             break;
         case 3:
             newMonster = new Bogeyman(this, r, c);
-//            m_monsters.push_back(new Bogeyman(this, r, c));
-//            m_monsters[m_nMonsters] = new Bogeyman(this,r,c);
             break;
         case 4:
             newMonster = new Dragon(this, r, c);
-//            m_monsters.push_back(new Dragon(this, r, c));
-//            m_monsters[m_nMonsters] = new Dragon(this,r,c);
             break;
         default:
             return false;
             break;
     }
-//    m_monsters[m_nMonsters] = newMonster;
     m_monsters.push_back(newMonster);
-//    if(!(m_monsters.empty()))
-//    {
-        addToGrid(r, c, m_monsters[m_nMonsters]->getSymbol());
-        m_nMonsters++;
-//    }
+    addToGrid(r, c, m_monsters[m_nMonsters]->getSymbol());
+    m_nMonsters++;
     return true;
 }
 
@@ -412,12 +386,12 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
 {
     if (!isInBounds(r, c))
         return false;
-
-      // Don't add a monster where a wall or another object exists
+    
+    // Don't add a monster where a wall or another object exists
     if (getGridValue(r, c) == WALL_SYMBOL || getGridValue(r, c) == WEAPON_SYMBOL || getGridValue(r, c) == SCROLL_SYMBOL)
         return false;
-
-      // Dynamically allocate new Monster and add it to the temple
+    
+    // Dynamically allocate new Monster and add it to the temple
     GameObject* newGameObject;
     switch (randomizer) {
         case 1:
@@ -441,8 +415,8 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
         case 7:
             newGameObject = new EnhanceDexterity(this, r, c);
             break;
-        // Objects 8, 9, and 10 will be called explicitly since they can
-        // only be added to the temple when a monster is killed
+            // Objects 8, 9, and 10 will be called explicitly since they can
+            // only be added to the temple when a monster is killed
         case 8:
             newGameObject = new MagicAxe(this, r, c);
             break;
@@ -471,7 +445,7 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
 
 void Temple::addAction(string action)
 {
-//    m_actions.push(action);
+    m_actions.push(action);
 }
 
 void Temple::monstersTakeTurn()
