@@ -127,12 +127,13 @@ void Game::play()
                     }
                     break;
             }
+            
             if(command != '>')
             {
                 m_temple->monstersTakeTurn();
             }
             m_temple->display();
-//            m_temple->displayActions();
+
             if(m_player->hasGoldenIdol())
             {
                 cout << "Congratulations, you won!" << endl;

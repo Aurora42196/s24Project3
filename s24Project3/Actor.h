@@ -66,6 +66,7 @@ public:
         
         // Non-inline declarations
     virtual void move(char dir)/* = 0*/; // move for the player
+    void attackActor(char dir);
 
         /// All Actors move differently, so they will all have their unique implementations.
         /// If I am not able to impelemnt all the move functions by the deadline, they will default moving an any random direction
@@ -105,6 +106,7 @@ public:
     // Mutators
     bool pickUpObject();
     virtual void move(char dir);
+    
 //    virtual char getSymbol() const { return PLAYER_SYMBOL; };
     
 private:

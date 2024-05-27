@@ -275,13 +275,13 @@ void Temple::display()
         for (int c = 0; c < cols(); c++)
         {
             Monster* monster = isMonsterAt(r, c);
-//            char monsterSymbol;
+            //            char monsterSymbol;
             if(isWeaponAt(r, c))
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
                 //                else if(isMonsterAt(r, c, monsterSymbol))
-                else if (/*isMonsterAt(r, c) && */monster != nullptr)
+                else if (monster != nullptr)
                 {
                     cout << monster->getSymbol();
                 }
@@ -294,7 +294,7 @@ void Temple::display()
                     cout << PLAYER_SYMBOL;
                 //                else if(isMonsterAt(r, c, monsterSymbol))
                 //                    cout << monsterSymbol;
-                else if (/*isMonsterAt(r, c) && */monster != nullptr)
+                else if (monster != nullptr)
                 {
                     cout << monster->getSymbol();
                 }
@@ -307,7 +307,7 @@ void Temple::display()
                     cout << PLAYER_SYMBOL;
                 //                else if(isMonsterAt(r, c, monsterSymbol))
                 //                    cout << monsterSymbol;
-                else if (/*isMonsterAt(r, c) && */monster != nullptr)
+                else if (monster != nullptr)
                 {
                     cout << monster->getSymbol();
                 }
@@ -320,7 +320,7 @@ void Temple::display()
                     cout << PLAYER_SYMBOL;
                 //                else if(isMonsterAt(r, c, monsterSymbol))
                 //                    cout << monsterSymbol;
-                else if (/*isMonsterAt(r, c) && */monster != nullptr)
+                else if (monster != nullptr)
                 {
                     cout << monster->getSymbol();
                 }
@@ -375,11 +375,32 @@ void Temple::addToGrid(int r, int c, char ch)
     m_grid[r][c] = ch;
 }
 
-void Temple::removeFromGrid(int i)
+void Temple::removeObjectFromGrid(int i)
 {
     m_objects.erase(m_objects.begin()+i);
     m_nGameObjects--;
 }
+
+void Temple::removeMonsterFromGrid(int r, int c)
+{
+    for(int i = 0; i < m_nMonsters; i++)
+    {
+        int rMonster = m_monsters[i]->row();
+        int cMonster = m_monsters[i]->col();
+        if(rMonster == r && cMonster == c)
+        {
+//            m_monsters[i]->setRow(-1);
+//            m_monsters[i]->setCol(-1);
+            delete m_monsters[i];
+            m_monsters.erase(m_monsters.begin() + i);
+            m_nMonsters--;
+            grid(rMonster, cMonster) = ' ';
+//            if(trueWithProbability(<#double p#>))
+            return;
+        }
+    }
+}
+
 
 bool Temple::addMonster(int r, int c, int randomizer)
 {
@@ -490,12 +511,28 @@ void Temple::monstersTakeTurn()
         int coldiff = m_monsters[i]->col() - pp->col();
         
         // if orthogonally adjacent, the monster piortizes attacking the player
-        if  ((rowdiff == 0  &&  (coldiff == 1  ||  coldiff == -1))  ||
-             (coldiff == 0  &&  (rowdiff == 1  ||  rowdiff == -1)) )
-            m_monsters[i]->attackPlayer();
-        // if the monster is not adjacent, it will move closet to the player
+        
+        if(rowdiff == 0  &&  coldiff == 1) //Attack right
+        {
+            m_monsters[i]->attackActor(ARROW_RIGHT);
+        }
+        else if (rowdiff == 0  &&  coldiff == -1) //Attack left
+        {
+            m_monsters[i]->attackActor(ARROW_LEFT);
+        }
+        else if (coldiff == 0  &&  rowdiff == -1) //Attack downward
+        {
+            m_monsters[i]->attackActor(ARROW_DOWN);
+        }
+        else if (coldiff == 0  &&  rowdiff == 1) //Attack upward
+        {
+            m_monsters[i]->attackActor(ARROW_UP);
+        }
+        // if the monster is not adjacent, it will move closer to the player
         else
+        {
             m_monsters[i]->move();
+        }
     }
 }
 

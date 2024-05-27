@@ -34,7 +34,7 @@ public:
     // Mutators
 //    virtual void move(char dir) = 0;
     virtual void move();
-    void attackPlayer(/*Monster**/);
+//    void attackPlayer(/*Monster**/);
     virtual void dropItem();
     
 private:

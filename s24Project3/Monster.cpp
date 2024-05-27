@@ -89,32 +89,32 @@ void Monster::move()
     }
 }
 
-void Monster::attackPlayer(/*Monster* attacker*/)
-{
-    Weapon* weapon = /*attacker->*/getWeapon();
-    Player* pp = getTemple()->getPlayer();
-    int attackerPoints = /*attacker->*/getDexterity() + weapon->getDexterityBonus();
-    
-    int defenderPoints = pp->getDexterity() + weapon->getDexterityBonus();
-    
-    int damagePoints = randInt(0, getStrength() + weapon->getWeaponDamage()-1);
-    
-    string action = getName() + " " + weapon->getAction() + pp->getName();
-    if(randInt(1, attackerPoints) >= randInt(1, defenderPoints))
-    {
-        pp->setHealth(pp->getHealth() - damagePoints);
-        if(pp->getHealth() <= 0)
-            action += ", dealing a final blow.";
-        else
-            action += " and hits.";
-    }
-    else
-    {
-        action += " and misses.";
-    }
-    
-    getTemple()->addAction(action);
-}
+//void Monster::attackPlayer(/*Monster* attacker*/)
+//{
+//    Weapon* weapon = /*attacker->*/getWeapon();
+//    Player* pp = getTemple()->getPlayer();
+//    int attackerPoints = /*attacker->*/getDexterity() + weapon->getDexterityBonus();
+//    
+//    int defenderPoints = pp->getDexterity() + weapon->getDexterityBonus();
+//    
+//    int damagePoints = randInt(0, getStrength() + weapon->getWeaponDamage()-1);
+//    
+//    string action = getName() + " " + weapon->getAction() + pp->getName();
+//    if(randInt(1, attackerPoints) >= randInt(1, defenderPoints))
+//    {
+//        pp->setHealth(pp->getHealth() - damagePoints);
+//        if(pp->getHealth() <= 0)
+//            action += ", dealing a final blow.";
+//        else
+//            action += " and hits.";
+//    }
+//    else
+//    {
+//        action += " and misses.";
+//    }
+//    
+//    getTemple()->addAction(action);
+//}
 
 void Monster::dropItem()
 {

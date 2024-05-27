@@ -9,6 +9,7 @@
 #include "Temple.h"
 #include "globals.h"
 #include "Weapon.h"
+#include "Monster.h"
 #include <iostream>
 using namespace std;
 
@@ -22,6 +23,67 @@ Actor::Actor(Temple* tp, int r, int c, char sym)
 
 void Actor::move(char dir)
 {}
+
+void Actor::attackActor(char dir)
+{
+    Actor* attacker = this;
+    Actor* defender = nullptr;
+    if(getSymbol() == PLAYER_SYMBOL) //if player called the attack function, then the player is the attacker and the monster is the defender. Otherwise, the monster is the attacker and player is the defender
+    {
+        switch (dir) // This is to determine which monster the player wants to attack based on the direction the Player pressed on the keyboard
+        {
+            case ARROW_UP:
+                defender = getTemple()->isMonsterAt(row()-1, col());
+                break;
+            case ARROW_DOWN:
+                defender = getTemple()->isMonsterAt(row()+1, col());
+                break;
+            case ARROW_LEFT:
+                defender = getTemple()->isMonsterAt(row(), col()-1);
+                break;
+            case ARROW_RIGHT:
+                defender = getTemple()->isMonsterAt(row(), col()+1);
+                break;
+            default:
+                return;
+                break;
+        }
+    }
+    else // a monster called the attack function and the player is the one defending the attack
+    {
+        defender = getTemple()->getPlayer();
+    }
+    
+    Weapon* aWeapon = attacker->getWeapon();
+    Weapon* dWeapon = defender->getWeapon();
+    int attackerPoints = attacker->getDexterity() + aWeapon->getDexterityBonus();
+    
+    int defenderPoints = defender->getDexterity() + dWeapon->getDexterityBonus();
+    
+    int damagePoints = randInt(0, getStrength() + aWeapon->getWeaponDamage()-1);
+    
+    string action = getName() + " " + aWeapon->getAction() + defender->getName();
+    if(randInt(1, attackerPoints) >= randInt(1, defenderPoints))
+    {
+        defender->setHealth(defender->getHealth() - damagePoints);
+        if(defender->getHealth() <= 0)
+        {
+            if(getSymbol() == PLAYER_SYMBOL) //Only remove from the grid if it's the monster that gets killed, not the player
+            {
+                getTemple()->removeMonsterFromGrid(defender->row(), defender->col());
+            }
+            action += ", dealing a final blow.";
+        }
+        else
+            action += " and hits.";
+    }
+    else
+    {
+        action += " and misses.";
+    }
+    
+    getTemple()->addAction(action);
+}
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -98,7 +160,7 @@ bool Player::pickUpObject()
                 templeObject->setRow(-1);
                 templeObject->setCol(-1);
                 m_inventory.push_back(templeObject);
-                tp->removeFromGrid(i);
+                tp->removeObjectFromGrid(i);
                 m_nItems++;
                 string pickup;
                 if(templeObject->getSymbol() == SCROLL_SYMBOL)
@@ -129,44 +191,64 @@ void Player::move(char dir)
     /// object. The game object will remain in the same place unless it gets picked up (TEST IF THIS WORKS!!)
     switch (dir) {
         case ARROW_UP:
-            if((getTemple()->grid(row()-1, col())) == WALL_SYMBOL)
-                return;
-            dir = getTemple()->grid(row()-1,col()); // decode the direction
-            if (dir == ' ' || dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL) // determine if the new position is a valid place to move
+//            if((getTemple()->grid(row()-1, col())) == WALL_SYMBOL)
+//                return;
+            if(getTemple()->isMonsterAt(row()-1, col()) != nullptr)
+                attackActor(ARROW_UP);
+            else
             {
-                getTemple()->addToGrid(row(), col(), ' '); // clear the space the player is moving from
-                setRow(row()-1); // alter the players position
-                getTemple()->addToGrid(row(), col(), getSymbol()); // show the change to player's position in the grid
+                dir = getTemple()->grid(row()-1,col()); // decode the direction
+                if (dir == ' ' || dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL) // determine if the new position is a valid place to move
+                {
+                    getTemple()->addToGrid(row(), col(), ' '); // clear the space the player is moving from
+                    setRow(row()-1); // alter the players position
+                    getTemple()->addToGrid(row(), col(), getSymbol()); // show the change to player's position in the grid
+                }
             }
             break;
             
         case ARROW_DOWN:
-            dir = getTemple()->grid(row()+1,col());
-            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+            if(getTemple()->isMonsterAt(row()+1, col()) != nullptr)
+                attackActor(ARROW_DOWN);
+            else
             {
-                getTemple()->addToGrid(row(), col(), ' ');
-                setRow(row()+1);
-                getTemple()->addToGrid(row(), col(), getSymbol());
+                dir = getTemple()->grid(row()+1,col());
+                if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+                {
+                    getTemple()->addToGrid(row(), col(), ' ');
+                    setRow(row()+1);
+                    getTemple()->addToGrid(row(), col(), getSymbol());
+                }
             }
             break;
             
         case ARROW_LEFT:
-            dir = getTemple()->grid(row(),col()-1);
-            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+            if(getTemple()->isMonsterAt(row(), col()-1) != nullptr)
+                attackActor(ARROW_LEFT);
+            else
             {
-                getTemple()->addToGrid(row(), col(), ' ');
-                setCol(col()-1);
-                getTemple()->addToGrid(row(), col(), getSymbol());
+                dir = getTemple()->grid(row(),col()-1);
+                if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+                {
+                    getTemple()->addToGrid(row(), col(), ' ');
+                    setCol(col()-1);
+                    getTemple()->addToGrid(row(), col(), getSymbol());
+                }
             }
             break;
             
         case ARROW_RIGHT:
-            dir = getTemple()->grid(row(),col()+1);
-            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+            if(getTemple()->isMonsterAt(row(), col()+1) != nullptr)
+                attackActor(ARROW_RIGHT);
+            else
             {
-                getTemple()->addToGrid(row(), col(), ' ');
-                setCol(col()+1);
-                getTemple()->addToGrid(row(), col(), getSymbol());
+                dir = getTemple()->grid(row(),col()+1);
+                if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+                {
+                    getTemple()->addToGrid(row(), col(), ' ');
+                    setCol(col()+1);
+                    getTemple()->addToGrid(row(), col(), getSymbol());
+                }
             }
             break;
             

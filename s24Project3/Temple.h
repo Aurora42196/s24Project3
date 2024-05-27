@@ -51,7 +51,8 @@ public:
     // Mutators
     void setPlayer(Player* pp) { m_player = pp; };
     void addToGrid(int r, int c, char ch);
-    void removeFromGrid(int i);
+    void removeObjectFromGrid(int i);
+    void removeMonsterFromGrid(int r, int c);
     bool addMonster(int r, int c, int randomizer);
     bool addGameObjects(int r, int c, int randomizer);
     void addAction(std::string action);
