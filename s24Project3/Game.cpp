@@ -20,13 +20,13 @@ Game::Game(int goblinSmellDistance)
     // Add a player, if the randomly generated coordinate is occupied
     // (i.e. wall or monster already exists there), then a new coordinate will
     // be generated until the addPlayer returns true
-    int rPlayer = randInt(1, MAXROWS);
-    int cPlayer = randInt(1, MAXCOLS);
+    int rPlayer = randInt(MAXROWS);
+    int cPlayer = randInt(MAXCOLS);
     while ( !(addPlayer(rPlayer, cPlayer)) )
     {
         //        cerr << "coordinate out of bounds" << endl;
-        rPlayer = randInt(1, MAXROWS);
-        cPlayer = randInt(1, MAXCOLS);
+        rPlayer = randInt(MAXROWS);
+        cPlayer = randInt(MAXCOLS);
     }
     m_temple->setPlayer(m_player);
     
@@ -57,7 +57,7 @@ bool Game::addPlayer(int r, int c)
         return false;
 
       // Don't add a player where a wall or monster exists
-    if (m_temple->getGridValue(r, c) != ' ' && m_temple->getGridValue(r, c) != WEAPON_SYMBOL && m_temple->getGridValue(r, c) != SCROLL_SYMBOL)
+    if (m_temple->getGridValue(r, c) != ' '/* && m_temple->getGridValue(r, c) != WEAPON_SYMBOL && m_temple->getGridValue(r, c) != SCROLL_SYMBOL*/)
         return false;
 
       // Dynamically allocate new Player and add it to the temple
@@ -71,12 +71,12 @@ void Game::goToNextLevel()
     delete m_temple;
     m_level++;
     m_temple = new Temple(m_player, MAXROWS,MAXCOLS, m_level);
-    int rPlayer = randInt(1, MAXROWS);
-    int cPlayer = randInt(1, MAXCOLS);
+    int rPlayer = randInt(MAXROWS);
+    int cPlayer = randInt(MAXCOLS);
     while ( !(isInBounds(rPlayer, cPlayer)) )
     {
-        rPlayer = randInt(1, MAXROWS);
-        cPlayer = randInt(1, MAXCOLS);
+        rPlayer = randInt(MAXROWS);
+        cPlayer = randInt(MAXCOLS);
     }
     m_player->setTemple(m_temple);
     m_player->setRow(rPlayer);

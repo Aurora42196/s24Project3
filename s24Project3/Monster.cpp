@@ -38,12 +38,12 @@ Monster::~Monster()
 void Monster::move()
 {
     char dir = '\0';
-    int moveDir = randInt(0, 3);
+    int moveDir = randInt(4);
     switch (moveDir) 
     {
         case 0: // MOVE UP
             dir = getTemple()->getGridValue(row()-1,col()); // decode the direction
-            if (dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL) // determine if the new position is a valid place to move
+            if (dir == ' '/*|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL*/) // determine if the new position is a valid place to move
             {
                 getTemple()->addToGrid(row(), col(), ' '); // clear the space the player is moving from
                 setRow(row()-1); // alter the players position
@@ -53,7 +53,7 @@ void Monster::move()
             
         case 1: // MOVE DOWN
             dir = getTemple()->getGridValue(row()+1,col());
-            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+            if(dir == ' '/*|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL*/)
             {
                 getTemple()->addToGrid(row(), col(), ' ');
                 setRow(row()+1);
@@ -63,7 +63,7 @@ void Monster::move()
             
         case 2: // MOVE LEFT
             dir = getTemple()->getGridValue(row(),col()-1);
-            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+            if(dir == ' '/*|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL*/)
             {
                 getTemple()->addToGrid(row(), col(), ' ');
                 setCol(col()-1);
@@ -73,7 +73,7 @@ void Monster::move()
             
         case 3: // MOVE RIGHT
             dir = getTemple()->getGridValue(row(),col()+1);
-            if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
+            if(dir == ' '/*|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL*/)
             {
                 getTemple()->addToGrid(row(), col(), ' ');
                 setCol(col()+1);

@@ -37,7 +37,7 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
     // Position (row,col) in the temple coordinate system is represented in
     // the array element grid[row-1][col-1]
     
-    int borderRandomizer = randInt(1, 4);
+    int borderRandomizer = randInt(2, 4);
     int r, c;
     for (r = 0; r < rows(); r++)
     {
@@ -92,23 +92,23 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
     //esle add the golden idol if the player is on level 4
     if (m_level == 4) // place golden idol instead of staircase
     {
-        int rObject = randInt(1, MAXROWS);
-        int cObject = randInt(1, MAXCOLS);
+        int rObject = randInt(MAXROWS);
+        int cObject = randInt(MAXCOLS);
         while (!(addGameObjects(rObject, cObject, 11)))
         {
-            rObject = randInt(1, MAXROWS);
-            cObject = randInt(1, MAXCOLS);
+            rObject = randInt(MAXROWS);
+            cObject = randInt(MAXCOLS);
         }
     }
     
     if (m_level <= 3) // place staircase instead of golden idol
     {
-        int rObject = randInt(1, MAXROWS);
-        int cObject = randInt(1, MAXCOLS);
+        int rObject = randInt(MAXROWS);
+        int cObject = randInt(MAXCOLS);
         while (!(addGameObjects(rObject, cObject, 12)))
         {
-            rObject = randInt(1, MAXROWS);
-            cObject = randInt(1, MAXCOLS);
+            rObject = randInt(MAXROWS);
+            cObject = randInt(MAXCOLS);
         }
     }
     
@@ -125,12 +125,12 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
         else // m_level > 2
             monsterRandomizer = randInt(1, 4);
         //        cerr << "coordinate out of bounds" << endl;
-        int rMonster = randInt(1, MAXROWS);
-        int cMonster = randInt(1, MAXCOLS);
+        int rMonster = randInt(MAXROWS);
+        int cMonster = randInt(MAXCOLS);
         while (/*!(isInBounds(rMonster, cMonster)) || */!(addMonster(rMonster, cMonster, monsterRandomizer)))
         {
-            rMonster = randInt(1, MAXROWS);
-            cMonster = randInt(1, MAXCOLS);
+            rMonster = randInt(MAXROWS);
+            cMonster = randInt(MAXCOLS);
         }
     }
     
@@ -140,12 +140,12 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
     for (; numObjects > 0; numObjects--)
     {
         int gameObjectRandomizer = randInt(1, 7);
-        int rObject = randInt(1, MAXROWS);
-        int cObject = randInt(1, MAXCOLS);
+        int rObject = randInt(MAXROWS);
+        int cObject = randInt(MAXCOLS);
         while (/*!(isInBounds(rObject, cObject)) || */!(addGameObjects(rObject, cObject, gameObjectRandomizer)))
         {
-            rObject = randInt(1, MAXROWS);
-            cObject = randInt(1, MAXCOLS);
+            rObject = randInt(MAXROWS);
+            cObject = randInt(MAXCOLS);
         }
     }
 }
@@ -327,13 +327,13 @@ void Temple::display() const
     
     /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
     /// This code was also used to see if any game objects got picked up properly
-//    if (m_player != nullptr) {
-//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-//    }
-//    for(int i = 0; i < m_nGameObjects; i++)
-//    {
-//        cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
-//    }
+    if (m_player != nullptr) {
+        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+    }
+    for(int i = 0; i < m_nGameObjects; i++)
+    {
+        cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
+    }
     
 }
 
@@ -369,7 +369,7 @@ bool Temple::addMonster(int r, int c, int randomizer)
         return false;
 
       // Don't add a monster where a wall or another monster exists
-    if (getGridValue(r-1, c-1) != WEAPON_SYMBOL && getGridValue(r-1, c-1) != SCROLL_SYMBOL && getGridValue(r, c) != ' ')
+    if (getGridValue(r, c) != WEAPON_SYMBOL && getGridValue(r, c) != SCROLL_SYMBOL && getGridValue(r, c) != ' ')
         return false;
 
       // Dynamically allocate new Monster and add it to the temple
@@ -490,5 +490,5 @@ void Temple::monstersTakeTurn()
 ///// Checks if any future objects created will remain within the walls of the temple
 bool Temple::isInBounds(int r ,int c) const
 {
-    return (r-1 >= 0  &&  r-1 <= m_rows  &&  c-1 >= 0  &&  c-1 <= m_cols && m_grid[r-1][c-1] != WALL_SYMBOL);
+    return (r >= 0  &&  r < m_rows  &&  c >= 0  &&  c < m_cols && m_grid[r][c] != WALL_SYMBOL);
 }

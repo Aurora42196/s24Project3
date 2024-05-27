@@ -72,7 +72,7 @@ bool Player::hasGoldenIdol()
 void Player::showInventory() const
 {
     clearScreen();
-//    char index = 97; // starts with the character 'a' and increments with each item in the inventory
+// starts with the character 'a' and increments with each item in the inventory
     cout << "Inventory:" << endl;
     for (int i = 0; i < m_nItems; i++)
     {
@@ -133,6 +133,8 @@ void Player::move(char dir)
     /// object. The game object will remain in the same place unless it gets picked up (TEST IF THIS WORKS!!)
     switch (dir) {
         case ARROW_UP:
+            if(/*!(getTemple()->isInBounds(row()-1, row())) || */(getTemple()->getGridValue(row()-1, col())) == WALL_SYMBOL)
+                return;
             dir = getTemple()->getGridValue(row()-1,col()); // decode the direction
             if (dir == ' ' || dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL) // determine if the new position is a valid place to move
             {

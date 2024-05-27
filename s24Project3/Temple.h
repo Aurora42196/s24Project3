@@ -77,12 +77,12 @@ private:
     // Class Invariants
     ///////////////////////////////////////////////////////////////////////////
     //
-    // 0 < m_rows < MAXROWS
-    // 0 < m_cols < MAXCOLS
+    // 0 <= m_rows < MAXROWS
+    // 0 <= m_cols < MAXCOLS
     // 0 <= m_level < 5 (Levels range from 0 to 4)
     // grid must have 18 rows and 70 columns
     
-    
+protected:
     // Helper functions
     bool isInBounds(int r, int c) const;
 };
