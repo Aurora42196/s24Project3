@@ -196,5 +196,84 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4CB15316-98CA-402D-A6B2-B1C498E9E822"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "s24Project3/Temple.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "Temple::display()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4CB15316-98CA-402D-A6B2-B1C498E9E822 - 2a6af0ee8e563eb2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Temple::display()"
+                  moduleName = "s24Project3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameronmaiden/Desktop/Spring%202024/CS%2032/Project%203/s24Project3/s24Project3/Temple.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "287"
+                  endingLineNumber = "287"
+                  offsetFromSymbolStart = "244">
+               </Location>
+               <Location
+                  uuid = "4CB15316-98CA-402D-A6B2-B1C498E9E822 - 2a6af0ee8e563e93"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Temple::display()"
+                  moduleName = "s24Project3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameronmaiden/Desktop/Spring%202024/CS%2032/Project%203/s24Project3/s24Project3/Temple.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "286"
+                  endingLineNumber = "286"
+                  offsetFromSymbolStart = "248">
+               </Location>
+               <Location
+                  uuid = "4CB15316-98CA-402D-A6B2-B1C498E9E822 - 2a6af0ee8e563e93"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Temple::display()"
+                  moduleName = "s24Project3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameronmaiden/Desktop/Spring%202024/CS%2032/Project%203/s24Project3/s24Project3/Temple.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "286"
+                  endingLineNumber = "286"
+                  offsetFromSymbolStart = "236">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EFCF8719-EBB6-4D49-AD9D-2C95AAC075E0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "s24Project3/Temple.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
+            landmarkName = "Temple::display()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

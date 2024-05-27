@@ -204,22 +204,39 @@ bool Temple::isScrollAt(int r, int c) const
     return false;
 }
 
-bool Temple::isMonsterAt(int r, int c, char& result) const
+//bool Temple::isMonsterAt(int r, int c, char& result) const
+//{
+//    for(int i = 0; i < m_nMonsters; i++)
+//    {
+////        if(m_monsters[i] != nullptr)
+////        {
+//            int rMonster = m_monsters[i]->row();
+//            int cMonster = m_monsters[i]->col();
+//            if(rMonster == r && cMonster == c)
+//            {
+//                result = m_monsters[i]->getSymbol();
+//                return true;
+//            }
+////        }
+//    }
+//    return false;
+//}
+
+Monster* Temple::isMonsterAt(int r, int c) const
 {
     for(int i = 0; i < m_nMonsters; i++)
     {
-        if(m_monsters[i] != nullptr)
+        //        if(m_monsters[i] != nullptr)
+        //        {
+        int rMonster = m_monsters[i]->row();
+        int cMonster = m_monsters[i]->col();
+        if(rMonster == r && cMonster == c)
         {
-            int rMonster = m_monsters[i]->row();
-            int cMonster = m_monsters[i]->col();
-            if(rMonster == r && cMonster == c)
-            {
-                result = m_monsters[i]->getSymbol();
-                return true;
-            }
+            return m_monsters[i];
         }
+        //        }
     }
-    return false;
+    return nullptr;
 }
 
 bool Temple::isIdolAt(int r, int c) const
@@ -257,13 +274,17 @@ void Temple::display()
     {
         for (int c = 0; c < cols(); c++)
         {
+            Monster* monster = isMonsterAt(r, c);
             char monsterSymbol;
             if(isWeaponAt(r, c))
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
-                else if(isMonsterAt(r, c, monsterSymbol))
-                    cout << monsterSymbol;
+                //                else if(isMonsterAt(r, c, monsterSymbol))
+                else if (/*isMonsterAt(r, c) && */monster != nullptr)
+                {
+                    cout << monster->getSymbol();
+                }
                 else
                     cout << WEAPON_SYMBOL;
             }
@@ -271,8 +292,12 @@ void Temple::display()
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
-                else if(isMonsterAt(r, c, monsterSymbol))
-                    cout << monsterSymbol;
+                //                else if(isMonsterAt(r, c, monsterSymbol))
+                //                    cout << monsterSymbol;
+                else if (/*isMonsterAt(r, c) && */monster != nullptr)
+                {
+                    cout << monster->getSymbol();
+                }
                 else
                     cout << SCROLL_SYMBOL;
             }
@@ -280,8 +305,12 @@ void Temple::display()
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
-                else if(isMonsterAt(r, c, monsterSymbol))
-                    cout << monsterSymbol;
+                //                else if(isMonsterAt(r, c, monsterSymbol))
+                //                    cout << monsterSymbol;
+                else if (/*isMonsterAt(r, c) && */monster != nullptr)
+                {
+                    cout << monster->getSymbol();
+                }
                 else
                     cout << IDOL_SYMBOL;
             }
@@ -289,8 +318,12 @@ void Temple::display()
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
-                else if(isMonsterAt(r, c, monsterSymbol))
-                    cout << monsterSymbol;
+                //                else if(isMonsterAt(r, c, monsterSymbol))
+                //                    cout << monsterSymbol;
+                else if (/*isMonsterAt(r, c) && */monster != nullptr)
+                {
+                    cout << monster->getSymbol();
+                }
                 else
                     cout << STAIRS_SYMBOL;
             }
@@ -354,7 +387,7 @@ bool Temple::addMonster(int r, int c, int randomizer)
         return false;
     
     // Don't add a monster where a wall or another monster exists
-    if (getGridValue(r, c) != WEAPON_SYMBOL && getGridValue(r, c) != SCROLL_SYMBOL && getGridValue(r, c) != ' ')
+    if (grid(r, c) != WEAPON_SYMBOL && grid(r, c) != SCROLL_SYMBOL && grid(r, c) != ' ')
         return false;
     
     // Dynamically allocate new Monster and add it to the temple
@@ -388,7 +421,7 @@ bool Temple::addGameObjects(int r, int c, int randomizer)
         return false;
     
     // Don't add a monster where a wall or another object exists
-    if (getGridValue(r, c) == WALL_SYMBOL || getGridValue(r, c) == WEAPON_SYMBOL || getGridValue(r, c) == SCROLL_SYMBOL)
+    if (grid(r, c) == WALL_SYMBOL || grid(r, c) == WEAPON_SYMBOL || grid(r, c) == SCROLL_SYMBOL)
         return false;
     
     // Dynamically allocate new Monster and add it to the temple

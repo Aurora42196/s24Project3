@@ -133,9 +133,9 @@ void Player::move(char dir)
     /// object. The game object will remain in the same place unless it gets picked up (TEST IF THIS WORKS!!)
     switch (dir) {
         case ARROW_UP:
-            if(/*!(getTemple()->isInBounds(row()-1, row())) || */(getTemple()->getGridValue(row()-1, col())) == WALL_SYMBOL)
+            if((getTemple()->grid(row()-1, col())) == WALL_SYMBOL)
                 return;
-            dir = getTemple()->getGridValue(row()-1,col()); // decode the direction
+            dir = getTemple()->grid(row()-1,col()); // decode the direction
             if (dir == ' ' || dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL) // determine if the new position is a valid place to move
             {
                 getTemple()->addToGrid(row(), col(), ' '); // clear the space the player is moving from
@@ -145,7 +145,7 @@ void Player::move(char dir)
             break;
             
         case ARROW_DOWN:
-            dir = getTemple()->getGridValue(row()+1,col());
+            dir = getTemple()->grid(row()+1,col());
             if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
             {
                 getTemple()->addToGrid(row(), col(), ' ');
@@ -155,7 +155,7 @@ void Player::move(char dir)
             break;
             
         case ARROW_LEFT:
-            dir = getTemple()->getGridValue(row(),col()-1);
+            dir = getTemple()->grid(row(),col()-1);
             if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
             {
                 getTemple()->addToGrid(row(), col(), ' ');
@@ -165,7 +165,7 @@ void Player::move(char dir)
             break;
             
         case ARROW_RIGHT:
-            dir = getTemple()->getGridValue(row(),col()+1);
+            dir = getTemple()->grid(row(),col()+1);
             if(dir == ' '|| dir == WEAPON_SYMBOL || dir == SCROLL_SYMBOL || dir == IDOL_SYMBOL || dir == STAIRS_SYMBOL)
             {
                 getTemple()->addToGrid(row(), col(), ' ');
