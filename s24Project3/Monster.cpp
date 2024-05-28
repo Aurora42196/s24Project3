@@ -286,9 +286,14 @@ Dragon::~Dragon()
 
 void Dragon::move(char dir)
 {
+    Dragon::move();
     return; // Dragons do not move, since they want to protect their treasure
 }
 
+void Dragon::move()
+{
+    return; // Dragons do not move, since they want to protect their treasure
+}
 ///////////////////////////////////////////////////////////////////////////
 // Goblin function implementations
 ///////////////////////////////////////////////////////////////////////////

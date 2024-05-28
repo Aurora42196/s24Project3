@@ -66,6 +66,7 @@ void Actor::attackActor(char dir)
     if(randInt(1, attackerPoints) >= randInt(1, defenderPoints))
     {
         defender->setHealth(defender->getHealth() - damagePoints);
+        
         if(defender->getHealth() <= 0)
         {
             if(getSymbol() == PLAYER_SYMBOL) //Only remove from the grid if it's the monster that gets killed, not the player
@@ -75,7 +76,24 @@ void Actor::attackActor(char dir)
             action += ", dealing a final blow.";
         }
         else
-            action += " and hits.";
+        {
+            if(aWeapon->getName() == "magic fangs of sleep") //If the attacker has the magic fangs of sleep, there is a 1 in 5 chance that the defender will fall asleep
+            {
+                if(trueWithProbability(0.20))
+                {
+                    defender->castSleep(randInt(2, 6));
+                    action += " and hits, putting " + defender->getName() + " to sleep.";
+                }
+                else
+                {
+                    action += " and hits."; //defender took damage but did not fall asleep
+                }
+            }
+            else
+            {
+                action += " and hits."; //defender took damage from a weapon that is not the magic fangs
+            }
+        }
     }
     else
     {
@@ -188,7 +206,8 @@ void Player::move(char dir)
     /// detemineNewPosition from project 1. The player is only allowed to move in the direction
     /// dir as long as there is no wall or monster at the new position, otherwise the player doesn't
     /// move and the Monsters take their turn. This will also work if the player moves on top of a game
-    /// object. The game object will remain in the same place unless it gets picked up (TEST IF THIS WORKS!!)
+    /// object. The game object will remain in the same place unless it gets picked up
+    
     switch (dir) {
         case ARROW_UP:
 //            if((getTemple()->grid(row()-1, col())) == WALL_SYMBOL)

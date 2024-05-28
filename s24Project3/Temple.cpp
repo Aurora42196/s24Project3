@@ -280,7 +280,6 @@ void Temple::display()
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
-                //                else if(isMonsterAt(r, c, monsterSymbol))
                 else if (monster != nullptr)
                 {
                     cout << monster->getSymbol();
@@ -292,8 +291,6 @@ void Temple::display()
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
-                //                else if(isMonsterAt(r, c, monsterSymbol))
-                //                    cout << monsterSymbol;
                 else if (monster != nullptr)
                 {
                     cout << monster->getSymbol();
@@ -305,8 +302,6 @@ void Temple::display()
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
-                //                else if(isMonsterAt(r, c, monsterSymbol))
-                //                    cout << monsterSymbol;
                 else if (monster != nullptr)
                 {
                     cout << monster->getSymbol();
@@ -318,8 +313,6 @@ void Temple::display()
             {
                 if(isPlayerAt(r, c))
                     cout << PLAYER_SYMBOL;
-                //                else if(isMonsterAt(r, c, monsterSymbol))
-                //                    cout << monsterSymbol;
                 else if (monster != nullptr)
                 {
                     cout << monster->getSymbol();
@@ -348,10 +341,12 @@ void Temple::display()
     //    if (m_player != nullptr) {
     //        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
     //    }
-        for(int i = 0; i < m_nGameObjects; i++)
-        {
-            cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
-        }
+//        for(int i = 0; i < m_nGameObjects; i++)
+//        {
+//            cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
+//        }
+    
+    cerr << "Player sleep timer: " << m_player->getSleepTimer() << endl;
     
 }
 
@@ -389,13 +384,11 @@ void Temple::removeMonsterFromGrid(int r, int c)
         int cMonster = m_monsters[i]->col();
         if(rMonster == r && cMonster == c)
         {
-//            m_monsters[i]->setRow(-1);
-//            m_monsters[i]->setCol(-1);
+            // The monster killed at location grid(r,c) may drop an item before it gets deleted
             m_monsters[i]->dropItem(m_monsters[i], r, c);
             delete m_monsters[i];
             m_monsters.erase(m_monsters.begin() + i);
             m_nMonsters--;
-//            grid(rMonster, cMonster) = ' ';
             return;
         }
     }

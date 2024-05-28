@@ -89,7 +89,7 @@ public:
 
     // Mutator
     virtual void move(char dir);
-//    virtual void move();
+    virtual void move();
 private:
     
 };

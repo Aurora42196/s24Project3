@@ -9,8 +9,9 @@
 #define Actor_h
 
 #include "utilities.h"
-#include <vector>
 #include "GameObject.h"
+#include <vector>
+#include <algorithm>
 /// Game Plan: Actors.h will contain the class declarations for the Actor base class and its derived class Player
 /// The Monster derived class will be in its own file since there are a wide variance of classes derived from Monster
 /// The implementations of the Actor base class and Player derived class will be in the source file Actor.cpp
@@ -60,7 +61,8 @@ public:
     void setArmor(int a) { m_armor = a; };
     void setStrength(int s) { m_strength = s; };
     void setDexterity(int d) { m_dexterity = d; };
-    void castSleep(int s) { m_sleepTimer = s; };
+    void castSleep(int s) { if(m_sleepTimer > 0) {m_sleepTimer = std::max(m_sleepTimer, s);} else m_sleepTimer = s; };
+    void wakeUp() { m_sleepTimer--; };
     void setTemple(Temple* tp) { m_temple = tp; };
     void setWeapon(Weapon* wp) { m_weapon = wp; };
         

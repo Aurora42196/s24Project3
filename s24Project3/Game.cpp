@@ -94,41 +94,48 @@ void Game::play()
     char command;
     while ((command = getCharacter()) && command != 'q' && ap->getHealth() > 0 && !(m_player->hasGoldenIdol()))
         {
-            switch (command)
+            if(m_player->getSleepTimer() <= 0)
             {
-                case ARROW_LEFT:
-                case ARROW_RIGHT:
-                case ARROW_UP:
-                case ARROW_DOWN:
-                    ap->move(command);
-                    break;
-                case 'i':
-                    m_player->showInventory();
-                    break;
-                case 'g':
-                    m_player->pickUpObject();
-                    break;
-                    
-                case 'c': // allows the player to cheat the game
-                    m_player->setHealth(50);
-                    m_player->setDexterity(9);
-                    break;
-    
-                default:
-                    cout << '\a' << endl; // beep
-                    break;
-                    
-                case '>':
-                    int rPlayer = m_player->row();
-                    int cPlayer = m_player->col();
-                    if(m_temple->isPlayerAt(rPlayer,cPlayer) == m_temple->isStaircaseAt(rPlayer, cPlayer))
-                    {
-                        goToNextLevel();
-                    }
-                    break;
+                switch (command)
+                {
+                    case ARROW_LEFT:
+                    case ARROW_RIGHT:
+                    case ARROW_UP:
+                    case ARROW_DOWN:
+                        ap->move(command);
+                        break;
+                    case 'i':
+                        m_player->showInventory();
+                        break;
+                    case 'g':
+                        m_player->pickUpObject();
+                        break;
+                        
+                    case 'c': // allows the player to cheat the game
+                        m_player->setHealth(50);
+                        m_player->setDexterity(9);
+                        break;
+                        
+                    default:
+                        cout << '\a' << endl; // beep
+                        break;
+                        
+                    case '>':
+                        int rPlayer = m_player->row();
+                        int cPlayer = m_player->col();
+                        if(m_temple->isPlayerAt(rPlayer,cPlayer) == m_temple->isStaircaseAt(rPlayer, cPlayer))
+                        {
+                            goToNextLevel();
+                        }
+                        break;
+                }
+            }
+            else // This means the player is asleep and cannot take any action until they wake up, the monsters take their turn even when the player is asleep
+            {
+                m_player->wakeUp();
             }
             
-            if(command != '>')
+            if(command != '>') // The monsters will not take a turn after immediately going to the next level
             {
                 m_temple->monstersTakeTurn();
             }
