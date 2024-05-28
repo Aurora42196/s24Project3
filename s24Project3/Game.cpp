@@ -94,6 +94,8 @@ void Game::play()
     char command;
     while ((command = getCharacter()) && command != 'q' && ap->getHealth() > 0 && !(m_player->hasGoldenIdol()))
         {
+            if(trueWithProbability(0.10))
+                m_player->heal();
             if(m_player->getSleepTimer() <= 0)
             {
                 switch (command)
@@ -110,9 +112,17 @@ void Game::play()
                     case 'g':
                         m_player->pickUpObject();
                         break;
+                    case 'w':
+                        m_player->equipWeapon();
+//                        m_player->showInventory();
+//                        char weaponPick /*= getCharacter()*/;
+//                        int iter = weaponPick - 'a';
+//                        cerr << "iter: " << iter << endl;
                         
+                        break;
                     case 'c': // allows the player to cheat the game
                         m_player->setHealth(50);
+                        m_player->setMaxHealth(50);
                         m_player->setDexterity(9);
                         break;
                         

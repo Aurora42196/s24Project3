@@ -58,7 +58,7 @@ public:
     virtual std::string getName() const { return "the Bogeyman"; };
     
     // Mutator
-//    virtual void move();
+    virtual void move();
 
 private:
     

@@ -65,6 +65,8 @@ public:
     void wakeUp() { m_sleepTimer--; };
     void setTemple(Temple* tp) { m_temple = tp; };
     void setWeapon(Weapon* wp) { m_weapon = wp; };
+    void setMaxHealth(int mh) { m_maxHealth = mh;}
+    void heal() { if(m_health < m_maxHealth) m_health++;};
         
         // Non-inline declarations
     virtual void move(char dir)/* = 0*/; // move for the player
@@ -80,6 +82,7 @@ private:
     int m_col;
     char m_symbol;
     int m_health;
+    int m_maxHealth;
     int m_armor;
     int m_strength;
     int m_dexterity;
@@ -106,7 +109,9 @@ public:
     
     
     // Mutators
+    void healPlayer() { };
     bool pickUpObject();
+    void equipWeapon();
     virtual void move(char dir);
     
 //    virtual char getSymbol() const { return PLAYER_SYMBOL; };

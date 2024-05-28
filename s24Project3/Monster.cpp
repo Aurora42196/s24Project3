@@ -128,8 +128,6 @@ void Monster::dropItem(Monster* mp, int r, int c)
             case BOGEYMAN_SYMBOL: // Bogeyman has a 1 in 10 chance of dropping a magic axe
                 if(trueWithProbability(0.10))
                 {
-//                    GameObject* itemDrop = new MagicAxe(tp, r, c);
-//                    tp->addToGrid(r, c, itemDrop->getSymbol());
                     tp->addGameObjects(r, c, 8);
                     return;
                 }
@@ -140,8 +138,6 @@ void Monster::dropItem(Monster* mp, int r, int c)
             case SNAKEWOMAN_SYMBOL: // Snakewoman has a 1 in 3 chance of dropping magic fangs
                 if(trueWithProbability(0.30))
                 {
-//                    GameObject* itemDrop = new MagicFangs(tp, r, c);
-//                    tp->addToGrid(r, c, itemDrop->getSymbol());
                     tp->addGameObjects(r, c, 9);
                     return;
                 }
@@ -164,8 +160,6 @@ void Monster::dropItem(Monster* mp, int r, int c)
             case GOBLIN_SYMBOL: // Goblin has a 1 in 3 chance of dropping a magic axe or magic fangs
                 if(trueWithProbability(0.30))
                 {
-//                    GameObject* itemDrop = new MagicFangs(tp, r, c);
-//                    tp->addToGrid(r, c, itemDrop->getSymbol());
                     tp->addGameObjects(r, c, randInt(8, 9));
                     return;
                 }
@@ -225,13 +219,14 @@ Bogeyman::Bogeyman(Temple* tp, int r, int c)
 
 Bogeyman::~Bogeyman()
 {
-    
+    delete getWeapon();
 }
 
-//void Bogeyman::move()
-//{
-//    
-//}
+void Bogeyman::move()
+{
+    Player* pp = getTemple()->getPlayer();
+    
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // Snakewoman function implementations
@@ -253,7 +248,7 @@ Snakewoman::Snakewoman(Temple* tp, int r, int c)
 
 Snakewoman::~Snakewoman()
 {
-    
+    delete getWeapon();
 }
 
 //void Snakewoman::move()
@@ -281,7 +276,7 @@ Dragon::Dragon(Temple* tp, int r, int c)
 
 Dragon::~Dragon()
 {
-    
+    delete getWeapon();
 }
 
 void Dragon::move(char dir)
@@ -319,5 +314,5 @@ Goblin::Goblin(Temple* tp, int r, int c)
 
 Goblin::~Goblin()
 {
-    
+    delete getWeapon();
 }

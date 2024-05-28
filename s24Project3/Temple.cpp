@@ -499,6 +499,9 @@ void Temple::monstersTakeTurn()
 {
     for( int i = 0; i < m_nMonsters; i++)
     {
+        if(m_monsters[i]->getSymbol() == 'D') // Dragons have a 1 in 10 chance of healing before they take their turn.
+            if(trueWithProbability(0.10))
+                m_monsters[i]->heal();
         Player* pp = getPlayer();
         int rowdiff = m_monsters[i]->row() - pp->row();
         int coldiff = m_monsters[i]->col() - pp->col();

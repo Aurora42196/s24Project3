@@ -200,6 +200,13 @@ bool Player::pickUpObject()
     return false;
 }
 
+void Player::equipWeapon()
+{
+    showInventory();
+    char command = '\0'; /*= getCharacter();*/
+    int iter = command - 'a';
+    cerr << "iter: " << iter << endl;
+}
 void Player::move(char dir)
 {
     /// This is my own version of move based on a combination of decodeDirection and
