@@ -112,6 +112,9 @@ void Game::play()
                     case 'g':
                         m_player->pickUpObject();
                         break;
+                    case 'r':
+                        m_player->readScroll();
+                        break;
                     case 'w':
 //                        m_player->showInventory();
                         m_player->equipWeapon();

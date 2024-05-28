@@ -279,6 +279,8 @@ Dragon::Dragon(Temple* tp, int r, int c)
     setStrength(4);
     setDexterity(4);
     setArmor(4);
+    //  Before each turn a dragon takes, there is a 1 in 10 chance the dragon will regain 1 hit point, up to its initial maximum number of hit points.
+    setMaxHealth(getHealth());
     
     Weapon* starterWeapon;
     starterWeapon = new LongSword();

@@ -9,6 +9,7 @@
 #include "Temple.h"
 #include "globals.h"
 #include "Weapon.h"
+#include "Scroll.h"
 #include "Monster.h"
 #include <iostream>
 using namespace std;
@@ -54,15 +55,15 @@ void Actor::attackActor(char dir)
         defender = getTemple()->getPlayer();
     }
     
-    Weapon* aWeapon = attacker->getWeapon();
-    Weapon* dWeapon = defender->getWeapon();
-    int attackerPoints = attacker->getDexterity() + aWeapon->getDexterityBonus();
+    Weapon* attWeapon = attacker->getWeapon();
+//    Weapon* dWeapon = defender->getWeapon();
+    int attackerPoints = attacker->getDexterity() + attWeapon->getDexterityBonus();
     
-    int defenderPoints = defender->getDexterity() + dWeapon->getDexterityBonus();
+    int defenderPoints = defender->getDexterity() + defender->getArmor();
     
-    int damagePoints = randInt(0, getStrength() + aWeapon->getWeaponDamage()-1);
+    int damagePoints = randInt(0, getStrength() + attWeapon->getWeaponDamage()-1);
     
-    string action = getName() + " " + aWeapon->getAction() + defender->getName();
+    string action = getName() + " " + attWeapon->getAction() + defender->getName();
     if(randInt(1, attackerPoints) >= randInt(1, defenderPoints))
     {
         defender->setHealth(defender->getHealth() - damagePoints);
@@ -77,7 +78,7 @@ void Actor::attackActor(char dir)
         }
         else
         {
-            if(aWeapon->getName() == "magic fangs of sleep") //If the attacker has the magic fangs of sleep, there is a 1 in 5 chance that the defender will fall asleep
+            if(attWeapon->getName() == "magic fangs of sleep") //If the attacker has the magic fangs of sleep, there is a 1 in 5 chance that the defender will fall asleep
             {
                 if(trueWithProbability(0.20))
                 {
@@ -183,6 +184,8 @@ bool Player::pickUpObject()
                 string pickup;
                 if(templeObject->getSymbol() == SCROLL_SYMBOL)
                 {
+                    Scroll* sp = dynamic_cast<Scroll*>(templeObject);
+                    sp->setPlayer(this);
                     pickup = "You pick up a scroll called " + (templeObject->getName());
                 }
                 else
@@ -229,6 +232,43 @@ void Player::equipWeapon()
     else
     {
         action = "You can't wield " + m_inventory[index]->getName();
+        getTemple()->addAction(action);
+    }
+}
+
+void Player::readScroll()
+{
+    clearScreen();
+    
+    // starts with the character 'a' and increments with each item in the inventory
+    cout << "Inventory:" << endl;
+    for (int i = 0; i < m_nItems; i++)
+    {
+        cout << " " << (char)('a' + i) << ". " << m_inventory[i]->getName() << endl;
+    }
+    
+    // char represented as an integer so we can directly access the vector element desired
+    int choice = getCharacter();
+    int index = choice - 'a';
+    string action;
+    // If the index is bigger than the amount of items in the vector or the char choice is not a letter (referencing the ASCII table), do nothing
+    if(index >= m_nItems || choice < 97 || choice > 122)
+        return;
+    
+    Scroll* sp = dynamic_cast<Scroll*>(m_inventory[index]);
+    if (sp != nullptr)
+    {
+        
+        action = "You read the scroll called " + sp->getName();
+        getTemple()->addAction(action);
+        sp->castEffect();
+        delete m_inventory[index];
+        m_inventory.erase(m_inventory.begin() + index);
+        m_nItems--;
+    }
+    else
+    {
+        action = "You can't read a " + m_inventory[index]->getName();
         getTemple()->addAction(action);
     }
 }

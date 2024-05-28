@@ -9,7 +9,8 @@
 #define Scroll_hpp
 
 #include "GameObject.h"
-
+#include <string>
+class Player;
 class Scroll : public GameObject
 {
 public:
@@ -18,10 +19,17 @@ public:
     
     // Accessors
     virtual std::string getName() = 0;
+    Player* getPlayer() { return m_player; };
+    bool isInBounds(int r ,int c);
+    virtual std::string actionString() = 0;
     
     // Mutators
     virtual void castEffect() = 0;
+    void setPlayer(Player* pp) { m_player = pp; };
 private:
+    Player* m_player;
+    
+    // Helper function
     
 };
 
@@ -33,7 +41,8 @@ public:
     
     // Accessors
     virtual std::string getName() { return "scroll of teleportation"; };
-    
+    virtual std::string actionString() { return "You feel your body wrenched in space and time."; };
+
     // Mutators
     virtual void castEffect();
 private:
@@ -48,7 +57,7 @@ public:
     
     // Accessors
     virtual std::string getName() { return "scroll of improve armor"; };
-    
+    virtual std::string actionString() { return "Your armor glows blue."; };
     // Mutators
     virtual void castEffect();
 private:
@@ -63,7 +72,7 @@ public:
     
     // Accessors
     virtual std::string getName() { return "scroll of raise strength"; };
-    
+    virtual std::string actionString() { return "Your muscles bulge."; };
     // Mutators
     virtual void castEffect();
 private:
@@ -78,6 +87,7 @@ public:
     
     // Accessors
     virtual std::string getName() { return "scroll of enhance health"; };
+    virtual std::string actionString() { return "You feel your heart beating stronger."; };
     
     // Mutators
     virtual void castEffect();
@@ -93,6 +103,7 @@ public:
     
     // Accessors
     virtual std::string getName() { return "scroll of enhance dexterity"; };
+    virtual std::string actionString() { return "You feel like less of a klutz."; };
     
     // Mutators
     virtual void castEffect();

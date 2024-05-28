@@ -44,6 +44,7 @@ public:
     int row() const { return m_row; };
     int col() const { return m_col; };
     int getHealth() const { return m_health; };
+    int getMaxHealth() const { return m_maxHealth; };
     int getArmor() const { return m_armor; };
     int getStrength() const { return m_strength; };
     int getDexterity() const { return m_dexterity; };
@@ -57,15 +58,15 @@ public:
         // Inline function implementations
     void setRow(int r) { m_row = r; };
     void setCol(int c) { m_col = c; };
-    void setHealth(int h) { m_health = h; };
-    void setArmor(int a) { m_armor = a; };
-    void setStrength(int s) { m_strength = s; };
-    void setDexterity(int d) { m_dexterity = d; };
-    void castSleep(int s) { if(m_sleepTimer > 0) {m_sleepTimer = std::max(m_sleepTimer, s);} else m_sleepTimer = s; };
+    void setHealth(int h) { if (m_health < 99) m_health = h; };
+    void setMaxHealth(int mh) { if (m_maxHealth < 99) m_maxHealth = mh;}
+    void setArmor(int a) { if (m_armor < 99) m_armor = a; };
+    void setStrength(int s) { if (m_strength < 99) m_strength = s; };
+    void setDexterity(int d) { if (m_dexterity < 99) m_dexterity = d; };
+    void castSleep(int s) { if(m_sleepTimer > 0 && m_sleepTimer < 9) {m_sleepTimer = std::max(m_sleepTimer, s);} else m_sleepTimer = s; };
     void wakeUp() { m_sleepTimer--; };
     void setTemple(Temple* tp) { m_temple = tp; };
     void setWeapon(Weapon* wp) { m_weapon = wp; };
-    void setMaxHealth(int mh) { m_maxHealth = mh;}
     void heal() { if(m_health < m_maxHealth) m_health++;};
         
         // Non-inline declarations
@@ -112,6 +113,7 @@ public:
     void healPlayer() { };
     bool pickUpObject();
     void equipWeapon();
+    void readScroll();
     virtual void move(char dir);
     
 //    virtual char getSymbol() const { return PLAYER_SYMBOL; };

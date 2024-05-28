@@ -346,7 +346,7 @@ void Temple::display()
 //            cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
 //        }
     
-    cerr << "Player sleep timer: " << m_player->getSleepTimer() << endl;
+//    cerr << "Player sleep timer: " << m_player->getSleepTimer() << endl;
     
 }
 

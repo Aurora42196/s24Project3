@@ -6,11 +6,19 @@
 //
 
 #include "Scroll.h"
+#include "Actor.h"
+#include <string>
+using namespace std;
 
 Scroll::Scroll(Temple* tp, int r, int c)
- :GameObject(tp, r, c, SCROLL_SYMBOL)
+ :GameObject(tp, r, c, SCROLL_SYMBOL), m_player(nullptr)
 {
     
+}
+
+bool Scroll::isInBounds(int r, int c)
+{
+    return ((m_player->getTemple()->grid(r, c)) == ' ');
 }
 
 Teleportation::Teleportation(Temple* tp, int r, int c)
@@ -21,7 +29,22 @@ Teleportation::Teleportation(Temple* tp, int r, int c)
 
 void Teleportation::castEffect()
 {
-    
+    Player* pp = getPlayer();
+    if(pp != nullptr)
+    {
+        int rPlayer = randInt(MAXROWS);
+        int cPlayer = randInt(MAXCOLS);
+        while ( !(isInBounds(rPlayer, cPlayer)) )
+        {
+            rPlayer = randInt(MAXROWS);
+            cPlayer = randInt(MAXCOLS);
+        }
+        pp->getTemple()->grid(pp->row(), pp->col()) = ' ';
+        pp->setRow(rPlayer);
+        pp->setCol(cPlayer);
+        pp->getTemple()->addToGrid(rPlayer, cPlayer, pp->getSymbol());
+        pp->getTemple()->addAction(actionString());
+    }
 }
 
 ImproveArmor::ImproveArmor(Temple* tp, int r, int c)
@@ -32,7 +55,12 @@ ImproveArmor::ImproveArmor(Temple* tp, int r, int c)
 
 void ImproveArmor::castEffect()
 {
-    
+    Player* pp = getPlayer();
+    if(pp != nullptr)
+    {
+        pp->setArmor(pp->getArmor() + randInt(1, 3));
+        pp->getTemple()->addAction(actionString());
+    }
 }
 
 RaiseStrength::RaiseStrength(Temple* tp, int r, int c)
@@ -43,7 +71,12 @@ RaiseStrength::RaiseStrength(Temple* tp, int r, int c)
 
 void RaiseStrength::castEffect()
 {
-    
+    Player* pp = getPlayer();
+    if(pp != nullptr)
+    {
+        pp->setStrength(pp->getStrength() + randInt(1, 3));
+        pp->getTemple()->addAction(actionString());
+    }
 }
 
 EnhanceHealth::EnhanceHealth(Temple* tp, int r, int c)
@@ -54,7 +87,12 @@ EnhanceHealth::EnhanceHealth(Temple* tp, int r, int c)
 
 void EnhanceHealth::castEffect()
 {
-    
+    Player* pp = getPlayer();
+    if(pp != nullptr)
+    {
+        pp->setMaxHealth(pp->getMaxHealth() + randInt(3, 8));
+        pp->getTemple()->addAction(actionString());
+    }
 }
 
 EnhanceDexterity::EnhanceDexterity(Temple* tp, int r, int c)
@@ -65,5 +103,10 @@ EnhanceDexterity::EnhanceDexterity(Temple* tp, int r, int c)
 
 void EnhanceDexterity::castEffect()
 {
-    
+    Player* pp = getPlayer();
+    if(pp != nullptr)
+    {
+        pp->setDexterity(pp->getDexterity() + 1);
+        pp->getTemple()->addAction(actionString());
+    }
 }
