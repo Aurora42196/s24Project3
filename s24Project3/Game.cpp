@@ -127,7 +127,7 @@ void Game::play()
                     case 'c': // allows the player to cheat the game
                         m_player->setHealth(50);
                         m_player->setMaxHealth(50);
-                        m_player->setDexterity(9);
+                        m_player->setStrength(9);
                         break;
                         
                     default:
