@@ -50,15 +50,18 @@ private:
 // Types of Monsters (Derived from Monster)
 ///////////////////////////////////////////////////////////////////////////
 ///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Bogeyman
+
 class Bogeyman : public Monster
 {
 public:
     Bogeyman(Temple* tp, int r, int c);
     virtual ~Bogeyman();
     
+    // Accesors
     virtual std::string getName() const { return "the Bogeyman"; };
     
-    // Mutator
+    // Mutators
     virtual void move();
 
 private:
@@ -67,20 +70,25 @@ private:
     
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Snakewoman
+
 class Snakewoman : public Monster
 {
 public:
     Snakewoman(Temple* tp, int r, int c);
     virtual ~Snakewoman();
     
+    // Accessors
     virtual std::string getName() const { return "the Snakewoman"; };
     
-    // Mutator
+    // Mutators
     virtual void move();
 
 private:
     
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Dragon
 
 class Dragon : public Monster
 {
@@ -88,14 +96,16 @@ public:
     Dragon(Temple* tp, int r, int c);
     virtual ~Dragon();
     
+    //Accessors
     virtual std::string getName() const { return "the Dragon"; };
 
     // Mutator
-//    virtual void decidedMove(char dir);
     virtual void move();
 private:
     
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Goblin
 
 class Goblin : public Monster
 {
@@ -103,9 +113,10 @@ public:
     Goblin(Temple* tp, int r, int c);
     virtual ~Goblin();
     
+    //Accessors
     virtual std::string getName() const { return "the Goblin"; };
     
-    // Mutator
+    // Mutators
     virtual void move();
 
 private:

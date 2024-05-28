@@ -55,7 +55,7 @@ public:
     virtual std::string getName() const = 0;
     
     // Mutators
-        // Inline function implementations
+        // Inline function implementations (setter functions)
     void setRow(int r) { m_row = r; };
     void setCol(int c) { m_col = c; };
     void setHealth(int h) { if (m_health < 99) m_health = h; };
@@ -68,13 +68,12 @@ public:
     void setTemple(Temple* tp) { m_temple = tp; };
     void setWeapon(Weapon* wp) { m_weapon = wp; };
     void heal() { if(m_health < m_maxHealth) m_health++;};
+    virtual void decidedMove(char dir) = 0;
+    /// All Actors move differently, so they will all have their unique implementations.
+    /// If I am not able to impelemnt all the move functions by the deadline, they will default to moving an any random direction
         
         // Non-inline declarations
-    virtual void move(char dir)/* = 0*/; // move for the player
     void attackActor(char dir);
-
-        /// All Actors move differently, so they will all have their unique implementations.
-        /// If I am not able to impelemnt all the move functions by the deadline, they will default moving an any random direction
     
 private:
     Temple* m_temple;
@@ -103,20 +102,21 @@ public:
     virtual ~Player();
     
     // Accessors
-    bool hasGoldenIdol();
+        // Inline function implementions
     int getInventorySize() { return m_nItems; };
-    void showInventory() const;
     virtual std::string getName() const { return "Player"; };
+    
+        // Non-inline function declarations
+    bool hasGoldenIdol();
+    void showInventory() const;
     
     
     // Mutators
-    void healPlayer() { };
     bool pickUpObject();
     void equipWeapon();
     void readScroll();
-    virtual void move(char dir);
+    virtual void decidedMove(char dir);
     
-//    virtual char getSymbol() const { return PLAYER_SYMBOL; };
     
 private:
     // A Player has an inventory of items (array of game objects)

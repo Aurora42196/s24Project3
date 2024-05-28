@@ -36,11 +36,11 @@ public:
     Player* getPlayer() const { return m_player; };
     GameObject* getGameObjectAt(int i) const { return m_objects[i]; };
     int getNumGameObjects() const { return m_nGameObjects; };
+    
         // Non-inline function declarations
     bool isPlayerAt(int r, int c) const;
     bool isWeaponAt(int r, int c) const;
     bool isScrollAt(int r, int c) const;
-//    bool isMonsterAt(int r, int c, char& result) const;
     Monster* isMonsterAt(int r, int c) const;
     bool isIdolAt(int r, int c) const;
     bool isStaircaseAt(int r, int c) const;

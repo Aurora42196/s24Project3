@@ -22,9 +22,6 @@ Actor::Actor(Temple* tp, int r, int c, char sym)
 : m_temple(tp), m_row(r), m_col(c), m_symbol(sym), m_health(0), m_armor(0), m_strength(0), m_dexterity(0), m_sleepTimer(0)
 {}
 
-void Actor::move(char dir)
-{}
-
 void Actor::attackActor(char dir)
 {
     Actor* attacker = this;
@@ -56,7 +53,6 @@ void Actor::attackActor(char dir)
     }
     
     Weapon* attWeapon = attacker->getWeapon();
-//    Weapon* dWeapon = defender->getWeapon();
     int attackerPoints = attacker->getDexterity() + attWeapon->getDexterityBonus();
     
     int defenderPoints = defender->getDexterity() + defender->getArmor();
@@ -276,7 +272,8 @@ void Player::readScroll()
         getTemple()->addAction(action);
     }
 }
-void Player::move(char dir)
+
+void Player::decidedMove(char dir)
 {
     /// This is my own version of move based on a combination of decodeDirection and
     /// detemineNewPosition from project 1. The player is only allowed to move in the direction

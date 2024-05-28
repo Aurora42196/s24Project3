@@ -19,6 +19,7 @@ public:
     bool addPlayer(int r, int c);
     void goToNextLevel();
     void play();
+    
 private:
     // Data members
     Temple* m_temple;

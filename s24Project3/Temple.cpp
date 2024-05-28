@@ -204,24 +204,6 @@ bool Temple::isScrollAt(int r, int c) const
     return false;
 }
 
-//bool Temple::isMonsterAt(int r, int c, char& result) const
-//{
-//    for(int i = 0; i < m_nMonsters; i++)
-//    {
-////        if(m_monsters[i] != nullptr)
-////        {
-//            int rMonster = m_monsters[i]->row();
-//            int cMonster = m_monsters[i]->col();
-//            if(rMonster == r && cMonster == c)
-//            {
-//                result = m_monsters[i]->getSymbol();
-//                return true;
-//            }
-////        }
-//    }
-//    return false;
-//}
-
 Monster* Temple::isMonsterAt(int r, int c) const
 {
     for(int i = 0; i < m_nMonsters; i++)
@@ -336,16 +318,16 @@ void Temple::display()
     
     displayActions();
     
-    /// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
-    /// This code was also used to see if any game objects got picked up properly
-    //    if (m_player != nullptr) {
-    //        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
-    //    }
+/// Used as a test to verify the player was placed within the temple floor and not on top of any existing walls
+/// This code was also used to see if any game objects got picked up properly
+//    if (m_player != nullptr) {
+//        cerr << "Player is placed at: (" << m_player->row() << ","<< m_player->col() << ")" << endl;
+//    }
 //        for(int i = 0; i < m_nGameObjects; i++)
 //        {
 //            cerr << m_objects[i]->getName() << " is placed at: (" << m_objects[i]->row() << ","<< m_objects[i]->col() << ")" << endl;
 //        }
-    
+
 //    cerr << "Player sleep timer: " << m_player->getSleepTimer() << endl;
     
 }

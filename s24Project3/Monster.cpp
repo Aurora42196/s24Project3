@@ -54,7 +54,9 @@ void Monster::decidedMove(char dir)
         case ARROW_RIGHT:
             moveDir = 3;
             break;
-            
+        case('\0'): // This is only used for the Dragon since it does not move
+            return;
+            break;
         default:
             // Default Monster movement will move in any random direction
             moveDir = randInt(4);
@@ -346,14 +348,9 @@ Dragon::~Dragon()
     delete getWeapon();
 }
 
-//void Dragon::decidedMove(char dir)
-//{
-//    Dragon::move();
-//    return; // Dragons do not move, since they want to protect their treasure
-//}
-
 void Dragon::move()
 {
+    decidedMove('\0');
     return; // Dragons do not move, since they want to protect their treasure
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -381,5 +378,5 @@ Goblin::~Goblin()
 
 void Goblin::move()
 {
-    decidedMove('\0');
+    decidedMove('r'); // move in a random direction until I can figure out the recursion
 }

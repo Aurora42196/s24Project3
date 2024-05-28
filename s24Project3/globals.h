@@ -15,12 +15,11 @@
 const int MAXROWS = 18; // max number of rows in a temple floor
 const int MAXCOLS = 70; // max number of columns in a temple floor
 const int INITIAL_PLAYER_HEALTH = 20;
-const int MAX_MONSTERS = 30;
 const int MAX_HEALTH = 99;
 const int MAX_ARMOR = 99;
 const int MAX_STRENGTH = 99;
 const int MAX_DEXTERITY = 99;
-const int INVENTORY_CAPACITY = 26;
+const int INVENTORY_CAPACITY = 26; // Player can only hold items a - z
 const char PLAYER_SYMBOL = '@';
 const char BOGEYMAN_SYMBOL = 'B';
 const char SNAKEWOMAN_SYMBOL = 'S';

@@ -40,7 +40,6 @@ Game::~Game()
 {
     delete m_temple;
     delete m_player;
-
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -104,26 +103,25 @@ void Game::play()
                     case ARROW_RIGHT:
                     case ARROW_UP:
                     case ARROW_DOWN:
-                        ap->move(command);
+                        ap->decidedMove(command);
                         break;
+                        
                     case 'i':
                         m_player->showInventory();
                         break;
+                        
                     case 'g':
                         m_player->pickUpObject();
                         break;
+                        
                     case 'r':
                         m_player->readScroll();
                         break;
-                    case 'w':
-//                        m_player->showInventory();
-                        m_player->equipWeapon();
-//                        clearScreen();
-//                        char weaponPick /*= getCharacter()*/;
-//                        int iter = weaponPick - 'a';
-//                        cerr << "iter: " << iter << endl;
                         
+                    case 'w':
+                        m_player->equipWeapon();
                         break;
+                        
                     case 'c': // allows the player to cheat the game
                         m_player->setHealth(50);
                         m_player->setMaxHealth(50);
@@ -144,7 +142,8 @@ void Game::play()
                         break;
                 }
             }
-            else // This means the player is asleep and cannot take any action until they wake up, the monsters take their turn even when the player is asleep
+            // This means the player is asleep and cannot take any action until they wake up, the monsters take their turn even when the player is asleep
+            else
             {
                 m_player->wakeUp();
             }
