@@ -10,6 +10,7 @@
 
 #include "Actor.h"
 #include <string>
+#include <queue>
 class Temple;
 
 ///////////////////////////////////////////////////////////////////////////
@@ -62,6 +63,8 @@ public:
 
 private:
     
+    bool pathExists(Temple* tp, int sr, int sc, int er, int ec);
+    
 };
 
 class Snakewoman : public Monster
@@ -107,5 +110,16 @@ public:
 
 private:
     
+};
+
+class Coord
+{
+public:
+    Coord(int rr, int cc) : m_row(rr), m_col(cc) {}
+    int r() const { return m_row; }
+    int c() const { return m_col; }
+private:
+    int m_row;
+    int m_col;
 };
 #endif /* Monster_h */

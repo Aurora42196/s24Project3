@@ -202,10 +202,35 @@ bool Player::pickUpObject()
 
 void Player::equipWeapon()
 {
-    showInventory();
-    char command = '\0'; /*= getCharacter();*/
-    int iter = command - 'a';
-    cerr << "iter: " << iter << endl;
+    clearScreen();
+    
+    // starts with the character 'a' and increments with each item in the inventory
+    cout << "Inventory:" << endl;
+    for (int i = 0; i < m_nItems; i++)
+    {
+        cout << " " << (char)('a' + i) << ". " << m_inventory[i]->getName() << endl;
+    }
+    
+    // char represented as an integer so we can directly access the vector element desired
+    int choice = getCharacter();
+    int index = choice - 'a';
+    string action;
+    // If the index is bigger than the amount of items in the vector or the char choice is not a letter (referencing the ASCII table), do nothing
+    if(index >= m_nItems || choice < 97 || choice > 122)
+        return;
+    
+    Weapon* wp = dynamic_cast<Weapon*>(m_inventory[index]);
+    if (wp != nullptr)
+    {
+        setWeapon(wp);
+        action = "You are wielding " + wp->getName();
+        getTemple()->addAction(action);
+    }
+    else
+    {
+        action = "You can't wield " + m_inventory[index]->getName();
+        getTemple()->addAction(action);
+    }
 }
 void Player::move(char dir)
 {

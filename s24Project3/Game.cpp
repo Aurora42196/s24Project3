@@ -113,8 +113,9 @@ void Game::play()
                         m_player->pickUpObject();
                         break;
                     case 'w':
-                        m_player->equipWeapon();
 //                        m_player->showInventory();
+                        m_player->equipWeapon();
+//                        clearScreen();
 //                        char weaponPick /*= getCharacter()*/;
 //                        int iter = weaponPick - 'a';
 //                        cerr << "iter: " << iter << endl;

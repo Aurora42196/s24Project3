@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <stack>
 #include "Temple.h"
 #include "Monster.h"
 #include "globals.h"
@@ -211,7 +212,6 @@ Bogeyman::Bogeyman(Temple* tp, int r, int c)
     setStrength(randInt(2, 3));
     setDexterity(randInt(2, 3));
     setArmor(2);
-    
     Weapon* starterWeapon;
     starterWeapon = new ShortSword();
     setWeapon(starterWeapon);
@@ -224,8 +224,19 @@ Bogeyman::~Bogeyman()
 
 void Bogeyman::move()
 {
-    Player* pp = getTemple()->getPlayer();
-    
+//    Player* pp = getTemple()->getPlayer();
+//    if(pathExists(getTemple(), row(), col(), pp->row(), pp->col()))
+        
+}
+
+///////////////////////////////////////////////////////////////////////////
+// Bogeyman Helper function
+///////////////////////////////////////////////////////////////////////////
+///
+bool pathExists(Temple* tp, int sr, int sc, int er, int ec)
+{
+//    int rowdiff = 
+    return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////
