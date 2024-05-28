@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <stack>
+#include <cstdlib>
 #include "Temple.h"
 #include "Monster.h"
 #include "globals.h"
@@ -37,10 +38,29 @@ Monster::~Monster()
 ///////////////////////////////////////////////////////////////////////////
 ///
 
-void Monster::move()
+void Monster::decidedMove(char dir)
 {
-    char dir = '\0';
-    int moveDir = randInt(4);
+    int moveDir;
+    switch (dir) {
+        case ARROW_UP:
+            moveDir = 0;
+            break;
+        case ARROW_DOWN:
+            moveDir = 1;
+            break;
+        case ARROW_LEFT:
+            moveDir = 2;
+            break;
+        case ARROW_RIGHT:
+            moveDir = 3;
+            break;
+            
+        default:
+            // Default Monster movement will move in any random direction
+            moveDir = randInt(4);
+            break;
+    }
+ 
     
     switch (moveDir)
     {
@@ -89,33 +109,6 @@ void Monster::move()
             break;
     }
 }
-
-//void Monster::attackPlayer(/*Monster* attacker*/)
-//{
-//    Weapon* weapon = /*attacker->*/getWeapon();
-//    Player* pp = getTemple()->getPlayer();
-//    int attackerPoints = /*attacker->*/getDexterity() + weapon->getDexterityBonus();
-//    
-//    int defenderPoints = pp->getDexterity() + weapon->getDexterityBonus();
-//    
-//    int damagePoints = randInt(0, getStrength() + weapon->getWeaponDamage()-1);
-//    
-//    string action = getName() + " " + weapon->getAction() + pp->getName();
-//    if(randInt(1, attackerPoints) >= randInt(1, defenderPoints))
-//    {
-//        pp->setHealth(pp->getHealth() - damagePoints);
-//        if(pp->getHealth() <= 0)
-//            action += ", dealing a final blow.";
-//        else
-//            action += " and hits.";
-//    }
-//    else
-//    {
-//        action += " and misses.";
-//    }
-//    
-//    getTemple()->addAction(action);
-//}
 
 void Monster::dropItem(Monster* mp, int r, int c)
 {
@@ -224,9 +217,38 @@ Bogeyman::~Bogeyman()
 
 void Bogeyman::move()
 {
-//    Player* pp = getTemple()->getPlayer();
-//    if(pathExists(getTemple(), row(), col(), pp->row(), pp->col()))
-        
+    // The Bogeyman moves can only smell the player if the player
+    // can be reached in 5 steps or less
+    
+    Player* pp = getTemple()->getPlayer();
+    int rowdiff = row() - pp->row();
+    int coldiff = col() - pp->col();
+    int distanceFromPlayer = abs(rowdiff) + abs(coldiff);
+    
+    if (distanceFromPlayer <= 5)
+    {
+        if(abs(rowdiff) > abs(coldiff)) // move closer to players row
+        {
+            if (rowdiff > 0)
+                decidedMove(ARROW_UP);
+            else
+                decidedMove(ARROW_DOWN);
+            return;
+        }
+        else // move closer to players column
+        {
+            if (coldiff > 0)
+                decidedMove(ARROW_LEFT);
+            else
+                decidedMove(ARROW_RIGHT);
+        }
+    }
+    else
+    {
+        // if distance is more than 5 steps from the player,
+        // the bogeyman doesn't move
+        return;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -262,10 +284,42 @@ Snakewoman::~Snakewoman()
     delete getWeapon();
 }
 
-//void Snakewoman::move()
-//{
-//    
-//}
+void Snakewoman::move()
+{
+    // The Snakewoman moves with the same behavior as the Bogeyman
+    // except the Snakewoman can only smell the player from a
+    // distance of three or less
+    
+    Player* pp = getTemple()->getPlayer();
+    int rowdiff = row() - pp->row();
+    int coldiff = col() - pp->col();
+    int distanceFromPlayer = abs(rowdiff) + abs(coldiff);
+    
+    if (distanceFromPlayer <= 3)
+    {
+        if(abs(rowdiff) > abs(coldiff)) // move closer to players row
+        {
+            if (rowdiff > 0)
+                decidedMove(ARROW_UP);
+            else
+                decidedMove(ARROW_DOWN);
+            return;
+        }
+        else // move closer to players column
+        {
+            if (coldiff > 0)
+                decidedMove(ARROW_LEFT);
+            else
+                decidedMove(ARROW_RIGHT);
+        }
+    }
+    else
+    {
+        // if distance is more than 3 steps from the player,
+        // the Snakewoman doesn't move
+        return;
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // Dragon function implementations
@@ -292,11 +346,11 @@ Dragon::~Dragon()
     delete getWeapon();
 }
 
-void Dragon::move(char dir)
-{
-    Dragon::move();
-    return; // Dragons do not move, since they want to protect their treasure
-}
+//void Dragon::decidedMove(char dir)
+//{
+//    Dragon::move();
+//    return; // Dragons do not move, since they want to protect their treasure
+//}
 
 void Dragon::move()
 {
@@ -320,12 +374,12 @@ Goblin::Goblin(Temple* tp, int r, int c)
     setWeapon(starterWeapon);
 }
 
-//void Goblin::move()
-//{
-//    return;
-//}
-
 Goblin::~Goblin()
 {
     delete getWeapon();
+}
+
+void Goblin::move()
+{
+    decidedMove('\0');
 }

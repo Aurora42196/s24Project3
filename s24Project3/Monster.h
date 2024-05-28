@@ -33,8 +33,8 @@ public:
     // Accessors
     virtual std::string getName() const = 0;
     // Mutators
-//    virtual void move(char dir) = 0;
-    virtual void move(); // Default Monster movement will move in any random direction
+    virtual void move() = 0; // Every monster moves in a unique way
+    virtual void decidedMove(char dir);
     virtual void dropItem(Monster* mp, int r, int c);
     
 private:
@@ -76,7 +76,7 @@ public:
     virtual std::string getName() const { return "the Snakewoman"; };
     
     // Mutator
-//    virtual void move();
+    virtual void move();
 
 private:
     
@@ -91,7 +91,7 @@ public:
     virtual std::string getName() const { return "the Dragon"; };
 
     // Mutator
-    virtual void move(char dir);
+//    virtual void decidedMove(char dir);
     virtual void move();
 private:
     
@@ -106,7 +106,7 @@ public:
     virtual std::string getName() const { return "the Goblin"; };
     
     // Mutator
-//    virtual void move();
+    virtual void move();
 
 private:
     
