@@ -91,7 +91,7 @@ public:
     MagicFangs(Temple* tp, int r, int c);
     MagicFangs() {setName(getName()); setDexterityBonus(3); setWeaponDamage(2);};
     virtual ~MagicFangs() {};
-    std::string getName() { return "magic fangs"; };
+    std::string getName() { return "magic fangs of sleep"; };
     std::string getAction() { return "strikes magic fangs at "; };
 private:
 };

@@ -33,15 +33,14 @@ public:
     virtual std::string getName() const = 0;
     // Mutators
 //    virtual void move(char dir) = 0;
-    virtual void move();
-//    void attackPlayer(/*Monster**/);
-    virtual void dropItem();
+    virtual void move(); // Default Monster movement will move in any random direction
+    virtual void dropItem(Monster* mp, int r, int c);
     
 private:
     // All monsters have an item to drop
     // Helper functions
-    bool determineNewPosition(int& r, int& c, int dir) const;
-    bool decodeDirection(char dir); // Default Monster movement will move in any random direction
+//    bool determineNewPosition(int& r, int& c, int dir) const;
+//    bool decodeDirection(char dir);
     
     
 };

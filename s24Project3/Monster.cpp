@@ -116,32 +116,93 @@ void Monster::move()
 //    getTemple()->addAction(action);
 //}
 
-void Monster::dropItem()
+void Monster::dropItem(Monster* mp, int r, int c)
 {
-    
+    Temple* tp = getTemple();
+    if(!(tp->isWeaponAt(r, c)) && !(tp->isScrollAt(r, c)))
+    {
+        int randomizer = randInt(4, 10);
+        char symbol = mp->getSymbol();
+        switch (symbol)
+        {
+            case BOGEYMAN_SYMBOL: // Bogeyman has a 1 in 10 chance of dropping a magic axe
+                if(trueWithProbability(0.10))
+                {
+//                    GameObject* itemDrop = new MagicAxe(tp, r, c);
+//                    tp->addToGrid(r, c, itemDrop->getSymbol());
+                    tp->addGameObjects(r, c, 8);
+                    return;
+                }
+                else
+                    tp->grid(r, c) = ' ';
+                break;
+                
+            case SNAKEWOMAN_SYMBOL: // Snakewoman has a 1 in 3 chance of dropping magic fangs
+                if(trueWithProbability(0.30))
+                {
+//                    GameObject* itemDrop = new MagicFangs(tp, r, c);
+//                    tp->addToGrid(r, c, itemDrop->getSymbol());
+                    tp->addGameObjects(r, c, 9);
+                    return;
+                }
+                else
+                    tp->grid(r, c) = ' ';
+                break;
+                
+            case DRAGON_SYMBOL: // Defeating a dragon has a 100% chance of dropping a scroll
+                if(randomizer > 7)
+                {
+                    tp->addGameObjects(r, c, 10); // put scroll of teleportation (refer to Temple::addGameObjects for list of addable items)
+                    return;
+                }
+                else
+                {
+                    tp->addGameObjects(r, c, randomizer);
+                    return;
+                }
+                break;
+            case GOBLIN_SYMBOL: // Goblin has a 1 in 3 chance of dropping a magic axe or magic fangs
+                if(trueWithProbability(0.30))
+                {
+//                    GameObject* itemDrop = new MagicFangs(tp, r, c);
+//                    tp->addToGrid(r, c, itemDrop->getSymbol());
+                    tp->addGameObjects(r, c, randInt(8, 9));
+                    return;
+                }
+                else
+                {
+                    tp->grid(r, c) = ' ';
+                    return;
+                }
+                break;
+                
+            default:
+                break;
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Helper function implementations
 ///////////////////////////////////////////////////////////////////////////
 
-bool Monster::determineNewPosition(int& r, int& c, int dir) const
-{
-    //    switch (dir)
-    //    {
-    //      case UP:     if (r <= 1)      return false; else r--; break;
-    //      case DOWN:   if (r >= rows()) return false; else r++; break;
-    //      case LEFT:   if (c <= 1)      return false; else c--; break;
-    //      case RIGHT:  if (c >= cols()) return false; else c++; break;
-    //      default:     return false;
-    //    }
-    return true;
-}
-
-bool Monster::decodeDirection(char dir)
-{
-    return false;
-}
+//bool Monster::determineNewPosition(int& r, int& c, int dir) const
+//{
+//    //    switch (dir)
+//    //    {
+//    //      case UP:     if (r <= 1)      return false; else r--; break;
+//    //      case DOWN:   if (r >= rows()) return false; else r++; break;
+//    //      case LEFT:   if (c <= 1)      return false; else c--; break;
+//    //      case RIGHT:  if (c >= cols()) return false; else c++; break;
+//    //      default:     return false;
+//    //    }
+//    return true;
+//}
+//
+//bool Monster::decodeDirection(char dir)
+//{
+//    return false;
+//}
 
 
 ///////////////////////////////////////////////////////////////////////////
