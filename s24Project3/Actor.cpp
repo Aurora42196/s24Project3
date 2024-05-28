@@ -74,7 +74,7 @@ void Actor::attackActor(char dir)
             {
                 getTemple()->removeMonsterFromGrid(defender->row(), defender->col());
             }
-            action += ", dealing a final blow.";
+            action += " dealing a final blow.";
         }
         else
         {
@@ -198,8 +198,12 @@ bool Player::pickUpObject()
             }
         }
     }
-    else
+    else // Iventory has reached capacity
+    {
+        string action = "Your knapsack is full; you can't pick that up.";
+        tp->addAction(action);
         return false;
+    }
     return false;
 }
 
