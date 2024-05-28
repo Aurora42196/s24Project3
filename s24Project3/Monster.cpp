@@ -21,7 +21,7 @@ using namespace std;
 ///
 // Constructor
 Monster::Monster(Temple *tp, int r, int c, char sym)
- :Actor(tp, r, c, sym)
+:Actor(tp, r, c, sym)
 {
     
 }
@@ -62,7 +62,7 @@ void Monster::decidedMove(char dir)
             moveDir = randInt(4);
             break;
     }
- 
+    
     
     switch (moveDir)
     {
@@ -201,7 +201,7 @@ void Monster::dropItem(Monster* mp, int r, int c)
 ///
 // Constructor
 Bogeyman::Bogeyman(Temple* tp, int r, int c)
- :Monster(tp, r, c, BOGEYMAN_SYMBOL)
+:Monster(tp, r, c, BOGEYMAN_SYMBOL)
 {
     setHealth(randInt(5, 10));
     setStrength(randInt(2, 3));
@@ -254,22 +254,12 @@ void Bogeyman::move()
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Bogeyman Helper function
-///////////////////////////////////////////////////////////////////////////
-///
-bool pathExists(Temple* tp, int sr, int sc, int er, int ec)
-{
-//    int rowdiff = 
-    return false;
-}
-
-///////////////////////////////////////////////////////////////////////////
 // Snakewoman function implementations
 ///////////////////////////////////////////////////////////////////////////
 ///
 // Constructor
 Snakewoman::Snakewoman(Temple* tp, int r, int c)
- :Monster(tp, r, c, SNAKEWOMAN_SYMBOL)
+:Monster(tp, r, c, SNAKEWOMAN_SYMBOL)
 {
     setHealth(randInt(3, 6));
     setStrength(2);
@@ -329,7 +319,7 @@ void Snakewoman::move()
 ///
 // Constructor
 Dragon::Dragon(Temple* tp, int r, int c)
- :Monster(tp, r, c, DRAGON_SYMBOL)
+:Monster(tp, r, c, DRAGON_SYMBOL)
 {
     setHealth(randInt(20, 25));
     setStrength(4);
@@ -353,13 +343,14 @@ void Dragon::move()
     decidedMove('\0');
     return; // Dragons do not move, since they want to protect their treasure
 }
+
 ///////////////////////////////////////////////////////////////////////////
 // Goblin function implementations
 ///////////////////////////////////////////////////////////////////////////
 ///
 // Constructor
 Goblin::Goblin(Temple* tp, int r, int c)
- :Monster(tp, r, c, GOBLIN_SYMBOL)
+:Monster(tp, r, c, GOBLIN_SYMBOL)
 {
     setHealth(randInt(15, 20));
     setStrength(3);
@@ -378,5 +369,116 @@ Goblin::~Goblin()
 
 void Goblin::move()
 {
-    decidedMove('r'); // move in a random direction until I can figure out the recursion
+    //    decidedMove('r'); // move in a random direction until I can figure out the recursion
+    Temple* tp = getTemple();
+    Player* pp = getTemple()->getPlayer();
+    char m_grid [MAXROWS][MAXCOLS];
+    // Copy over all the values of the grid so we can build a maze solver
+    for(int r = 0; r < tp->rows(); r++)
+    {
+        for(int c = 0; c < tp->cols(); c++)
+        {
+            m_grid[r][c] = tp->grid(r, c);
+        }
+    }
+    stack<char> walkablePath;
+    //    stack<Coord> coordStack;
+    
+    if(pathExists(m_grid, row(), col(), pp->row(), pp->col(), 0, walkablePath))
+    {
+        while(!walkablePath.empty())
+        {
+            decidedMove(walkablePath.top());
+            walkablePath.pop();
+        }
+    }
+    else // The player is more than 15 steps away
+        return;
+}
+
+bool Goblin::pathExists(char grid [MAXROWS][MAXCOLS], int sr, int sc, int er, int ec, int depth, stack<char>& wp)
+{
+    /// If the start location is equal to the ending location, then we've
+    ///     solved the maze, so return true.
+    /// Mark the start location as visted.
+    /// For each of the four directions,
+    ///     If the location one step in that direction (from the start
+    ///         location) has no wall and is unvisited,
+    ///             then if calling pathExists starting from that location
+    ///                         (and ending at the same ending location as in
+    ///                         the current call) returns true,
+    ///                      then return true.
+    /// Return false.
+    ///
+    Temple* tp = getTemple();
+    int rowdiff = sr - er;
+    int coldiff = sc - ec;
+    
+    if(sr == er && sc == ec)
+        return true;
+    
+    //    if(depth == tp->getSmellDistance())
+    //        return false; //
+    
+    if((abs(rowdiff) + abs(coldiff)) > tp->getSmellDistance())
+        return false;
+    //    wp.push(Coord(sr, sc));
+    grid[sr][sc] = 'X';
+    
+    
+    //    cerr << "Searching Coordinate: [" << sr << "],[" << sc << "]" << endl;
+    //EAST
+    if(grid[sr][sc+1] == ' ' )
+    {
+        if(coldiff > 0)
+            wp.push(ARROW_RIGHT);
+        else
+            wp.push(ARROW_LEFT);
+        if(pathExists(grid, sr, sc+1, er, ec, depth++, wp))
+        {
+//            wp.push(ARROW_RIGHT);
+            return true;
+        }
+    }
+    //SOUTH
+    if(grid[sr+1][sc] == ' ')
+    {
+        if(rowdiff < 0)
+            wp.push(ARROW_DOWN);
+        else
+            wp.push(ARROW_UP);
+        if(pathExists(grid, sr+1, sc, er, ec, depth++, wp))
+        {
+//            wp.push(ARROW_DOWN);
+            return true;
+        }
+    }
+    //WEST
+    if(grid[sr][sc-1] == ' ')
+    {
+        if(coldiff < 0)
+            wp.push(ARROW_LEFT);
+        else
+            wp.push(ARROW_RIGHT);
+        if(pathExists(grid, sr, sc-1, er, ec, depth++, wp))
+        {
+//            wp.push(ARROW_LEFT);
+            return true;
+        }
+    }
+    //NORTH
+    if(grid[sr-1][sc] == ' ')
+    {
+        if(rowdiff > 0)
+            wp.push(ARROW_UP);
+        else
+            wp.push(ARROW_DOWN);
+        if(pathExists(grid, sr-1, sc, er, ec, depth++, wp))
+        {
+//            wp.push(ARROW_UP);
+            return true;
+        }
+    }
+    
+    return false;
 }

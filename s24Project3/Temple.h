@@ -35,6 +35,7 @@ public:
     char& grid( int r, int c) { return m_grid[r][c]; };
     Player* getPlayer() const { return m_player; };
     GameObject* getGameObjectAt(int i) const { return m_objects[i]; };
+    int getSmellDistance() const { return m_smell; };
     int getNumGameObjects() const { return m_nGameObjects; };
     
         // Non-inline function declarations
@@ -50,6 +51,7 @@ public:
     
     // Mutators
     void setPlayer(Player* pp) { m_player = pp; };
+    void setSmellDistance(int sd) { m_smell = sd; };
     void addToGrid(int r, int c, char ch);
     void removeObjectFromGrid(int i);
     void removeMonsterFromGrid(int r, int c);
@@ -66,6 +68,7 @@ private:
     int m_rows;
     int m_cols;
     int m_level;
+    int m_smell;
     int m_nMonsters;
     int m_nGameObjects;
     char m_grid[MAXROWS][MAXCOLS];

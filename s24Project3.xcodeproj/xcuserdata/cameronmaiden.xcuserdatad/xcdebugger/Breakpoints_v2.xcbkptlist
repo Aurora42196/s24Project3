@@ -263,7 +263,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A6A2DED5-3F1D-4316-BF77-C8A96E9D4D94"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "s24Project3/Actor.cpp"
@@ -272,6 +272,118 @@
             startingLineNumber = "81"
             endingLineNumber = "81"
             landmarkName = "Actor::attackActor(dir)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B1A73F46-E3CB-4281-814A-AF6209141880"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "s24Project3/Monster.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
+            landmarkName = "Goblin::move()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B1A73F46-E3CB-4281-814A-AF6209141880 - c03f9639bc18d849"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Goblin::move()"
+                  moduleName = "s24Project3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameronmaiden/Desktop/Spring%202024/CS%2032/Project%203/s24Project3/s24Project3/Monster.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "388"
+                  endingLineNumber = "388"
+                  offsetFromSymbolStart = "384">
+               </Location>
+               <Location
+                  uuid = "B1A73F46-E3CB-4281-814A-AF6209141880 - c03f9639bc18d868"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Goblin::move()"
+                  moduleName = "s24Project3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameronmaiden/Desktop/Spring%202024/CS%2032/Project%203/s24Project3/s24Project3/Monster.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "389"
+                  endingLineNumber = "389"
+                  offsetFromSymbolStart = "392">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3FCED1C0-E10B-4B18-809D-A1A5A6B692B2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "s24Project3/Monster.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
+            landmarkName = "Goblin::pathExists(, sr, sc, er, ec, depth, wp)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3FCED1C0-E10B-4B18-809D-A1A5A6B692B2 - 18f0772262d4844f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Goblin::pathExists(char (*) [70], int, int, int, int, int, std::__1::stack&lt;char, std::__1::deque&lt;char, std::__1::allocator&lt;char&gt;&gt;&gt;&amp;)"
+                  moduleName = "s24Project3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameronmaiden/Desktop/Spring%202024/CS%2032/Project%203/s24Project3/s24Project3/Monster.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "413"
+                  endingLineNumber = "413"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "3FCED1C0-E10B-4B18-809D-A1A5A6B692B2 - 180b7eb84dece95e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Goblin::pathExists(char (*) [70], int, int, int, int, int, std::__1::stack&lt;Goblin::Coord, std::__1::deque&lt;Goblin::Coord, std::__1::allocator&lt;Goblin::Coord&gt;&gt;&gt;&amp;)"
+                  moduleName = "s24Project3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cameronmaiden/Desktop/Spring%202024/CS%2032/Project%203/s24Project3/s24Project3/Monster.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "413"
+                  endingLineNumber = "413"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A61E306-9768-4542-9702-2614167E4129"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "s24Project3/Monster.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "387"
+            endingLineNumber = "387"
+            landmarkName = "Goblin::move()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

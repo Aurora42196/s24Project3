@@ -11,6 +11,7 @@
 #include "Actor.h"
 #include <string>
 #include <queue>
+#include <stack>
 class Temple;
 
 ///////////////////////////////////////////////////////////////////////////
@@ -65,9 +66,7 @@ public:
     virtual void move();
 
 private:
-    
-    bool pathExists(Temple* tp, int sr, int sc, int er, int ec);
-    
+        
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Snakewoman
@@ -120,17 +119,20 @@ public:
     virtual void move();
 
 private:
+    // Helper functions
+    class Coord
+    {
+    public:
+        Coord(int rr, int cc) : m_row(rr), m_col(cc) {}
+        int r() const { return m_row; }
+        int c() const { return m_col; }
+    private:
+        int m_row;
+        int m_col;
+    };
+    
+    bool pathExists(char grid [][MAXCOLS], int sr, int sc, int er, int ec, int depth, std::stack<char>& wp);
     
 };
 
-class Coord
-{
-public:
-    Coord(int rr, int cc) : m_row(rr), m_col(cc) {}
-    int r() const { return m_row; }
-    int c() const { return m_col; }
-private:
-    int m_row;
-    int m_col;
-};
 #endif /* Monster_h */

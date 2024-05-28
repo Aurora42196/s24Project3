@@ -29,7 +29,7 @@ Game::Game(int goblinSmellDistance)
         cPlayer = randInt(MAXCOLS);
     }
     m_temple->setPlayer(m_player);
-    
+    m_temple->setSmellDistance(goblinSmellDistance);
 }
 
 ///////////////////////////////////////////////////////////////////////////
