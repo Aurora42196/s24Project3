@@ -25,7 +25,7 @@ private:
     Temple* m_temple;
     Player* m_player;
     int m_level; // keeps track of what level the player is currently on
-    
+    int m_smell;
     // Helper functions
     bool isInBounds(int r ,int c) const;
 };

@@ -54,39 +54,39 @@ Temple::Temple(Player* pp, int nRows, int nCols, int level)
     // Room generator
     ///////////////////////////////////////////////////////////////////////////
     ///rectangle sizes will range from 4x4 to 8x8
-    //    // fill grid with walls
-    //    int r, c;
-    //    for (r = 0; r < rows(); r++)
-    //    {
-    //        for (c = 0; c < cols(); c++)
-    //        {
-    //                m_grid[r][c] = WALL_SYMBOL;
-    //        }
-    //    }
-    //
-    //    int numRooms = randInt(3, 5);
-    //    cerr << "number of rooms generated: " << numRooms << endl;
-    //    while (numRooms > 0)
-    //    {
-    //        int rectangleOriginRow = randInt(1, MAXROWS-1);
-    //        int rectangleOriginCol = randInt(1, MAXCOLS-1);
-    //        int roomRowSize = randInt(8, 10);
-    //        int roomColsize = randInt(8, 10);
-    //        for (r = 0; r < roomRowSize; r++)
-    //        {
-    //            if(rectangleOriginRow + r == MAXROWS-1) // row reached the bottom of the bounds of the temple
-    //                break;
-    //
-    //            for(c = 0; c < roomColsize; c++)
-    //            {
-    //                if(rectangleOriginCol + c == MAXCOLS-1)
-    //                    break;
-    //                else
-    //                    m_grid[rectangleOriginRow + r][rectangleOriginCol + c] = ' ';
-    //            }
-    //        }
-    //        numRooms--;
-    //    }
+//        // fill grid with walls
+//        int r, c;
+//        for (r = 0; r < rows(); r++)
+//        {
+//            for (c = 0; c < cols(); c++)
+//            {
+//                    m_grid[r][c] = WALL_SYMBOL;
+//            }
+//        }
+//    
+//        int numRooms = randInt(3, 5);
+//        cerr << "number of rooms generated: " << numRooms << endl;
+//        while (numRooms > 0)
+//        {
+//            int rectangleOriginRow = randInt(1, MAXROWS-1);
+//            int rectangleOriginCol = randInt(1, MAXCOLS-1);
+//            int roomRowSize = randInt(8, 10);
+//            int roomColsize = randInt(8, 10);
+//            for (r = 0; r < roomRowSize; r++)
+//            {
+//                if(rectangleOriginRow + r == MAXROWS-1) // row reached the bottom of the bounds of the temple
+//                    break;
+//    
+//                for(c = 0; c < roomColsize; c++)
+//                {
+//                    if(rectangleOriginCol + c == MAXCOLS-1)
+//                        break;
+//                    else
+//                        m_grid[rectangleOriginRow + r][rectangleOriginCol + c] = ' ';
+//                }
+//            }
+//            numRooms--;
+//        }
     
     //Add the staircase if the player is on level 0-3,
     //esle add the golden idol if the player is on level 4

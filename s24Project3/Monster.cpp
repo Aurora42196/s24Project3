@@ -369,31 +369,62 @@ Goblin::~Goblin()
 
 void Goblin::move()
 {
-    //    decidedMove('r'); // move in a random direction until I can figure out the recursion
-    Temple* tp = getTemple();
+///////////////////////////////////////////////// Goblin Moves like a Bogeyman /////////////////////////////////////////////////////
     Player* pp = getTemple()->getPlayer();
-    char m_grid [MAXROWS][MAXCOLS];
-    // Copy over all the values of the grid so we can build a maze solver
-    for(int r = 0; r < tp->rows(); r++)
-    {
-        for(int c = 0; c < tp->cols(); c++)
-        {
-            m_grid[r][c] = tp->grid(r, c);
-        }
-    }
-    stack<char> walkablePath;
-    //    stack<Coord> coordStack;
+    int rowdiff = row() - pp->row();
+    int coldiff = col() - pp->col();
+    int distanceFromPlayer = abs(rowdiff) + abs(coldiff);
     
-    if(pathExists(m_grid, row(), col(), pp->row(), pp->col(), 0, walkablePath))
+    if (distanceFromPlayer <= getTemple()->getSmellDistance())
     {
-        while(!walkablePath.empty())
+        if(abs(rowdiff) > abs(coldiff)) // move closer to players row
         {
-            decidedMove(walkablePath.top());
-            walkablePath.pop();
+            if (rowdiff > 0)
+                decidedMove(ARROW_UP);
+            else
+                decidedMove(ARROW_DOWN);
+            return;
+        }
+        else // move closer to players column
+        {
+            if (coldiff > 0)
+                decidedMove(ARROW_LEFT);
+            else
+                decidedMove(ARROW_RIGHT);
         }
     }
-    else // The player is more than 15 steps away
+    else
+    {
+        // if distance is more than 3 steps from the player,
+        // the Snakewoman doesn't move
         return;
+    }
+
+///////////////////////////////////////////////// Goblin Recursive Movement /////////////////////////////////////////////////////
+
+//    Temple* tp = getTemple();
+//    Player* pp = getTemple()->getPlayer();
+//    char m_grid [MAXROWS][MAXCOLS];
+//    // Copy over all the values of the grid so we can build a maze solver
+//    for(int r = 0; r < tp->rows(); r++)
+//    {
+//        for(int c = 0; c < tp->cols(); c++)
+//        {
+//            m_grid[r][c] = tp->grid(r, c);
+//        }
+//    }
+//    stack<char> walkablePath;
+//    
+//    if(pathExists(m_grid, row(), col(), pp->row(), pp->col(), 0, walkablePath))
+//    {
+//        while(!walkablePath.empty())
+//        {
+//            decidedMove(walkablePath.top());
+//            walkablePath.pop();
+//        }
+//    }
+//    else // The player is more than 15 steps away
+//        return;
 }
 
 bool Goblin::pathExists(char grid [MAXROWS][MAXCOLS], int sr, int sc, int er, int ec, int depth, stack<char>& wp)
@@ -414,19 +445,19 @@ bool Goblin::pathExists(char grid [MAXROWS][MAXCOLS], int sr, int sc, int er, in
     int rowdiff = sr - er;
     int coldiff = sc - ec;
     
-    if(sr == er && sc == ec)
-        return true;
+    if(sr == er && sc == ec) 
+    {
+        int distance = abs(rowdiff) + abs(coldiff);
+        if(distance <= tp->getSmellDistance())
+            return true;
+    }
     
-    //    if(depth == tp->getSmellDistance())
-    //        return false; //
-    
-    if((abs(rowdiff) + abs(coldiff)) > tp->getSmellDistance())
+    if (depth == tp->getSmellDistance())
         return false;
-    //    wp.push(Coord(sr, sc));
+    
     grid[sr][sc] = 'X';
     
     
-    //    cerr << "Searching Coordinate: [" << sr << "],[" << sc << "]" << endl;
     //EAST
     if(grid[sr][sc+1] == ' ' )
     {
@@ -434,7 +465,7 @@ bool Goblin::pathExists(char grid [MAXROWS][MAXCOLS], int sr, int sc, int er, in
             wp.push(ARROW_RIGHT);
         else
             wp.push(ARROW_LEFT);
-        if(pathExists(grid, sr, sc+1, er, ec, depth++, wp))
+        if(pathExists(grid, sr, sc+1, er, ec, depth+1, wp))
         {
 //            wp.push(ARROW_RIGHT);
             return true;
@@ -447,7 +478,7 @@ bool Goblin::pathExists(char grid [MAXROWS][MAXCOLS], int sr, int sc, int er, in
             wp.push(ARROW_DOWN);
         else
             wp.push(ARROW_UP);
-        if(pathExists(grid, sr+1, sc, er, ec, depth++, wp))
+        if(pathExists(grid, sr+1, sc, er, ec, depth+1, wp))
         {
 //            wp.push(ARROW_DOWN);
             return true;
@@ -460,7 +491,7 @@ bool Goblin::pathExists(char grid [MAXROWS][MAXCOLS], int sr, int sc, int er, in
             wp.push(ARROW_LEFT);
         else
             wp.push(ARROW_RIGHT);
-        if(pathExists(grid, sr, sc-1, er, ec, depth++, wp))
+        if(pathExists(grid, sr, sc-1, er, ec, depth+1, wp))
         {
 //            wp.push(ARROW_LEFT);
             return true;
@@ -473,7 +504,7 @@ bool Goblin::pathExists(char grid [MAXROWS][MAXCOLS], int sr, int sc, int er, in
             wp.push(ARROW_UP);
         else
             wp.push(ARROW_DOWN);
-        if(pathExists(grid, sr-1, sc, er, ec, depth++, wp))
+        if(pathExists(grid, sr-1, sc, er, ec, depth+1, wp))
         {
 //            wp.push(ARROW_UP);
             return true;

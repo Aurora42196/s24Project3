@@ -12,7 +12,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 ///
 Game::Game(int goblinSmellDistance)
- :m_temple(nullptr), m_player(nullptr), m_level(0)
+ :m_temple(nullptr), m_player(nullptr), m_level(0), m_smell(goblinSmellDistance)
 {
     // create the Temple of Doom
     m_temple = new Temple(m_player, MAXROWS,MAXCOLS, m_level);
@@ -70,6 +70,7 @@ void Game::goToNextLevel()
     delete m_temple;
     m_level++;
     m_temple = new Temple(m_player, MAXROWS,MAXCOLS, m_level);
+    m_temple->setSmellDistance(m_smell);
     int rPlayer = randInt(MAXROWS);
     int cPlayer = randInt(MAXCOLS);
     while ( !(isInBounds(rPlayer, cPlayer)) )

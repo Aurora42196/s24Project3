@@ -30,8 +30,8 @@
             filePath = "s24Project3/Game.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "Game::play()"
             landmarkType = "7">
          </BreakpointContent>
@@ -285,8 +285,8 @@
             filePath = "s24Project3/Monster.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "Goblin::move()"
             landmarkType = "7">
             <Locations>
@@ -333,8 +333,8 @@
             filePath = "s24Project3/Monster.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "430"
+            endingLineNumber = "430"
             landmarkName = "Goblin::pathExists(, sr, sc, er, ec, depth, wp)"
             landmarkType = "7">
             <Locations>
@@ -381,8 +381,8 @@
             filePath = "s24Project3/Monster.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "Goblin::move()"
             landmarkType = "7">
          </BreakpointContent>
